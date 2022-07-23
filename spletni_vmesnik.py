@@ -1,4 +1,5 @@
 import bottle
+from bottle import static_file, route, template
 #from bottle import run, route, template
 
 # @bottle.get('/')
@@ -12,3 +13,8 @@ def index():
     return bottle.template("views/poskus.tpl")
 
 bottle.run(debug=True, host="localhost", reloader=True)
+
+# tole je še rahlo sumljivo, ampak sem vedno bližje pravi rešitvi
+@route('/views/sah_samo_z_legalnimi_potezami.js')
+def send_static(filename):
+    return static_file(filename, root='./views/')
