@@ -1,5 +1,5 @@
 import bottle
-from bottle import template
+from bottle import template, static_file, route
 # @bottle.get('/')
 # def osnovni_zaslon():
 #     return '<h1> Opravila: program za vzbujanje slabe vesti </h1>'
@@ -20,3 +20,7 @@ if __name__ == '__main__':
 # def server_static(ime_dat):
 #   pot = 'static'
 #   return bottle.static_file(ime_dat, root=pot)
+
+@route('/static/:filename:')
+def send_static(filename):
+    return static_file(filename, root='./static/')
