@@ -1,3 +1,11 @@
+/* import from 'chessboard-element';
+import from 'chess.js' */
+import {objToFen} from '/chessboard-element/bundled/chessboard-element.bundled.js';
+
+            // Begin Example JS
+            // NOTE: this example uses the chess.js library:
+// https://github.com/jhlywa/chess.js
+
 const board = document.querySelector('chess-board');
 const game = new Chess();
 const statusElement = document.querySelector('#status');
@@ -75,3 +83,4 @@ function updateStatus () {
 }
 
 updateStatus();
+            // End Example JS
