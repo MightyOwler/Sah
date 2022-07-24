@@ -8,19 +8,23 @@ from bottle import template, static_file, route
 def index():
     return bottle.template("views/osnova.tpl")
 
-if __name__ == '__main__':
-    bottle.run(debug=True, host="localhost", reloader=True)
+@route('/static/<ime_dat:path>')
+def server_static(ime_dat):
+  pot = 'static'
+  return bottle.static_file(ime_dat, root=pot)
 
-# tole je še rahlo sumljivo, ampak sem vedno bližje pravi rešitvi
+# tole je še rahlo sumljivo, vrže error 500
 # @route('/static/:filename:')
 # def send_static(filename):
 #     return static_file(filename, root='./static/')
 
-# @route('/static/<ime_dat:path>')
-# def server_static(ime_dat):
-#   pot = 'static'
-#   return bottle.static_file(ime_dat, root=pot)
+if __name__ == '__main__':
+    bottle.run(debug=True, host="localhost", reloader=True)
+    
 
-@route('/static/:filename:')
-def send_static(filename):
-    return static_file(filename, root='./static/')
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 /* import from 'chessboard-element';
 import from 'chess.js' */
-import {objToFen} from '/chessboard-element/bundled/chessboard-element.bundled.js';
+import {objToFen} from "https://unpkg.com/chessboard-element?module";  //tole ne dela tako kot bi moralo
 
             // Begin Example JS
             // NOTE: this example uses the chess.js library:
