@@ -10,10 +10,8 @@
 <chess-board style="width: 600px" position="start" draggable-pieces=""></chess-board>
 <label>Status:</label>
 <div id="status"></div>
-<!-- 
 <label>FEN:</label>
 <div id="fen"></div>
--->
 <label>Igra:</label>
 <div id="pgn"></div>
 </body>
