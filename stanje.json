@@ -1,0 +1,13 @@
+{
+    "uporabniki": [
+        {
+            "uporabnisko_ime": "jasa",
+            "zasifrirano_geslo": "geslo"   
+        }
+    ,
+        {
+            "uporabnisko_ime": "matej",
+            "zasifrirano_geslo": "geslo"
+        }
+    ]
+}
