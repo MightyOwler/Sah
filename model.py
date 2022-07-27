@@ -71,7 +71,7 @@ class VseSkupaj:
 
     def v_datoteko(self, ime_datoteke):
         with open(ime_datoteke, "w") as f:
-            json.dump(self.v_slovar(), f, ensure_ascii=False, indent=4)
+            json.dump(self, f, ensure_ascii=False, indent=4)
 
     @classmethod
     def iz_datoteke(cls, ime_datoteke):

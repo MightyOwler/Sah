@@ -2,11 +2,18 @@
     "uporabniki": [
         {
             "uporabnisko_ime": "jasa",
-            "zasifrirano_geslo": "geslo"   
-        }
-    ,
+            "zasifrirano_geslo": "geslo"
+        },
         {
             "uporabnisko_ime": "matej",
+            "zasifrirano_geslo": "geslo"
+        },
+        {
+            "uporabnisko_ime": "jasak",
+            "zasifrirano_geslo": "geslo"
+        },
+        {
+            "uporabnisko_ime": "bedanc",
             "zasifrirano_geslo": "geslo"
         }
     ]
