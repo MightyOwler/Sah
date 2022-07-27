@@ -1,4 +1,6 @@
-% rebase('base.html')
+<! ---% rebase('osnova.tpl') --->
+<! -- tu nima smisla rebase, saj te stvari ni na  osnovni strani>
+
 <form method="POST">
     <div class="field">
         <label class="label">Uporabniško ime</label>
@@ -8,7 +10,7 @@
                 <i class="fas fa-user"></i>
             </span>
         </div>
-        % if napaka:
+        % if napaka == "Napačno geslo":
         <p class="help is-danger">{{ napaka }}</p>
         % end
     </div>
@@ -23,7 +25,7 @@
     </div>
     <div class="field is-grouped">
         <div class="control">
-            <button class="button is-link">Registriraj se</button>
+            <button class="button is-link">Prijavi se</button>
         </div>
     </div>
 </form>

@@ -20,7 +20,7 @@ def server_static(ime_dat):
     
 @bottle.get("/prijava/")
 def prijava_get():
-    return bottle.template("prijava.html", napaka=None)
+    return bottle.template("prijava.tpl", napaka=None)
 
 @bottle.post("/prijava/")
 def prijava_post():
@@ -28,16 +28,32 @@ def prijava_post():
     # tole bom moral spremeniti nazaj, ker zdaj je malo smešno (v resnici je to, kar sem imenoval zasifrirano geslo v json datoteki cistopis) (spodnja vrstica)
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
+    # if model.preveri_uporabnika(uporabnisko_ime, geslo):
+    print(uporabnisko_ime, uporabnik.zasifrirano_geslo, geslo_v_cistopisu)
     if uporabnik:
-        bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
+        bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/")  # , secret=SKRIVNOST
         bottle.redirect("/")
     else:
-        return bottle.template("prijava.html", napaka="Napačno geslo")
+        return bottle.template("prijava.tpl", napaka="Napačno geslo")
 
+
+# tole pobriše piškotek uporabnisko_ime
 @bottle.post("/odjava/")
 def odjava_post():
     bottle.response.delete_cookie("uporabnisko_ime")
     bottle.redirect("/")
+
+
+# ni še jasno, ali bom to zares potreboval
+
+# def stanje_trenutnega_uporabnika():
+#     uporabnisko_ime = bottle.response.get_cookie('uporabnisko_ime')
+#     if uporabnisko_ime:
+#         return vse_skupaj.iz_slovarja(f"{uporabnisko_ime}.json")
+#     else:
+#         bottle.redirect('/prijava/')
+        
+# to mora biti čisto na dnu
 
 if __name__ == '__main__':
     bottle.run(debug=True, host="localhost", reloader=True)

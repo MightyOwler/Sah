@@ -1,5 +1,4 @@
-<! ---% rebase('osnova.tpl') --->
-<! -- tu nima smisla rebase, saj te stvari ni na  osnovni strani>
+% rebase('osnova.tpl')
 <form method="POST">
     <div class="field">
         <label class="label">Uporabniško ime</label>
@@ -24,7 +23,7 @@
     </div>
     <div class="field is-grouped">
         <div class="control">
-            <button class="button is-link">Prijavi se</button>
+            <button class="button is-link">Registriraj se</button>
         </div>
     </div>
 </form>

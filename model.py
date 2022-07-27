@@ -25,9 +25,7 @@ class Uporabnik:
     def v_slovar(self):
         return {
             "uporabnisko_ime": self.uporabnisko_ime,
-            "zasifrirano_geslo": self.zasifrirano_geslo,
-            #"proracun": self.proracun.v_slovar(),
-            #tega zagotovo ne bom potreboval
+            "zasifrirano_geslo": self.zasifrirano_geslo
         }
 
     @classmethod
@@ -41,6 +39,7 @@ class Uporabnik:
 @dataclass
 class VseSkupaj:
     uporabniki: List[Uporabnik]
+
 
     def poisci_uporabnika(self, uporabnisko_ime, geslo_v_cistopisu=None):
         for uporabnik in self.uporabniki:
@@ -70,4 +69,5 @@ class VseSkupaj:
             #print("Beri", json.load(f))
             return cls.iz_slovarja(json.load(f))
     
+        
     # malo sumljivo je, ker sploh nikjer nisem zašifriral gesla
