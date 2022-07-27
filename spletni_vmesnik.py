@@ -1,5 +1,6 @@
+from importlib.resources import path
 import bottle
-from bottle import template, static_file, route
+from bottle import template, static_file, route, response
 import model
 
 SKRIVNOST = "blablalba" #to je kasneje treba dati v neko datoteko
@@ -28,10 +29,9 @@ def prijava_post():
     # tole bom moral spremeniti nazaj, ker zdaj je malo smešno (v resnici je to, kar sem imenoval zasifrirano geslo v json datoteki cistopis) (spodnja vrstica)
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
-    # if model.preveri_uporabnika(uporabnisko_ime, geslo):
     print(uporabnisko_ime, uporabnik.zasifrirano_geslo, geslo_v_cistopisu)
     if uporabnik:
-        bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/")  # , secret=SKRIVNOST
+        bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
         bottle.redirect("/")
     else:
         return bottle.template("prijava.tpl", napaka="Napačno geslo")
@@ -40,7 +40,8 @@ def prijava_post():
 # tole pobriše piškotek uporabnisko_ime
 @bottle.post("/odjava/")
 def odjava_post():
-    bottle.response.delete_cookie("uporabnisko_ime")
+    #uporabnisko_ime = bottle.request.get_cookie("uporabnisko_ime")
+    response.delete_cookie("uporabnisko_ime", path = "/", secret=SKRIVNOST)
     bottle.redirect("/")
 
 

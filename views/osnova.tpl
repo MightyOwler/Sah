@@ -29,9 +29,10 @@ tukaj bom dal svoj css, da bo lep izgled
 <!-- tu spodaj je treba spremeniti pogoj if defined('uporabnik'), saj ne deluje! Tudi, če smo prijavljeni, še vedno daje za prijavo -->
 
 <div class="buttons">
-              % if defined('uporabnik'):
+              %import bottle
+              %if bottle.request.get_cookie('uporabnisko_ime'):
               <form method="POST" action="/odjava/">
-                <button class="button is-light">
+                <button class="button is-primary">
                   Odjavi se
                 </button>
               </form>
