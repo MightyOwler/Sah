@@ -10,14 +10,14 @@
                 <i class="fas fa-user"></i>
             </span>
         </div>
-        % if napaka == "Napačno geslo":
+        % if napaka in ["Napačno geslo", "Napačno ime"]:
         <p class="help is-danger">{{ napaka }}</p>
         % end
     </div>
     <div class="field">
         <label class="label">Geslo</label>
         <div class="control has-icons-left">
-            <input class="input" name="geslo" type="password" placeholder="geslo">
+            <input class="input" name="zasifrirano_geslo" type="password" placeholder="geslo">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>

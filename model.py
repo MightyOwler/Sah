@@ -35,6 +35,14 @@ class Uporabnik:
             zasifrirano_geslo=slovar["zasifrirano_geslo"]
         )
 
+    def preveri_uporabnika(self, uporabnisko_ime, geslo):
+        if self.poisci_uporabnika(uporabnisko_ime) == None:
+            return False
+        else:
+            if self.zasifrirano_geslo == geslo:
+                return True
+            else:
+                return False
 
 @dataclass
 class VseSkupaj:
@@ -44,9 +52,12 @@ class VseSkupaj:
     def poisci_uporabnika(self, uporabnisko_ime, geslo_v_cistopisu=None):
         for uporabnik in self.uporabniki:
             if uporabnik.uporabnisko_ime == uporabnisko_ime:
-                if geslo_v_cistopisu is None or uporabnik.ima_geslo(geslo_v_cistopisu):
-                    return uporabnik
-
+                #if geslo_v_cistopisu is None or uporabnik.ima_geslo(geslo_v_cistopisu):
+                return uporabnik
+        
+        ## return ...
+        # tukaj bo v resnici bilo treba nekaj narediti
+    
     def v_slovar(self):
         return {
             "uporabniki": [uporabnik.v_slovar() for uporabnik in self.uporabniki],

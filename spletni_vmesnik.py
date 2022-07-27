@@ -29,13 +29,14 @@ def prijava_post():
     # tole bom moral spremeniti nazaj, ker zdaj je malo smešno (v resnici je to, kar sem imenoval zasifrirano geslo v json datoteki cistopis) (spodnja vrstica)
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
-    print(uporabnisko_ime, uporabnik.zasifrirano_geslo, geslo_v_cistopisu)
     if uporabnik:
-        bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
-        bottle.redirect("/")
+        if uporabnik.zasifrirano_geslo == geslo_v_cistopisu:
+            bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
+            bottle.redirect("/")
+        else:
+            return bottle.template("prijava.tpl", napaka="Napačno geslo")
     else:
-        return bottle.template("prijava.tpl", napaka="Napačno geslo")
-
+        return bottle.template("prijava.tpl", napaka="Napačno ime")
 
 # tole pobriše piškotek uporabnisko_ime
 @bottle.post("/odjava/")
