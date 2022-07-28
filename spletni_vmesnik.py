@@ -18,11 +18,25 @@ def server_static(ime_dat):
 
 # ideja je narediti uporabnike, najprej bom samo prekopiral stvar iz projekta **kuverte**
 
-    
 @bottle.get("/prijava/")
 def prijava_get():
     return bottle.template("prijava.tpl", napaka=None)
 
+@bottle.post("/prijava/")
+def prijava_post():
+    uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
+    # tole bom moral spremeniti nazaj, ker zdaj je malo smešno (v resnici je to, kar sem imenoval zasifrirano geslo v json datoteki cistopis) (spodnja vrstica)
+    geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
+    uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
+    if uporabnik:
+        if uporabnik.zasifrirano_geslo == geslo_v_cistopisu:
+            bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
+            bottle.redirect("/")
+        else:
+            return bottle.template("prijava.tpl", napaka="Napačno geslo")
+    else:
+        return bottle.template("prijava.tpl", napaka="Napačno ime")
+    
 @bottle.get("/registracija/")
 def registracija_get():
     return bottle.template("registracija.tpl", napaka=None)
@@ -49,31 +63,38 @@ def prijava_post():
         
         # registracija ne deluje takoj!
         
+# v resnici bosta bila na strani /odjava/ dva ustrezna gumba z ustreznimi POST 
+@bottle.post("/igraj_proti_cloveku/")
+def igra_proti_cloveku_post():
+    return bottle.template("igraj.tpl", vrsta_igre="clovek")
 
-@bottle.post("/prijava/")
-def prijava_post():
-    uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
-    # tole bom moral spremeniti nazaj, ker zdaj je malo smešno (v resnici je to, kar sem imenoval zasifrirano geslo v json datoteki cistopis) (spodnja vrstica)
-    geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
-    uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
-    if uporabnik:
-        if uporabnik.zasifrirano_geslo == geslo_v_cistopisu:
-            bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
-            bottle.redirect("/")
-        else:
-            return bottle.template("prijava.tpl", napaka="Napačno geslo")
-    else:
-        return bottle.template("prijava.tpl", napaka="Napačno ime")
+@bottle.post("/igraj_proti_racunalniku/")
+def igraj_proti_racunalniku_post():
+    return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
+
+@bottle.post("/igraj_proti_racunalniku/stanley/")
+def igraj_proti_racunalniku__stanley_post():
+    return bottle.template("igraj_stanley.tpl")
+
+@bottle.post("/igraj_proti_racunalniku/stockfish/")
+def igraj_proti_racunalniku__stockfish_post():
+    return bottle.template("igraj_stockfish.tpl")
+
+    # treba je še naštimati ustrezno barvo figur
+    
+    
+# morda bi se dalo to narediti bolj eleganto, samo z eno stranjo tpl
 
 # tole pobriše piškotek uporabnisko_ime
 @bottle.post("/odjava/")
 def odjava_post():
-    #uporabnisko_ime = bottle.request.get_cookie("uporabnisko_ime")
     bottle.response.delete_cookie("uporabnisko_ime", path = "/", secret=SKRIVNOST)
     bottle.redirect("/")
 
 
-# ni še jasno, ali bom to zares potreboval
+
+# ni še jasno, ali bom to zares potreboval (verjentno niti ne bo treba)
+# to je treba vključiti v igre!
 
 # def stanje_trenutnega_uporabnika():
 #     uporabnisko_ime = bottle.response.get_cookie('uporabnisko_ime')
@@ -82,8 +103,9 @@ def odjava_post():
 #     else:
 #         bottle.redirect('/prijava/')
         
-# to mora biti čisto na dnu
 
+
+# to mora biti čisto na dnu
 if __name__ == '__main__':
     bottle.run(debug=True, host="localhost", reloader=True)
 
