@@ -23,12 +23,12 @@
 <title>Šah proti računalniku</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 
-<form method="POST" action="/igraj_proti_racunalniku/stanley">
+<form method="POST" action="/igraj_proti_racunalniku/stanley/">
                 <button class="button is-primary">
                   Igraj proti Stanleyu
                 </button>
               </form>
-              <form method="POST" action="/igraj_proti_racunalniku/stockfish">
+              <form method="POST" action="/igraj_proti_racunalniku/stockfish/">
                 <button class="button is-primary">
                   Igraj proti Stockfishu
                 </button>
