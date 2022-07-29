@@ -6,6 +6,7 @@ const game = new Chess();
 board.flip()
 window.setTimeout(makeRandomMove, 250)
 
+
 board.addEventListener('drag-start', (e) => {
   const {source, piece, position, orientation} = e.detail;
 
@@ -16,7 +17,7 @@ board.addEventListener('drag-start', (e) => {
   }
 
   // only pick up pieces for White
-  if (piece.search(/^b/) !== -1) {
+  if (piece.search(/^W/) !== -1) {
     e.preventDefault();
     return;
   }

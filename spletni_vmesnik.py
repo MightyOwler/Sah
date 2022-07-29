@@ -8,6 +8,7 @@ vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 
 @bottle.get('/')
 def index():
+    bottle.response.delete_cookie("barva", path = "/igraj_proti_racunalniku/", secret=SKRIVNOST)
     return bottle.template("views/osnova.tpl")
 
 @bottle.route('/static/<ime_dat:path>')
@@ -15,11 +16,12 @@ def server_static(ime_dat):
   pot = 'static'
   return bottle.static_file(ime_dat, root=pot)
 
-@bottle.route('/igraj_proti_racunalniku/stanley/<barva:path>')
+@bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
 def server_static(barva):
   pot = '/igraj_proti_racunalniku/'
+  print(barva)
+  bottle.response.set_cookie("barva", barva[:-1], path=pot, secret=SKRIVNOST)
   bottle.redirect("/igraj_proti_racunalniku/stanley/")
-  return bottle.static_file(barva, root=pot)
 
 
 # ideja je narediti uporabnike, najprej bom samo prekopiral stvar iz projekta **kuverte**
@@ -70,20 +72,20 @@ def prijava_post():
         # registracija ne deluje takoj!
         
 # v resnici bosta bila na strani /odjava/ dva ustrezna gumba z ustreznimi POST 
-@bottle.post("/igraj_proti_cloveku/")
-def igra_proti_cloveku_post():
+@bottle.get("/igraj_proti_cloveku/")
+def igra_proti_cloveku_get():
     return bottle.template("igraj.tpl", vrsta_igre="clovek")
 
-@bottle.post("/igraj_proti_racunalniku/")
-def igraj_proti_racunalniku_post():
+@bottle.get("/igraj_proti_racunalniku/")
+def igraj_proti_racunalniku_get():
     return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
 
-@bottle.post("/igraj_proti_racunalniku/stanley/")
-def igraj_proti_racunalniku__stanley_post():
+@bottle.get("/igraj_proti_racunalniku/stanley/")
+def igraj_proti_racunalniku__stanley_get():
     return bottle.template("igraj_stanley.tpl")
 
-@bottle.post("/igraj_proti_racunalniku/stockfish/")
-def igraj_proti_racunalniku__stockfish_post():
+@bottle.get("/igraj_proti_racunalniku/stockfish/")
+def igraj_proti_racunalniku__stockfish_get():
     return bottle.template("igraj_stockfish.tpl")
 
     # treba je še naštimati ustrezno barvo figur

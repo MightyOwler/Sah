@@ -14,7 +14,7 @@ board.addEventListener('drag-start', (e) => {
   }
 
   // only pick up pieces for White
-  if (piece.search(/^w/) !== -1) {
+  if (piece.search(/^b/) !== -1) {
     e.preventDefault();
     return;
   }
@@ -40,7 +40,7 @@ board.addEventListener('drop', (e) => {
   const move = game.move({
     from: source,
     to: target,
-    promotion: "q" // NOTE: always promote to a queen for example simplicity
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
   });
 
   // illegal move

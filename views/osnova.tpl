@@ -25,22 +25,22 @@ tukaj bom dal svoj css, da bo lep izgled
                   Odjavi se
                 </button>
               </form>
-              <form method="POST" action="/igraj_proti_cloveku/">
+              <form method="GET" action="/igraj_proti_cloveku/">
                 <button class="button is-primary">
                   Igraj proti človeku
                 </button>
               </form>
-              <form method="POST" action="/igraj_proti_racunalniku/">
+              <form method="GET" action="/igraj_proti_racunalniku/">
                 <button class="button is-primary">
                   Igraj proti računalniku
                 </button>
               </form>
-              <form method="POST" action="/arhiv_iger/">
+              <form method="GET" action="/arhiv_iger/">
                 <button class="button is-primary">
                   Arhiv iger
                 </button>
               </form>
-              <form method="POST" action="/arhiv_iger/">
+              <form method="GET" action="/statistika/">
                 <button class="button is-primary">
                   Statistika
                 </button>
