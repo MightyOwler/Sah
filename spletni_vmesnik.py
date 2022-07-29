@@ -2,7 +2,7 @@ import bottle
 #from bottle import template, static_file, route, response
 import model
 
-SKRIVNOST = "blablalba" #to je kasneje treba dati v neko datoteko
+SKRIVNOST = "blablabla" #to je kasneje treba dati v neko datoteko
 STANJE = "stanje.json"
 vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 
@@ -14,6 +14,12 @@ def index():
 def server_static(ime_dat):
   pot = 'static'
   return bottle.static_file(ime_dat, root=pot)
+
+@bottle.route('/igraj_proti_racunalniku/stanley/<barva:path>')
+def server_static(barva):
+  pot = '/igraj_proti_racunalniku/'
+  bottle.redirect("/igraj_proti_racunalniku/stanley/")
+  return bottle.static_file(barva, root=pot)
 
 
 # ideja je narediti uporabnike, najprej bom samo prekopiral stvar iz projekta **kuverte**
