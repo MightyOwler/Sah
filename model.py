@@ -11,6 +11,7 @@ from typing import List
 class Uporabnik:
     uporabnisko_ime: str
     zasifrirano_geslo: str
+    igre: list
 
     @staticmethod
     def zasifriraj_geslo(geslo_v_cistopisu):
@@ -25,14 +26,16 @@ class Uporabnik:
     def v_slovar(self):
         return {
             "uporabnisko_ime": self.uporabnisko_ime,
-            "zasifrirano_geslo": self.zasifrirano_geslo
+            "zasifrirano_geslo": self.zasifrirano_geslo,
+            "igre": self.igre
         }
 
     @classmethod
     def iz_slovarja(cls, slovar):
         return cls(
             uporabnisko_ime=slovar["uporabnisko_ime"],
-            zasifrirano_geslo=slovar["zasifrirano_geslo"]
+            zasifrirano_geslo=slovar["zasifrirano_geslo"],
+            igre=slovar["igre"]
         )
 
     def preveri_uporabnika(self, uporabnisko_ime, geslo):

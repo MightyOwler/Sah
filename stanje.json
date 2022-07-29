@@ -2,19 +2,23 @@
     "uporabniki": [
         {
             "uporabnisko_ime": "jasa",
-            "zasifrirano_geslo": "geslo"
+            "zasifrirano_geslo": "geslo",
+            "igre": []
         },
         {
             "uporabnisko_ime": "matej",
-            "zasifrirano_geslo": "geslo"
+            "zasifrirano_geslo": "geslo",
+            "igre": []
         },
         {
-            "uporabnisko_ime": "jasak",
-            "zasifrirano_geslo": "geslo"
+            "uporabnisko_ime": "sabina",
+            "zasifrirano_geslo": "yelena",
+            "igre": []
         },
         {
-            "uporabnisko_ime": "bedanc",
-            "zasifrirano_geslo": "geslo"
+            "uporabnisko_ime": "jasa2",
+            "zasifrirano_geslo": "geslo",
+            "igre": []
         }
     ]
 }

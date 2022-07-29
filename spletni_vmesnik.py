@@ -35,7 +35,7 @@ def prijava_post():
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
     # tole bom moral spremeniti nazaj, ker zdaj je malo smešno (v resnici je to, kar sem imenoval zasifrirano geslo v json datoteki cistopis) (spodnja vrstica)
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
-    uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
+    uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu, [])
     if uporabnik:
         if uporabnik.zasifrirano_geslo == geslo_v_cistopisu:
             bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
@@ -58,9 +58,9 @@ def prijava_post():
     if uporabnik:
         return bottle.template("registracija.tpl", napaka="Uporabnik že obstaja!")
     else:
-        nov_uporabnik = model.Uporabnik(uporabnisko_ime, geslo_v_cistopisu)
+        nov_uporabnik = model.Uporabnik(uporabnisko_ime, geslo_v_cistopisu, [])
         slovar_z_novim_uporabnikom = dict()
-        slovar_z_novim_uporabnikom["uporabniki"] = vse_skupaj.v_slovar()["uporabniki"] + [{'uporabnisko_ime': uporabnisko_ime, 'zasifrirano_geslo': geslo_v_cistopisu}]
+        slovar_z_novim_uporabnikom["uporabniki"] = vse_skupaj.v_slovar()["uporabniki"] + [{'uporabnisko_ime': uporabnisko_ime, 'zasifrirano_geslo': geslo_v_cistopisu, 'igre':[]}]
         # na tem mestu sem spremenil metodo v_datoteko iz model.py 
         # (json.dump(self.v_slovar()) --> json.dump(self))
         model.VseSkupaj.v_datoteko(slovar_z_novim_uporabnikom, STANJE)

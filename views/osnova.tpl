@@ -19,6 +19,7 @@ tukaj bom dal svoj css, da bo lep izgled
 
 <div class="buttons">
               %import bottle
+              %SKRIVNOST = "blablabla"
               %if bottle.request.get_cookie('uporabnisko_ime'):
               <form method="POST" action="/odjava/">
                 <button class="button is-primary">
@@ -45,6 +46,7 @@ tukaj bom dal svoj css, da bo lep izgled
                   Statistika
                 </button>
               </form>
+              <h1>Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
               % else:
               <a class="button is-primary" href="/registracija/">
                 <strong>Registriraj se</strong>

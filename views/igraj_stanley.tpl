@@ -20,17 +20,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>{{uporabnisko_ime}} proti Stanleyu</title>
+
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) == "beli":
+<title>{{uporabnisko_ime}} vs. Stanleyu</title>
+<h1>{{uporabnisko_ime}} vs. Stanleyu</h1>
 <script type="module" src="../../static/sah_proti_stanleyu_beli.js"></script>
 %else:
+<title>Stanley vs. {{uporabnisko_ime}}</title>
+<h1>Stanley vs. {{uporabnisko_ime}}</h1>
 <script type="module" src="../../static/sah_proti_stanleyu_crni.js"></script>
 %end
 </head>
 <body>
-<h1>{{uporabnisko_ime}} proti Stanleyu</h1>
+
 <chess-board style="width: 600px" position="start" draggable-pieces=""></chess-board>
 <label>Status:</label>
 <div id="status"></div>
