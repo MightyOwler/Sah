@@ -13,8 +13,7 @@
                   Črni
                 </button>
               </form>
-
-
+              
 %else:
 
 <!DOCTYPE html>

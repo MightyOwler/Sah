@@ -16,15 +16,31 @@ def server_static(ime_dat):
   pot = 'static'
   return bottle.static_file(ime_dat, root=pot)
 
+
+
+
+
+
 @bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
 def server_static(barva):
   pot = '/igraj_proti_racunalniku/'
-  print(barva)
   bottle.response.set_cookie("barva", barva[:-1], path=pot, secret=SKRIVNOST)
   bottle.redirect("/igraj_proti_racunalniku/stanley/")
 
+@bottle.route("/igraj_proti_racunalniku/stanley/")
+def poizvedba():
+    igra = bottle.request.query.igra
+    print(igra)
+    return f"<h1>Živ {igra}</h1>"
 
-# ideja je narediti uporabnike, najprej bom samo prekopiral stvar iz projekta **kuverte**
+# to izgleda dela, ampak ni pa ideano da te preusmeri na nov link
+# vendar tudi še ne dela najbolje, poleg tega ni najbolj 
+# elegantna rešitev (sploh na dolgi rok in za pregledovanje iger)
+@bottle.route("/igraj_proti_cloveku/")
+def poizvedba():
+    igra = bottle.request.query.igra
+    print(igra)
+    bottle.redirect("/")
 
 @bottle.get("/prijava/")
 def prijava_get():

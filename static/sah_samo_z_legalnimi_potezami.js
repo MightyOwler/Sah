@@ -64,9 +64,11 @@ function updateStatus () {
   if (game.in_checkmate()) {
     // checkmate?
     status = `Game over, ${moveColor} is in checkmate.`;
+    location.replace('/igraj_proti_cloveku/?igra='.concat(game.pgn()));
   } else if (game.in_draw()) {
     // draw?
     status = 'Game over, drawn position';
+    location.replace('/igraj_proti_cloveku/?igra='.concat(game.pgn()));
   } else {
     // game still on
     status = `${moveColor} to move`;
@@ -80,6 +82,8 @@ function updateStatus () {
   statusElement.innerHTML = status;
   fenElement.innerHTML = game.fen();
   pgnElement.innerHTML = game.pgn();
+  // alert(game.pgn());
+  // v game.pgn() se skiriva cela igra, ko je mat bi lahko program sporočil
 }
 
 updateStatus();
