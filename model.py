@@ -52,7 +52,7 @@ class VseSkupaj:
     uporabniki: List[Uporabnik]
 
 
-    def poisci_uporabnika(self, uporabnisko_ime, geslo_v_cistopisu=None):
+    def poisci_uporabnika(self, uporabnisko_ime, geslo_v_cistopisu=None, igre=None):
         for uporabnik in self.uporabniki:
             if uporabnik.uporabnisko_ime == uporabnisko_ime:
                 #if geslo_v_cistopisu is None or uporabnik.ima_geslo(geslo_v_cistopisu):

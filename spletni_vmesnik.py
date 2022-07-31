@@ -1,11 +1,10 @@
 import bottle
-#from bottle import template, static_file, route, response
 import model
+from datetime import datetime
 
 SKRIVNOST = "blablabla" #to je kasneje treba dati v neko datoteko
 STANJE = "stanje.json"
 vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
-
 @bottle.get('/')
 def index():
     bottle.response.delete_cookie("barva", path = "/igraj_proti_racunalniku/", secret=SKRIVNOST)
@@ -17,29 +16,30 @@ def server_static(ime_dat):
   return bottle.static_file(ime_dat, root=pot)
 
 
-
-
-
-
 @bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
 def server_static(barva):
   pot = '/igraj_proti_racunalniku/'
   bottle.response.set_cookie("barva", barva[:-1], path=pot, secret=SKRIVNOST)
   bottle.redirect("/igraj_proti_racunalniku/stanley/")
 
-@bottle.route("/igraj_proti_racunalniku/stanley/")
+@bottle.route("/shrani_igro/")
 def poizvedba():
-    igra = bottle.request.query.igra
-    print(igra)
-    return f"<h1>Živ {igra}</h1>"
-
-# to izgleda dela, ampak ni pa ideano da te preusmeri na nov link
-# vendar tudi še ne dela najbolje, poleg tega ni najbolj 
-# elegantna rešitev (sploh na dolgi rok in za pregledovanje iger)
-@bottle.route("/igraj_proti_cloveku/")
-def poizvedba():
-    igra = bottle.request.query.igra
-    print(igra)
+    global vse_skupaj
+    # spremeniti smo morali url, da se podatki niso izgubili 
+    igra = bottle.request.query.igra.replace("_","#")
+    print("Shranjena je igra:", igra)
+    # tukaj je treba v resnici še dodati ime nasprotnika, kar bomo storili s pomočjo button posta
+    uporabnisko_ime = bottle.request.get_cookie("uporabnisko_ime", secret=SKRIVNOST)
+    list_ki_mu_hocemo_dodati_igro = vse_skupaj.v_slovar()["uporabniki"]
+    print(list_ki_mu_hocemo_dodati_igro)
+    nov_list = []
+    for account in list_ki_mu_hocemo_dodati_igro:
+        if account["uporabnisko_ime"] == uporabnisko_ime:
+            account["igre"] = account["igre"] + [(uporabnisko_ime, igra, str(datetime.today()))]
+        nov_list.append(account)
+        
+    model.VseSkupaj.v_datoteko({"uporabniki":nov_list}, STANJE)
+    vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
     bottle.redirect("/")
 
 @bottle.get("/prijava/")
@@ -53,6 +53,7 @@ def prijava_post():
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu, [])
     if uporabnik:
+        print(uporabnik)
         if uporabnik.zasifrirano_geslo == geslo_v_cistopisu:
             bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
             bottle.redirect("/")
@@ -106,8 +107,6 @@ def igraj_proti_racunalniku__stockfish_get():
 
     # treba je še naštimati ustrezno barvo figur
     
-    
-# morda bi se dalo to narediti bolj eleganto, samo z eno stranjo tpl
 
 # tole pobriše piškotek uporabnisko_ime
 @bottle.post("/odjava/")
