@@ -41,9 +41,7 @@ def shrani_igro():
     if "1/2-1/2" in igra:
         rezultat_igre = "D"
         lokalni_rezultat = "Remi"
-    #print("Shranjena je igra:", igra)
     list_ki_mu_hocemo_dodati_igro = vse_skupaj.v_slovar()["uporabniki"]
-    print(list_ki_mu_hocemo_dodati_igro)
     nov_list = []
     for account in list_ki_mu_hocemo_dodati_igro:
         if account["uporabnisko_ime"] == uporabnisko_ime:
@@ -65,7 +63,6 @@ def prijava_post():
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu, [])
     if uporabnik:
-        print(uporabnik)
         if uporabnik.zasifrirano_geslo == geslo_v_cistopisu:
             bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
             bottle.redirect("/")

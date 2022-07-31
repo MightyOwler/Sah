@@ -3,8 +3,9 @@
 
 const board = document.querySelector('chess-board');
 const game = new Chess();
-board.flip()
-window.setTimeout(makeRandomMove, 250)
+board.flip();
+const pgnElement = document.querySelector('#pgn');
+window.setTimeout(makeRandomMove, 250);
 
 
 board.addEventListener('drag-start', (e) => {
@@ -52,8 +53,10 @@ board.addEventListener('drop', (e) => {
     return;
   }
 
+  window.setTimeout(updateStatus(),250);
   // make random legal move for black
   window.setTimeout(makeRandomMove, 250);
+  window.setTimeout(updateStatus(),250);
 });
 
 // update the board position after the piece snap
@@ -61,3 +64,25 @@ board.addEventListener('drop', (e) => {
 board.addEventListener('snap-end', (e) => {
   board.setPosition(game.fen());
 });
+
+function updateStatus () {
+  let moveColor = 'White';
+  if (game.turn() === 'b') {
+    moveColor = 'Black';
+  }
+  
+  if (game.in_checkmate()) {
+  // checkmate?
+  var rezulat_na_koncu_pgn
+  if (moveColor == "Black") {var rezulat_na_koncu_pgn = " 1-0"}
+  else {var rezulat_na_koncu_pgn = " 0-1"}
+  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).concat(";").replace("#","_").concat("?"));
+} else if (game.in_draw()) {
+  // draw?
+  var rezulat_na_koncu_pgn = " 1/2-1/2"
+  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).concat(";").replace("#","_"));
+}
+pgnElement.innerHTML = game.pgn();
+}
+
+updateStatus(); 

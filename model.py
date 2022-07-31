@@ -79,8 +79,6 @@ class VseSkupaj:
     @classmethod
     def iz_datoteke(cls, ime_datoteke):
         with open(ime_datoteke, encoding="utf-8") as f:
-            #to je samo v primeru, da bi bilo kaj treba gledati
-            #print("Beri", json.load(f))
             return cls.iz_slovarja(json.load(f))
     
         
