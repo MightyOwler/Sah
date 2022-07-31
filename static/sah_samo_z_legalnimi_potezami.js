@@ -68,7 +68,7 @@ function updateStatus () {
     var rezulat_na_koncu_pgn
     if (moveColor == "Black") {var rezulat_na_koncu_pgn = " 1-0"}
     else {var rezulat_na_koncu_pgn = " 0-1"}
-    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).concat(";").replace("#","_"));
+    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).concat(";").replace("#","_").concat("?"));
   } else if (game.in_draw()) {
     // draw?
     status = 'Game over, drawn position';

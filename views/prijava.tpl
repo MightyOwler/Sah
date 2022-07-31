@@ -10,7 +10,7 @@
                 <i class="fas fa-user"></i>
             </span>
         </div>
-        % if napaka in ["Napačno geslo", "Napačno ime"]:
+        % if napaka:
         <p class="help is-danger">{{ napaka }}</p>
         % end
     </div>

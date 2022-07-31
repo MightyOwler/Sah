@@ -31,7 +31,7 @@ function zamenjaj_barvi() {
     <div class="field">
         <label class="label">Beli</label>
         <div class="control has-icons-left">
-            <input id="beli" class="input" name="beli" type="text" value={{uporabnisko_ime}} readOnly=true>
+            <input id="beli" class="input" name="beli" type="text" value={{uporabnisko_ime}} placeholder="Vpiši ime nasprotnika" readOnly=true>
             <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
             </span>
@@ -51,6 +51,10 @@ function zamenjaj_barvi() {
         </div>
     </div>
 </form>
+% if napaka:
+        <p class="help is-danger">{{ napaka }}</p>
+% end
+
 
 %else:
 
