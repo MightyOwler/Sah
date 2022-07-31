@@ -23,7 +23,7 @@ def server_static(barva):
   bottle.redirect("/igraj_proti_racunalniku/stanley/")
 
 @bottle.route("/shrani_igro/")
-def poizvedba():
+def shrani_igro():
     global vse_skupaj
     # spremeniti smo morali url, da se podatki niso izgubili 
     igra = bottle.request.query.igra.replace("_","#")
@@ -37,7 +37,6 @@ def poizvedba():
         if account["uporabnisko_ime"] == uporabnisko_ime:
             account["igre"] = account["igre"] + [(uporabnisko_ime, igra, str(datetime.today()))]
         nov_list.append(account)
-        
     model.VseSkupaj.v_datoteko({"uporabniki":nov_list}, STANJE)
     vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
     bottle.redirect("/")
@@ -86,16 +85,21 @@ def prijava_post():
         bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
         bottle.redirect("/")
         
-        # registracija ne deluje takoj!
-        
 # v resnici bosta bila na strani /odjava/ dva ustrezna gumba z ustreznimi POST 
 @bottle.get("/igraj_proti_cloveku/")
 def igra_proti_cloveku_get():
-    return bottle.template("igraj.tpl", vrsta_igre="clovek")
+    return bottle.template("igraj.tpl", vrsta_igre="clovek", nasprotnik = None)
+
+@bottle.post("/igraj_proti_cloveku/")
+def igraj_proti_racunalniku_post():
+    beli = bottle.request.forms.getunicode("beli")
+    crni = bottle.request.forms.getunicode("crni")
+    return bottle.template("igraj.tpl", vrsta_igre="clovek", nasprotnik= "izbran", beli=beli, crni=crni)
 
 @bottle.get("/igraj_proti_racunalniku/")
 def igraj_proti_racunalniku_get():
     return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
+
 
 @bottle.get("/igraj_proti_racunalniku/stanley/")
 def igraj_proti_racunalniku__stanley_get():
@@ -113,20 +117,6 @@ def igraj_proti_racunalniku__stockfish_get():
 def odjava_post():
     bottle.response.delete_cookie("uporabnisko_ime", path = "/", secret=SKRIVNOST)
     bottle.redirect("/")
-
-
-
-# ni še jasno, ali bom to zares potreboval (verjentno niti ne bo treba)
-# to je treba vključiti v igre!
-
-# def stanje_trenutnega_uporabnika():
-#     uporabnisko_ime = bottle.response.get_cookie('uporabnisko_ime')
-#     if uporabnisko_ime:
-#         return vse_skupaj.iz_slovarja(f"{uporabnisko_ime}.json")
-#     else:
-#         bottle.redirect('/prijava/')
-        
-
 
 # to mora biti čisto na dnu
 if __name__ == '__main__':
