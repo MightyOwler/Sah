@@ -23,10 +23,15 @@
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) == "beli":
+%bottle.response.set_cookie("beli", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
+%bottle.response.set_cookie("crni", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
+        
 <title>{{uporabnisko_ime}} vs. Stanleyu</title>
 <h1>{{uporabnisko_ime}} vs. Stanley</h1>
 <script type="module" src="../../static/sah_proti_stanley_beli.js"></script>
 %else:
+%bottle.response.set_cookie("beli", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
+%bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
 <title>Stanley vs. {{uporabnisko_ime}}</title>
 <h1>Stanley vs. {{uporabnisko_ime}}</h1>
 <script type="module" src="../../static/sah_proti_stanley_crni.js"></script>

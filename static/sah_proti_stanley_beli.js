@@ -33,6 +33,7 @@ function makeRandomMove () {
   const randomIdx = Math.floor(Math.random() * possibleMoves.length);
   game.move(possibleMoves[randomIdx]);
   board.setPosition(game.fen());
+  updateStatus();
 }
 
 board.addEventListener('drop', (e) => {
@@ -54,7 +55,7 @@ board.addEventListener('drop', (e) => {
   updateStatus();
   // make random legal move for black
   window.setTimeout(makeRandomMove, 250);
-  updateStatus();
+  //updateStatus();
 
 });
 
