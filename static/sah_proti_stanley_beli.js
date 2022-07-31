@@ -1,6 +1,6 @@
 // NOTE: this example uses the chess.js library:
 // https://github.com/jhlywa/chess.js
-//
+
 const board = document.querySelector('chess-board');
 const game = new Chess();
 const pgnElement = document.querySelector('#pgn');
@@ -16,7 +16,7 @@ board.addEventListener('drag-start', (e) => {
   }
 
   // only pick up pieces for White
-  if (piece.search(/^b/) !== -1) {
+  if (piece.search(/^B/) !== -1) {
     e.preventDefault();
     return;
   }
@@ -33,8 +33,6 @@ function makeRandomMove () {
   const randomIdx = Math.floor(Math.random() * possibleMoves.length);
   game.move(possibleMoves[randomIdx]);
   board.setPosition(game.fen());
-  updateStatus();
- 
 }
 
 board.addEventListener('drop', (e) => {

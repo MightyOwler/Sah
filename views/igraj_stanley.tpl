@@ -24,12 +24,12 @@
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) == "beli":
 <title>{{uporabnisko_ime}} vs. Stanleyu</title>
-<h1>{{uporabnisko_ime}} vs. Stanleyu</h1>
-<script type="module" src="../../static/sah_proti_stanleyu_beli.js"></script>
+<h1>{{uporabnisko_ime}} vs. Stanley</h1>
+<script type="module" src="../../static/sah_proti_stanley_beli.js"></script>
 %else:
 <title>Stanley vs. {{uporabnisko_ime}}</title>
 <h1>Stanley vs. {{uporabnisko_ime}}</h1>
-<script type="module" src="../../static/sah_proti_stanleyu_crni.js"></script>
+<script type="module" src="../../static/sah_proti_stanley_crni.js"></script>
 %end
 </head>
 <body>
