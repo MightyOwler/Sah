@@ -4,7 +4,7 @@
 const board = document.querySelector('chess-board');
 const game = new Chess();
 const pgnElement = document.querySelector('#pgn');
-
+var celotna_igra = [];
 
 board.addEventListener('drag-start', (e) => {
   const {source, piece, position, orientation} = e.detail;
@@ -76,13 +76,14 @@ function updateStatus () {
   var rezulat_na_koncu_pgn
   if (moveColor == "Black") {var rezulat_na_koncu_pgn = " 1-0"}
   else {var rezulat_na_koncu_pgn = " 0-1"}
-  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_"));
+  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
 } else if (game.in_draw()) {
   // draw?
   var rezulat_na_koncu_pgn = " 1/2-1/2"
-  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_"));
+  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
 }
 pgnElement.innerHTML = game.pgn();
+celotna_igra.push(game.fen());
 }
 
 updateStatus(); 

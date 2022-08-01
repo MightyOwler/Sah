@@ -30,6 +30,7 @@ def shrani_igro():
     # spremeniti smo morali url, da se podatki niso izgubili
     uporabnisko_ime = bottle.request.get_cookie("uporabnisko_ime", secret=SKRIVNOST)
     igra = bottle.request.query.igra.replace("_","#")
+    celoten_fen = bottle.request.query.fen.replace("_","/")
     beli = bottle.request.get_cookie("beli", secret=SKRIVNOST)
     crni = bottle.request.get_cookie("crni", secret=SKRIVNOST)
     if "1-0" in igra:
@@ -45,7 +46,7 @@ def shrani_igro():
     nov_list = []
     for account in list_ki_mu_hocemo_dodati_igro:
         if account["uporabnisko_ime"] == uporabnisko_ime:
-            account["igre"] = account["igre"] + [{"id":len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat, "igra":igra, "datum":str(datetime.today())}]
+            account["igre"] = account["igre"] + [{"id":len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
             #[(uporabnisko_ime, igra, str(datetime.today()))]
         nov_list.append(account)
     model.VseSkupaj.v_datoteko({"uporabniki":nov_list}, STANJE)

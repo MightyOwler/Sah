@@ -6,23 +6,7 @@
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %if nasprotnik == None:
 <h1>Kdo igra proti komu?</h1>
-<script>
-//zamenjamo vrednost polj
-function zamenjaj_barvi() {
-    beli = document.getElementById('beli');   
-    crni = document.getElementById('crni');
-    vrednost_beli = beli.value;
-    vrednost_crni = crni.value;
-    beli.value = vrednost_crni;
-    crni.value = vrednost_beli;
-    if (beli.readOnly){
-      beli.readOnly = false;
-    } else {beli.readOnly = true;}
-    if (crni.readOnly){
-      crni.readOnly = false;
-    } else {crni.readOnly = true;}
-}
-</script>
+<script src="../static/zamenjaj_barvi.js"></script>
 <button onclick="zamenjaj_barvi()">Zamenjaj barvi</button>
 <form method="POST">
     <div class="field">
@@ -60,7 +44,7 @@ function zamenjaj_barvi() {
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"> -->
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
-<script type="module" src="../static/sah_samo_z_legalnimi_potezami.js"></script>
+<script type="module" src="../static/sah_samo_z_legalnimi_potezami – kopija.js"></script>
 <script type="module" src="../static/sah_proti_igralcu.js"></script>
 </head>
 <body>

@@ -12,7 +12,8 @@ class Uporabnik:
     uporabnisko_ime: str
     zasifrirano_geslo: str
     igre: list
-
+    
+    # karkoli naj bi bila ta metoda...
     @staticmethod
     def zasifriraj_geslo(geslo_v_cistopisu):
         return "XXX" + geslo_v_cistopisu[::-1] + "XXX"
