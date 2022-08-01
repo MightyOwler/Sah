@@ -15,6 +15,10 @@ def server_static(ime_dat):
   pot = 'static'
   return bottle.static_file(ime_dat, root=pot)
 
+@bottle.get("/statistika/")
+def arhiv_get():
+    return bottle.template("statistika.tpl")
+
 @bottle.get("/arhiv/")
 def arhiv_get():
     return bottle.template("arhiv.tpl")
