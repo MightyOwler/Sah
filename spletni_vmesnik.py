@@ -45,7 +45,7 @@ def shrani_igro():
     nov_list = []
     for account in list_ki_mu_hocemo_dodati_igro:
         if account["uporabnisko_ime"] == uporabnisko_ime:
-            account["igre"] = account["igre"] + [{"beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat, "igra":igra, "datum":str(datetime.today())}]
+            account["igre"] = account["igre"] + [{"id":len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat, "igra":igra, "datum":str(datetime.today())}]
             #[(uporabnisko_ime, igra, str(datetime.today()))]
         nov_list.append(account)
     model.VseSkupaj.v_datoteko({"uporabniki":nov_list}, STANJE)
