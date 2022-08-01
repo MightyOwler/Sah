@@ -19,12 +19,11 @@ def server_static(ime_dat):
 def arhiv_get():
     return bottle.template("arhiv.tpl")
 
-
 # tukaj moramo urediti dinamičen naslov
 @bottle.get("/arhiv/<id:path>")
 def server_static(id):
-    pot = "/arhiv/igra/"
-    return bottle.template("arhiv.tpl")
+    # pot = "/arhiv/igra/"
+    return bottle.template("arhiv_igra.tpl", id=id[:-1])
 
 @bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
 def server_static(barva):

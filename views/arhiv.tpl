@@ -8,7 +8,6 @@
 %vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 %uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
 %vse_uporabnikove_igre = uporabnik.igre
-%print(vse_uporabnikove_igre)
 <head>
 <title>Igranje šaha</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
