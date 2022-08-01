@@ -3,12 +3,8 @@
 
 const board = document.querySelector('chess-board');
 const game = new Chess();
-var celotna_igra = [];
-board.flip();
 const pgnElement = document.querySelector('#pgn');
-window.setTimeout(makeRandomMove, 250);
-
-
+var celotna_igra = [];
 
 board.addEventListener('drag-start', (e) => {
   const {source, piece, position, orientation} = e.detail;
@@ -20,7 +16,7 @@ board.addEventListener('drag-start', (e) => {
   }
 
   // only pick up pieces for White
-  if (piece.search(/^W/) !== -1) {
+  if (piece.search(/^B/) !== -1) {
     e.preventDefault();
     return;
   }
@@ -47,19 +43,18 @@ board.addEventListener('drop', (e) => {
   const move = game.move({
     from: source,
     to: target,
-    promotion: "q" // NOTE: always promote to a queen for example simplicity
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
   });
 
   // illegal move
   if (move === null) {
     setAction('snapback');
     return;
-  }
-
-  window.setTimeout(updateStatus(),250);
+  }else {updateStatus();}
   // make random legal move for black
   window.setTimeout(makeRandomMove, 250);
-  window.setTimeout(updateStatus(),250);
+  //updateStatus();
+
 });
 
 // update the board position after the piece snap
@@ -69,6 +64,8 @@ board.addEventListener('snap-end', (e) => {
 });
 
 function updateStatus () {
+  celotna_igra.push(game.fen());
+  
   let moveColor = 'White';
   if (game.turn() === 'b') {
     moveColor = 'Black';
@@ -86,7 +83,7 @@ function updateStatus () {
   location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
 }
 pgnElement.innerHTML = game.pgn();
-celotna_igra.push(game.fen());
+
 }
 
 updateStatus(); 

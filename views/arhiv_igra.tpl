@@ -6,14 +6,14 @@
 %SKRIVNOST = "blablabla"
 %STANJE = "stanje.json"
 
-%print("Gledamo igro", id)
+
 
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 %uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
 %vse_uporabnikove_igre = uporabnik.igre
 %for posamezna_igra in vse_uporabnikove_igre:
-%print(posamezna_igra["id"], id, str(posamezna_igra["id"]) == id)
+
 %if str(posamezna_igra["id"]) == id:
 %   igra = posamezna_igra["igra"]
 %   beli = posamezna_igra["beli"]
@@ -23,9 +23,8 @@
 %   break
 %end
 %end
-%print(celoten_fen)
 %popravljen_celoten_fen = [i.split(" ")[0] for i in celoten_fen]
-%print(popravljen_celoten_fen)
+
 
 <head>
 <title>Analiza igre {{[beli]}} vs. {{[crni]}}</title>

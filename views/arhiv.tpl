@@ -15,7 +15,6 @@
 <ul>
             % for posamezna_igra in vse_uporabnikove_igre:
             % id_igre, beli, crni, rez, lok_rez, igra, celoten_fen, datum = posamezna_igra
-            % print(id_igre, beli, crni, rez, lok_rez, igra, celoten_fen, datum)
             <li class="level-left">
             <div class="button is-primary is-selected" name="id_igre" value="{{posamezna_igra[id_igre]}}">
                 {{posamezna_igra[id_igre]}}: {{posamezna_igra[beli]}} vs. {{posamezna_igra[crni]}}

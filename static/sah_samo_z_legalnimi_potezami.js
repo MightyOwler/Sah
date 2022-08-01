@@ -12,6 +12,7 @@ const statusElement = document.querySelector('#status');
 const fenElement = document.querySelector('#fen');
 const pgnElement = document.querySelector('#pgn');
 var celotna_igra = [];
+alert("Živ")
 board.addEventListener('drag-start', (e) => {
   const {source, piece, position, orientation} = e.detail;
 
@@ -42,9 +43,9 @@ board.addEventListener('drop', (e) => {
   // illegal move
   if (move === null) {
     setAction('snapback');
-  }
+  } else {updateStatus();}
 
-  updateStatus();
+  
 });
 
 // update the board position after the piece snap
@@ -54,6 +55,8 @@ board.addEventListener('snap-end', (e) => {
 });
 
 function updateStatus () {
+  celotna_igra.push(game.fen());
+  
   let status = '';
 
   let moveColor = 'White';
@@ -68,12 +71,12 @@ function updateStatus () {
     var rezulat_na_koncu_pgn
     if (moveColor == "Black") {var rezulat_na_koncu_pgn = " 1-0"}
     else {var rezulat_na_koncu_pgn = " 0-1"}
-    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&?").concat(String(celotna_igra)));
+    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
   } else if (game.in_draw()) {
     // draw?
     status = 'Game over, drawn position';
     var rezulat_na_koncu_pgn = " 1/2-1/2"
-    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&?").concat(String(celotna_igra)));
+    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
   } else {
     // game still on
     status = `${moveColor} to move`;
@@ -87,7 +90,7 @@ function updateStatus () {
   statusElement.innerHTML = status;
   fenElement.innerHTML = game.fen();
   pgnElement.innerHTML = game.pgn();
-  celotna_igra.push(game.fen());
+
   // alert(game.pgn());
   // v game.pgn() se skiriva cela igra, ko je mat bi lahko program sporočil
 }
