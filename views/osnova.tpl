@@ -46,7 +46,9 @@ tukaj bom dal svoj css, da bo lep izgled
                   Statistika
                 </button>
               </form>
+              <div class = "container">
               <h1>Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
+              </div>
               % else:
               <a class="button is-primary" href="/registracija/">
                 <strong>Registriraj se</strong>

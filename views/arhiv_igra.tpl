@@ -41,22 +41,28 @@
 <chess-board id="sahovnica" style="width: 600px" position="start"></chess-board>
 <label>Igra:</label>
 <div id="pgn">{{igra}}</div>
+<button id="nazaj">Nazaj</button>
 <button id="naprej">Naprej</button>
 </body>
 
 <script>
+var polpoteza = 0;
 const searchRegExp = /&#039/g;
 const replaceWith = '';
 const board = document.querySelector('chess-board');
 var celotna_igra = '{{str(popravljen_celoten_fen)}}'.replace(searchRegExp, replaceWith).replace(/;/g, replaceWith);
 celotna_igra = celotna_igra.slice(1,-1).split(", ");
+const dolzina_igre = celotna_igra.length; 
 document.querySelector('#naprej').addEventListener('click', () => {
-const board = document.querySelector('chess-board');
+    if (polpoteza < dolzina_igre - 1){
+        polpoteza += 1;
+        board.setPosition(celotna_igra[polpoteza]);}
+});
 
-
-const pozicija = celotna_igra[1];
-board.setPosition(pozicija);
-
+document.querySelector('#nazaj').addEventListener('click', () => {
+    if (0< polpoteza){
+        polpoteza -= 1;
+        board.setPosition(celotna_igra[polpoteza]);}
 });
 </script>
 </html>
