@@ -59,11 +59,48 @@ document.querySelector('#naprej').addEventListener('click', () => {
         board.setPosition(celotna_igra[polpoteza]);}
 });
 
+document.querySelector('#naprej').addEventListener('keydown', (e) => {
+    e = e || window.event;
+    if (e.keyCode === 39) {
+    console.log('right arrow pressed') 
+    if (polpoteza < dolzina_igre - 1){
+        polpoteza += 1;
+        board.setPosition(celotna_igra[polpoteza]);}
+  }
+    
+});
+
 document.querySelector('#nazaj').addEventListener('click', () => {
     if (0< polpoteza){
         polpoteza -= 1;
         board.setPosition(celotna_igra[polpoteza]);}
 });
-</script>
+
+document.querySelector('#nazaj').addEventListener('keydown', (e) => {
+    e = e;
+    if (e.key === 'ArrowLeft') {
+    console.log('left arrow pressed') 
+    if (0< polpoteza){
+        polpoteza -= 1;
+        board.setPosition(celotna_igra[polpoteza]);}
+  }
+    
+});
+
+ document.onkeydown = function (event) {
+      switch (event.keyCode) {
+         case 37:
+         case 65:
+            if (0< polpoteza){ polpoteza -= 1; board.setPosition(celotna_igra[polpoteza]);};
+            break;
+         case 39:
+         case 68:
+         case 32:
+            if (polpoteza < dolzina_igre - 1){polpoteza += 1;board.setPosition(celotna_igra[polpoteza]);};
+            break;
+      }
+   };
+
+</script>   
 </html>
 
