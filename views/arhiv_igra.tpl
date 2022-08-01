@@ -28,31 +28,36 @@
 %print(popravljen_celoten_fen)
 
 <head>
-<title>Pregled igre {{[beli]}} vs. {{[crni]}}</title>
+<title>Analiza igre {{[beli]}} vs. {{[crni]}}</title>
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"> -->
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
-<script>
-const searchRegExp = /&#039/g;
-const replaceWith = '';
-var celotna_igra = '{{str(popravljen_celoten_fen)}}'.replace(searchRegExp, replaceWith).replace(/;/g, replaceWith);
-celotna_igra = celotna_igra.slice(1,-1).split(",");
-console.log(celotna_igra);
-console.log(celotna_igra[0]);
-alert(celotna_igra[0]);
 
-function naprej(){
-const board = document.querySelector('chess-board');
-board.setPosition(String(celotna_igra[1]));
-
-}
-</script>   
 </head>
+
+
 <body>
-<h1>Pregled igre: {{beli}} vs. {{crni}}</h1>
+<h1>Analiza igre: {{beli}} vs. {{crni}}</h1>
 <chess-board id="sahovnica" style="width: 600px" position="start"></chess-board>
 <label>Igra:</label>
 <div id="pgn">{{igra}}</div>
-<button id="naprej" onclick="naprej()">Naprej</button>
+<button id="naprej">Naprej</button>
 </body>
+
+<script>
+const searchRegExp = /&#039/g;
+const replaceWith = '';
+const board = document.querySelector('chess-board');
+var celotna_igra = '{{str(popravljen_celoten_fen)}}'.replace(searchRegExp, replaceWith).replace(/;/g, replaceWith);
+celotna_igra = celotna_igra.slice(1,-1).split(", ");
+document.querySelector('#naprej').addEventListener('click', () => {
+const board = document.querySelector('chess-board');
+
+
+const pozicija = celotna_igra[1];
+board.setPosition(pozicija);
+
+});
+</script>
+</html>
 
