@@ -12,7 +12,6 @@ const statusElement = document.querySelector('#status');
 const fenElement = document.querySelector('#fen');
 const pgnElement = document.querySelector('#pgn');
 var celotna_igra = [];
-alert("Živ")
 board.addEventListener('drag-start', (e) => {
   const {source, piece, position, orientation} = e.detail;
 
@@ -56,7 +55,7 @@ board.addEventListener('snap-end', (e) => {
 
 function updateStatus () {
   celotna_igra.push(game.fen());
-  
+
   let status = '';
 
   let moveColor = 'White';
