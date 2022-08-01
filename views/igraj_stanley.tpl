@@ -28,13 +28,13 @@
         
 <title>{{uporabnisko_ime}} vs. Stanleyu</title>
 <h1>{{uporabnisko_ime}} vs. Stanley</h1>
-<script type="module" src="../../static/sah_proti_stanley_beli.js"></script>
+<script type="module" src="../../static/sah_proti_stanley_beli – kopija.js"></script>
 %else:
 %bottle.response.set_cookie("beli", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
 <title>Stanley vs. {{uporabnisko_ime}}</title>
 <h1>Stanley vs. {{uporabnisko_ime}}</h1>
-<script type="module" src="../../static/sah_proti_stanley_crni.js"></script>
+<script type="module" src="../../static/sah_proti_stanley_crni – kopija.js"></script>
 %end
 </head>
 <body>
