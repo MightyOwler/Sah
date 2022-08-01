@@ -3,40 +3,26 @@
         {
             "uporabnisko_ime": "jasa",
             "zasifrirano_geslo": "geslo",
-            "igre": [
-                {
+            "igre": [ {
+                    "id": 1,
                     "beli": "jasa",
-                    "crni": "dadad",
+                    "crni": "praclovek",
                     "rezultat": "W",
                     "lokalni_rezultat": "Zmaga",
-                    "igra": "1. e4 e5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qxf7# 1-0;",
-                    "datum": "2022-07-31 20:59:51.705405"
+                    "igra": "1. e4 e5 2. Qh5 Nf6 3. Bc4 Nc6 4. Qxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2,rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2,rnbqkb1r/pppp1ppp/5n2/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3,rnbqkb1r/pppp1ppp/5n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3,r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+                    "datum": "2022-08-01 10:53:14.308462"
                 },
                 {
+                    "id": 2,
                     "beli": "jasa",
-                    "crni": "ddAD",
-                    "rezultat": "B",
-                    "lokalni_rezultat": "Poraz",
-                    "igra": "1. e4 e6 2. f4 Qh4  3. g3 Qxg3  4. Ke2 Bc5 5. d3 Qf2# 0-1;",
-                    "datum": "2022-07-31 21:00:23.558573"
-                },
-                {
-                    "beli": "jasa",
-                    "crni": "pog",
-                    "rezultat": "D",
-                    "lokalni_rezultat": "Remi",
-                    "igra": "1. e4 e5 2. Qh5 Qg5 3. Qxg5 Nc6 4. Qg6 Nb8 5. Qxg7 Nc6 6. Qxh8 Nd8 7. Qxg8 Ne6 8. Qxf8  Nxf8 9. Nh3 Ng6 10. Ng5 Nf4 11. h3 Nxh3 12. Nxh7 Nxf2 13. Ng5 Nxh1 14. Nxf7 Ng3 15. Kd1 Nxf1 16. Ke1 Nxd2 17. Nc3 Nxe4 18. Ng5 Nxc3 19. Be3 Nxa2 20. Rc1 Nxc1 21. b3 Nxb3 22. c4 Na5 23. Bf2 Nxc4 24. Be3 Nxe3 25. Ne6 Nxg2  26. Kf2 Nf4 27. Nxc7  Kf8 28. Nxa8 b5 29. Nb6 Nd5 30. Nxd7  Kg7 31. Nb6 Kg6 32. Nxc8 Nc3 33. Nxa7 e4 34. Nxb5 e3  35. Kxe3 Nxb5 1/2-1/2;",
-                    "datum": "2022-07-31 21:02:20.871532"
-                },
-                {
-                    "beli": "jasa",
-                    "crni": "Stanley",
+                    "crni": "bilbo",
                     "rezultat": "W",
                     "lokalni_rezultat": "Zmaga",
-                    "igra": "1. e4 b5 2. Bxb5 Bb7 3. Bc4 a6 4. Qh5 d5 5. Bxd5 e6 6. Bxe6 Bb4 7. Qxf7# 1-0;?",
-                    "datum": "2022-08-01 00:01:36.248680"
-                }
-            ]
+                    "igra": "1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2,rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2,r1bqkbnr/pppp1ppp/2n5/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 2 3,r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3,r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+                    "datum": "2022-08-01 11:22:16.592500"
+                }]
         },
         {
             "uporabnisko_ime": "matej",

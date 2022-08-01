@@ -36,7 +36,7 @@ tukaj bom dal svoj css, da bo lep izgled
                   Igraj proti računalniku
                 </button>
               </form>
-              <form method="GET" action="/arhiv_iger/">
+              <form method="GET" action="/arhiv/">
                 <button class="button is-primary">
                   Arhiv iger
                 </button>

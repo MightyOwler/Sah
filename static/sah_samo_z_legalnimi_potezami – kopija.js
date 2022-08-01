@@ -12,7 +12,6 @@ const statusElement = document.querySelector('#status');
 const fenElement = document.querySelector('#fen');
 const pgnElement = document.querySelector('#pgn');
 var celotna_igra = [];
-alert("Živijo")
 board.addEventListener('drag-start', (e) => {
   const {source, piece, position, orientation} = e.detail;
 

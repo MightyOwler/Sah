@@ -15,6 +15,16 @@ def server_static(ime_dat):
   pot = 'static'
   return bottle.static_file(ime_dat, root=pot)
 
+@bottle.get("/arhiv/")
+def arhiv_get():
+    return bottle.template("arhiv.tpl")
+
+
+# tukaj moramo urediti dinamičen naslov
+@bottle.get("/arhiv/<id:path>")
+def server_static(id):
+    pot = "/arhiv/igra/"
+    return bottle.template("arhiv.tpl")
 
 @bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
 def server_static(barva):
@@ -119,7 +129,6 @@ def igraj_proti_racunalniku_post():
 def igraj_proti_racunalniku_get():
     return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
 
-
 @bottle.get("/igraj_proti_racunalniku/stanley/")
 def igraj_proti_racunalniku__stanley_get():
     return bottle.template("igraj_stanley.tpl")
@@ -130,6 +139,8 @@ def igraj_proti_racunalniku__stockfish_get():
 
     # treba je še naštimati ustrezno barvo figur
     
+
+
 
 # tole pobriše piškotek uporabnisko_ime
 @bottle.post("/odjava/")
