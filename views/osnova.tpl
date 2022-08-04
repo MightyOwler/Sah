@@ -2,14 +2,8 @@
 <html>
 <head>
 <title>Igranje šaha</title>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-
-<!-- 
-<link rel="stylesheet" href="/static/stil.css"> 
-
-tukaj bom dal svoj css, da bo lep izgled
--->
-
 </head>
 <body>
 
@@ -18,6 +12,7 @@ tukaj bom dal svoj css, da bo lep izgled
 <!-- tu spodaj je treba spremeniti pogoj if defined('uporabnik'), saj ne deluje! Tudi, če smo prijavljeni, še vedno daje za prijavo -->
 
 <div class="buttons">
+
               %import bottle
               %SKRIVNOST = "blablabla"
               %if bottle.request.get_cookie('uporabnisko_ime'):
@@ -59,4 +54,5 @@ tukaj bom dal svoj css, da bo lep izgled
               % end
             </div>
 </body>
+
 </html>
