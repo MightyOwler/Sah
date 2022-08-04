@@ -68,13 +68,15 @@ function updateStatus () {
     status = `Game over, ${moveColor} is in checkmate.`;
     //document.cookie = "igra=".concat(String(game.pgn()).concat(";path=/;max-age=60;Secure;"))
     var rezulat_na_koncu_pgn
-    if (moveColor == "Black") {var rezulat_na_koncu_pgn = " 1-0"}
-    else {var rezulat_na_koncu_pgn = " 0-1"}
+    if (moveColor == "Black") {alert("Beli je zmagal!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 1-0"}
+    else {alert("Beli je zmagal!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 0-1"}
+    
     location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
   } else if (game.in_draw()) {
     // draw?
     status = 'Game over, drawn position';
     var rezulat_na_koncu_pgn = " 1/2-1/2"
+    alert("Remi! Igra se bo shranila!")
     location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
   } else {
     // game still on

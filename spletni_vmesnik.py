@@ -97,6 +97,9 @@ def prijava_post():
     if uporabnisko_ime in ["Stanley", "Stockfish"]:
                 # to moramo preveriti, saj bi sicer imeli probleme z branjem iger
                 return bottle.template("registracija.tpl", napaka="To ime je rezervirano za računalnike!")
+    
+    # tukaj preveri ASCII
+    
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
     if uporabnik:
         return bottle.template("registracija.tpl", napaka="Uporabnik že obstaja!")
@@ -106,7 +109,6 @@ def prijava_post():
         # na tem mestu sem spremenil metodo v_datoteko iz model.py 
         # (json.dump(self.v_slovar()) --> json.dump(self))
         model.VseSkupaj.v_datoteko(slovar_z_novim_uporabnikom, STANJE)
-        # naslednja vrstica je zato, da pravilno deluje prijava
         vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
         bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
         bottle.redirect("/")

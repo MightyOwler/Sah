@@ -16,12 +16,20 @@
             % for posamezna_igra in vse_uporabnikove_igre:
             % id_igre, beli, crni, rez, lok_rez, igra, celoten_fen, datum = posamezna_igra
             <li class="level-left">
-            <div class="button is-primary is-selected" name="id_igre" value="{{posamezna_igra[id_igre]}}">
+            <div class="button is-primary is-selected" name="id_igre" value="{{posamezna_igra[id_igre]}}" style="width:200px;">
                 {{posamezna_igra[id_igre]}}: {{posamezna_igra[beli]}} vs. {{posamezna_igra[crni]}}
-                <!--- <span class="tag is-rounded">{{posamezna_igra[lok_rez]}}</span> --->
             </div>
-            <a href="/arhiv/{{posamezna_igra[id_igre]}}/" class="button" name="id_igre" value="{{posamezna_igra[id_igre]}}">
-                <span class="tag is-rounded">{{posamezna_igra[lok_rez]}}</span>
+            <a href="/arhiv/{{posamezna_igra[id_igre]}}/" class="button" name="id_igre" value="{{posamezna_igra[id_igre]}}" style="width:200px">
+                % if posamezna_igra[lok_rez] == "Zmaga":
+                <span class="tag is-rounded" style="color:green">{{posamezna_igra[lok_rez]}}</span>
+                %end
+                % if posamezna_igra[lok_rez] == "Poraz":
+                <span class="tag is-rounded" style="color:red">{{posamezna_igra[lok_rez]}}</span>
+                %end
+                % if posamezna_igra[lok_rez] == "Remi":
+                <span class="tag is-rounded" style="color:gray">{{posamezna_igra[lok_rez]}}</span>
+                %end
+
                 <span class="tag is-rounded">{{posamezna_igra[datum].split(" ")[0]}}</span>
                 </a>
             % end

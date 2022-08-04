@@ -65,7 +65,7 @@ board.addEventListener('snap-end', (e) => {
 
 function updateStatus () {
   celotna_igra.push(game.fen());
-  
+
   let moveColor = 'White';
   if (game.turn() === 'b') {
     moveColor = 'Black';
@@ -74,12 +74,14 @@ function updateStatus () {
   if (game.in_checkmate()) {
   // checkmate?
   var rezulat_na_koncu_pgn
-  if (moveColor == "Black") {var rezulat_na_koncu_pgn = " 1-0"}
-  else {var rezulat_na_koncu_pgn = " 0-1"}
+  if (moveColor == "Black") {alert("Zmaga!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 1-0"}
+  else {alert("Več sreče prihodnjič! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 0-1"}
+  
   location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
 } else if (game.in_draw()) {
   // draw?
   var rezulat_na_koncu_pgn = " 1/2-1/2"
+  alert("Remi! Igra se bo shranila!")
   location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
 }
 pgnElement.innerHTML = game.pgn();
