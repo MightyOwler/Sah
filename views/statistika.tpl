@@ -44,7 +44,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
+<div class="columns is-mobile is-centered">
+<h1 class="subtitle is-1 " style="margin:10px;">Statistika uporabnika <strong>{{uporabnisko_ime}}</strong></h1>
+</div>
 <div label="skupno" class="level-left" style="width: 600px; float: left;">
 <canvas id="myChat_skupno" width="400" height="400"></canvas>
 </div>

@@ -170,6 +170,11 @@
             "uporabnisko_ime": "aljaz",
             "zasifrirano_geslo": "aljaz",
             "igre": []
+        },
+        {
+            "uporabnisko_ime": "ziva",
+            "zasifrirano_geslo": "kapibara",
+            "igre": []
         }
     ]
 }

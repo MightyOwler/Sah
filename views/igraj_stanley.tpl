@@ -28,21 +28,29 @@
 %bottle.response.set_cookie("crni", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
         
 <title>{{uporabnisko_ime}} vs. Stanleyu</title>
-<h1>{{uporabnisko_ime}} vs. Stanley</h1>
+<div class="columns is-mobile is-centered">
+  <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stanley</strong></h1>
+</div>
 <script type="module" src="../../static/sah_proti_stanley_beli.js"></script>
 %else:
 %bottle.response.set_cookie("beli", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
 <title>Stanley vs. {{uporabnisko_ime}}</title>
-<h1>Stanley vs. {{uporabnisko_ime}}</h1>
+<div class="columns is-mobile is-centered">
+  <h1 class="subtitle is-1" style="margin:10px;"><strong>Stanley</strong> vs. <strong>{{uporabnisko_ime}}</strong></h1>
+</div>
 <script type="module" src="../../static/sah_proti_stanley_crni.js"></script>
 %end
 </head>
 <body>
 
-<chess-board style="width: 600px" position="start" draggable-pieces=""></chess-board>
-<label>Igra:</label> 
-<div id="pgn"></div>
+<div class="columns is-mobile is-centered">
+  <chess-board style="width: 600px" position="start" draggable-pieces=""></chess-board>
+</div>
+<div class="columns is-mobile is-centered"><label class="title is-2" style="margin:10px;">Igra:</label></div> 
+<div class="columns is-mobile is-centered">
+  <div id="pgn" class="subtitle is-4" style="margin:10px;"></div>
+</div>
 </body>
 </html>
 
