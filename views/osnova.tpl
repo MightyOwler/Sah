@@ -17,27 +17,27 @@
               %SKRIVNOST = "blablabla"
               %if bottle.request.get_cookie('uporabnisko_ime'):
               <form method="POST" action="/odjava/">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium">
                   Odjavi se
                 </button>
               </form>
               <form method="GET" action="/igraj_proti_cloveku/">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium">
                   Igraj proti človeku
                 </button>
               </form>
               <form method="GET" action="/igraj_proti_racunalniku/">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium">
                   Igraj proti računalniku
                 </button>
               </form>
               <form method="GET" action="/arhiv/">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium">
                   Arhiv iger
                 </button>
               </form>
               <form method="GET" action="/statistika/">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium">
                   Statistika
                 </button>
               </form>
@@ -45,10 +45,10 @@
               <h1>Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
               </div>
               % else:
-              <a class="button is-primary" href="/registracija/">
+              <a class="button is-primary is-medium" href="/registracija/">
                 <strong>Registriraj se</strong>
               </a>
-              <a class="button is-light" href="/prijava/">
+              <a class="button is-light is-medium" href="/prijava/">
                 Prijavi se
               </a>
               % end

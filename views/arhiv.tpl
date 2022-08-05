@@ -28,6 +28,10 @@ ul li{
 div{
   background: wheat;
 }
+
+span{
+    margin: 5px 5px;
+}
 </style>
 <ul>
             % for posamezna_igra in vse_uporabnikove_igre:
@@ -38,7 +42,7 @@ div{
             </div>
             <a href="/arhiv/{{posamezna_igra[id_igre]}}/" class="button" name="id_igre" value="{{posamezna_igra[id_igre]}}" style="width:200px; border: 0.1px solid black; background-color:AliceBlue;">
                 % if posamezna_igra[lok_rez] == "Zmaga":
-                <span class="tag is-rounded" style="background-color:lime; color:white; border: 0.1px solid black;">{{posamezna_igra[lok_rez]}}</span>
+                <span class="tag is-rounded" style="background-color:limegreen; color:white; border: 0.1px solid black;">{{posamezna_igra[lok_rez]}}</span>
                 %end
                 % if posamezna_igra[lok_rez] == "Poraz":
                 <span class="tag is-rounded" style="background-color:orangered; color:white; border: 0.1px solid black;">{{posamezna_igra[lok_rez]}}</span>

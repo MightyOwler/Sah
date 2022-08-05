@@ -1,8 +1,9 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 %import bottle
 %SKRIVNOST = "blablabla"
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
-<h1>Izberi barvo</h1>
+<h1 class="title is-1">Izberi barvo</h1>
 <form method="POST" action="/igraj_proti_racunalniku/stanley/beli/">
                 <button class="button is-primary">
                   Beli
