@@ -6,7 +6,7 @@
     <div class="field">
         <label class="label" style="margin:10px;">Uporabniško ime</label>
         <div class="control has-icons-left">
-            <input class="input" name="uporabnisko_ime" type="text" placeholder="uporabniško ime" style="width: 20%; margin:10px;">
+            <input class="input is-medium" name="uporabnisko_ime" type="text" placeholder="uporabniško ime" style="width: 20%; margin:10px;">
             <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
             </span>
@@ -18,7 +18,7 @@
     <div class="field">
         <label class="label" style="margin:10px;">Geslo</label>
         <div class="control has-icons-left">
-            <input class="input" name="zasifrirano_geslo" type="password" placeholder="geslo" style="width: 20%; margin:10px;">
+            <input class="input is-medium" name="zasifrirano_geslo" type="password" placeholder="geslo" style="width: 20%; margin:10px;">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>

@@ -41,8 +41,8 @@
                   Statistika
                 </button>
               </form>
-              <div class = "container">
-              <h1>Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
+              <div class="columns is-mobile is-centered" style="margin:10px;">
+              <h1 class="subtitle is-4 is-spaced">Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
               </div>
               % else:
               <a class="button is-primary is-medium" href="/registracija/">

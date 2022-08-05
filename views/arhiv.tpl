@@ -13,26 +13,18 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 </head>
 <style>
-
 ul{
-  list-style-type:none;
-  justify-content: center;
-  text-align: center;
-
-}
-ul li{
-  display: list-item;
-  padding: 5px 15px;
-  color:white;
-}
-div{
-  background: wheat;
+    padding: 15px 15px;
 }
 
 span{
     margin: 5px 5px;
 }
 </style>
+<div class="columns is-mobile is-centered">
+<h1 class="subtitle is-1 " style="margin:10px;">Arhiv iger uporabnika <strong>{{uporabnisko_ime}}</strong></h1>
+</div>
+<div class="columns is-mobile is-centered">
 <ul>
             % for posamezna_igra in vse_uporabnikove_igre:
             % id_igre, beli, crni, rez, lok_rez, igra, celoten_fen, datum = posamezna_igra
@@ -57,6 +49,6 @@ span{
             % end
             </li>
 </ul>
-
+</div>
 
 </html>

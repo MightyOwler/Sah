@@ -3,14 +3,14 @@
 %SKRIVNOST = "blablabla"
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
-<h1 class="title is-1">Izberi barvo</h1>
+<h1 class="title is-1" style="margin:10px;">Izberi barvo</h1>
 <form method="POST" action="/igraj_proti_racunalniku/stanley/beli/">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium" style="margin:10px;">
                   Beli
                 </button>
               </form>
 <form method="POST" action="/igraj_proti_racunalniku/stanley/crni/">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium" style="margin:10px;">
                   Črni
                 </button>
               </form>
