@@ -29,10 +29,10 @@ span{
             % for posamezna_igra in vse_uporabnikove_igre:
             % id_igre, beli, crni, rez, lok_rez, igra, celoten_fen, datum = posamezna_igra
             <li class="level-left">
-            <div class="button is-primary is-selected" name="id_igre" value="{{posamezna_igra[id_igre]}}" style="width:200px; background-color:BurlyWood; color:black; border: 0.1px solid black; justify-content: center;">
+            <div class="button is-warning is-selected is-light" name="id_igre" value="{{posamezna_igra[id_igre]}}" style="width:300px;  color:black; border: 0.1px solid black; justify-content: center;">
                 {{posamezna_igra[id_igre]}}: {{posamezna_igra[beli]}} vs. {{posamezna_igra[crni]}}
             </div>
-            <a href="/arhiv/{{posamezna_igra[id_igre]}}/" class="button" name="id_igre" value="{{posamezna_igra[id_igre]}}" style="width:200px; border: 0.1px solid black; background-color:AliceBlue;">
+            <a href="/arhiv/{{posamezna_igra[id_igre]}}/" class="button is-info" name="id_igre" value="{{posamezna_igra[id_igre]}}" style="width:300px; border: 0.1px solid black;">
                 % if posamezna_igra[lok_rez] == "Zmaga":
                 <span class="tag is-rounded" style="background-color:limegreen; color:white; border: 0.1px solid black;">{{posamezna_igra[lok_rez]}}</span>
                 %end

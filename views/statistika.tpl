@@ -47,16 +47,18 @@
 <div class="columns is-mobile is-centered">
 <h1 class="subtitle is-1 " style="margin:10px;">Statistika uporabnika <strong>{{uporabnisko_ime}}</strong></h1>
 </div>
-<div label="skupno" class="level-left" style="width: 600px; float: left;">
-<canvas id="myChat_skupno" width="400" height="400"></canvas>
-</div>
-
-<div label="beli" class="level-left" style="width: 600px; float: left;">
-<canvas id="myChart_beli" width="400" height="400"></canvas>
-</div>
-
-<div label="crni" class="level-left" style="width: 600px; float: left;">
-<canvas id="myChart_crni" width="400" height="400"></canvas>
+<div class="section">
+    <div label="skupno" class="level-left" style="width: 600px; float: left;">
+    <canvas id="myChat_skupno" width="400" height="400"></canvas>
+    </div>
+    
+    <div label="beli" class="level-left" style="width: 600px; float: left;">
+    <canvas id="myChart_beli" width="400" height="400"></canvas>
+    </div>
+    
+    <div label="crni" class="level-left" style="width: 600px; float: left;">
+    <canvas id="myChart_crni" width="400" height="400"></canvas>
+    </div>
 </div>
 
 <script>
@@ -87,7 +89,7 @@ const myChart_skupno = new Chart(ctx_skupno, {
         plugins: {
             title: {
                 display: true,
-                text: 'Skupno'
+                text: 'Rezultati iger skupno'
             }
         }
     }
@@ -120,7 +122,7 @@ const myChart_beli = new Chart(ctx_beli, {
         plugins: {
             title: {
                 display: true,
-                text: 'Beli'
+                text: 'Rezultati iger beli'
             }
         }
     }
@@ -155,7 +157,7 @@ const myChart_crni = new Chart(ctx_crni, {
         plugins: {
             title: {
                 display: true,
-                text: 'Črni'
+                text: 'Rezultati iger črni'
             }
         }
     }
