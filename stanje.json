@@ -153,13 +153,84 @@
                     "igra": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng1 Ng8 5. Qh5 Nf6 6. Qxf7# 1-0",
                     "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2,rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2,r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3,r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3,r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4,r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR b KQkq - 5 4,r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR w KQkq - 6 5,r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 7 5,r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 8 6,r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 6",
                     "datum": "2022-08-04 22:44:19.952475"
+                },
+                {
+                    "id": 16,
+                    "beli": "jasa",
+                    "crni": "jasa/jasa",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Zmaga",
+                    "igra": "1. e4 e5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2,rnbqkbnr/pppp1ppp/8/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR b KQkq - 1 2,r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 3,r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3,r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4,r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
+                    "datum": "2022-08-06 11:16:26.047553"
+                },
+                {
+                    "id": 17,
+                    "beli": "jasa",
+                    "crni": "jasa#jasa",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Zmaga",
+                    "igra": "1. e4 e5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2,rnbqkbnr/pppp1ppp/8/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR b KQkq - 1 2,r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 3,r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3,r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4,r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
+                    "datum": "2022-08-06 11:16:51.586985"
+                },
+                {
+                    "id": 18,
+                    "beli": "jasa",
+                    "crni": "Stanley",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Zmaga",
+                    "igra": "1. f4 c5 2. Nf3 a5 3. e3 Nf6 4. Bc4 Ra7 5. Ne5 g5 6. Bxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/5P2/8/PPPPP1PP/RNBQKBNR b KQkq f3 0 1,rnbqkbnr/pp1ppppp/8/2p5/5P2/8/PPPPP1PP/RNBQKBNR w KQkq c6 0 2,rnbqkbnr/pp1ppppp/8/2p5/5P2/5N2/PPPPP1PP/RNBQKB1R b KQkq - 1 2,rnbqkbnr/1p1ppppp/8/p1p5/5P2/5N2/PPPPP1PP/RNBQKB1R w KQkq a6 0 3,rnbqkbnr/1p1ppppp/8/p1p5/5P2/4PN2/PPPP2PP/RNBQKB1R b KQkq - 0 3,rnbqkb1r/1p1ppppp/5n2/p1p5/5P2/4PN2/PPPP2PP/RNBQKB1R w KQkq - 1 4,rnbqkb1r/1p1ppppp/5n2/p1p5/2B2P2/4PN2/PPPP2PP/RNBQK2R b KQkq - 2 4,1nbqkb1r/rp1ppppp/5n2/p1p5/2B2P2/4PN2/PPPP2PP/RNBQK2R w KQk - 3 5,1nbqkb1r/rp1ppppp/5n2/p1p1N3/2B2P2/4P3/PPPP2PP/RNBQK2R b KQk - 4 5,1nbqkb1r/rp1ppp1p/5n2/p1p1N1p1/2B2P2/4P3/PPPP2PP/RNBQK2R w KQk g6 0 6,1nbqkb1r/rp1ppB1p/5n2/p1p1N1p1/5P2/4P3/PPPP2PP/RNBQK2R b KQk - 0 6",
+                    "datum": "2022-08-06 11:34:08.878649"
+                },
+                {
+                    "id": 19,
+                    "beli": "jasa",
+                    "crni": "Stanley",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Zmaga",
+                    "igra": "1. e4 Nf6 2. e5 Ng4 3. d4 Rg8 4. Qxg4 g6 5. Nf3 a5 6. Nc3 Na6 7. Bg5 a4 8. Be3 Nb8 9. Ng5 f5 10. Qh4 b6 11. Qxh7 e6 12. Qf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkb1r/pppppppp/5n2/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2,rnbqkb1r/pppppppp/5n2/4P3/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2,rnbqkb1r/pppppppp/8/4P3/6n1/8/PPPP1PPP/RNBQKBNR w KQkq - 1 3,rnbqkb1r/pppppppp/8/4P3/3P2n1/8/PPP2PPP/RNBQKBNR b KQkq d3 0 3,rnbqkbr1/pppppppp/8/4P3/3P2n1/8/PPP2PPP/RNBQKBNR w KQq - 1 4,rnbqkbr1/pppppppp/8/4P3/3P2Q1/8/PPP2PPP/RNB1KBNR b KQq - 0 4,rnbqkbr1/pppppp1p/6p1/4P3/3P2Q1/8/PPP2PPP/RNB1KBNR w KQq - 0 5,rnbqkbr1/pppppp1p/6p1/4P3/3P2Q1/5N2/PPP2PPP/RNB1KB1R b KQq - 1 5,rnbqkbr1/1ppppp1p/6p1/p3P3/3P2Q1/5N2/PPP2PPP/RNB1KB1R w KQq a6 0 6,rnbqkbr1/1ppppp1p/6p1/p3P3/3P2Q1/2N2N2/PPP2PPP/R1B1KB1R b KQq - 1 6,r1bqkbr1/1ppppp1p/n5p1/p3P3/3P2Q1/2N2N2/PPP2PPP/R1B1KB1R w KQq - 2 7,r1bqkbr1/1ppppp1p/n5p1/p3P1B1/3P2Q1/2N2N2/PPP2PPP/R3KB1R b KQq - 3 7,r1bqkbr1/1ppppp1p/n5p1/4P1B1/p2P2Q1/2N2N2/PPP2PPP/R3KB1R w KQq - 0 8,r1bqkbr1/1ppppp1p/n5p1/4P3/p2P2Q1/2N1BN2/PPP2PPP/R3KB1R b KQq - 1 8,rnbqkbr1/1ppppp1p/6p1/4P3/p2P2Q1/2N1BN2/PPP2PPP/R3KB1R w KQq - 2 9,rnbqkbr1/1ppppp1p/6p1/4P1N1/p2P2Q1/2N1B3/PPP2PPP/R3KB1R b KQq - 3 9,rnbqkbr1/1pppp2p/6p1/4PpN1/p2P2Q1/2N1B3/PPP2PPP/R3KB1R w KQq f6 0 10,rnbqkbr1/1pppp2p/6p1/4PpN1/p2P3Q/2N1B3/PPP2PPP/R3KB1R b KQq - 1 10,rnbqkbr1/2ppp2p/1p4p1/4PpN1/p2P3Q/2N1B3/PPP2PPP/R3KB1R w KQq - 0 11,rnbqkbr1/2ppp2Q/1p4p1/4PpN1/p2P4/2N1B3/PPP2PPP/R3KB1R b KQq - 0 11,rnbqkbr1/2pp3Q/1p2p1p1/4PpN1/p2P4/2N1B3/PPP2PPP/R3KB1R w KQq - 0 12,rnbqkbr1/2pp1Q2/1p2p1p1/4PpN1/p2P4/2N1B3/PPP2PPP/R3KB1R b KQq - 1 12",
+                    "datum": "2022-08-06 11:46:11.429224"
+                },
+                {
+                    "id": 20,
+                    "beli": "jasa",
+                    "crni": "buldog",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Zmaga",
+                    "igra": "1. e4 c5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2,rnbqkbnr/pp1ppppp/8/2p5/2B1P3/8/PPPP1PPP/RNBQK1NR b KQkq - 1 2,r1bqkbnr/pp1ppppp/2n5/2p5/2B1P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 3,r1bqkbnr/pp1ppppp/2n5/2p4Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3,r1bqkb1r/pp1ppppp/2n2n2/2p4Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4,r1bqkb1r/pp1ppQpp/2n2n2/2p5/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
+                    "datum": "2022-08-06 11:57:05.043923"
+                },
+                {
+                    "id": 21,
+                    "beli": "jasa",
+                    "crni": "matej",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Zmaga",
+                    "igra": "1. e4 Nc6 2. Qh5 d6 3. Bc4 Bd7 4. Qxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2,r1bqkbnr/pppppppp/2n5/7Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 2 2,r1bqkbnr/ppp1pppp/2np4/7Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 0 3,r1bqkbnr/ppp1pppp/2np4/7Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 1 3,r2qkbnr/pppbpppp/2np4/7Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 2 4,r2qkbnr/pppbpQpp/2np4/8/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
+                    "datum": "2022-08-06 11:57:21.928644"
                 }
             ]
         },
         {
             "uporabnisko_ime": "matej",
             "zasifrirano_geslo": "geslo",
-            "igre": []
+            "igre": [
+                {
+                    "id": 1,
+                    "beli": "jasa",
+                    "crni": "matej",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Poraz",
+                    "igra": "1. e4 Nc6 2. Qh5 d6 3. Bc4 Bd7 4. Qxf7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2,r1bqkbnr/pppppppp/2n5/7Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 2 2,r1bqkbnr/ppp1pppp/2np4/7Q/4P3/8/PPPP1PPP/RNB1KBNR w KQkq - 0 3,r1bqkbnr/ppp1pppp/2np4/7Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 1 3,r2qkbnr/pppbpppp/2np4/7Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 2 4,r2qkbnr/pppbpQpp/2np4/8/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4",
+                    "datum": "2022-08-06 11:57:21.928644"
+                }
+            ]
         },
         {
             "uporabnisko_ime": "sabina",
