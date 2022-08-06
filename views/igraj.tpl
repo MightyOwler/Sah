@@ -12,7 +12,7 @@
             <h1 class="title is-1 ">Kdo igra proti komu?</h1>
         </div>
         <script src="../static/zamenjaj_barvi.js"></script>
-        <div class="columns is-mobile is-centered" style="margin:10px;"><button onclick="zamenjaj_barvi()" class="button is-primary is-medium" style="margin:10px;">Zamenjaj barvi</button></div>
+        <div class="columns is-mobile is-centered" style="margin:10px;"><button onclick="zamenjaj_barvi()" class="button is-primary is-large" style="margin:10px;">Zamenjaj barvi</button></div>
         <form method="POST">
             <div class="field">
         
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="columns is-mobile is-centered" style="margin:10px;">
-                <button class="button is-link is-medium" style="margin:10px;">Začni igro</button>
+                <button class="button is-link is-large" style="margin:10px;">Začni igro</button>
             </div>
         
         </form>
@@ -79,12 +79,12 @@
 <div class="box">
     <div class="buttons is-mobile is-centered">
         <form method="GET" action="/igraj_proti_racunalniku/stanley/">
-                        <button class="button is-primary is-medium">
+                        <button class="button is-primary is-large">
                           Igraj proti Stanleyu
                         </button>
                       </form>
                       <form method="GET" action="/igraj_proti_racunalniku/stockfish/">
-                        <button class="button is-primary is-medium">
+                        <button class="button is-primary is-large">
                           Igraj proti Stockfishu
                         </button>
                       </form>

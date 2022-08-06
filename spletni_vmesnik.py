@@ -35,7 +35,7 @@ def server_static(barva):
   bottle.response.set_cookie("barva", barva[:-1], path=pot, secret=SKRIVNOST)
   bottle.redirect("/igraj_proti_racunalniku/stanley/")
 
-###  TUKAJ MORAŠ NAREDITI SPREMEMBE GLEDE SHRANJEVANJA IGER (V SLOVAR NE PA MNOŽICO)
+###  TUKAJ MORAŠ NAREDITI SPREMEMBE GLEDE SHRANJEVANJA IGER (TUDI DRUGEMU UPORABNIKU)
 
 @bottle.route("/shrani_igro/")
 def shrani_igro():
@@ -46,21 +46,30 @@ def shrani_igro():
     celoten_fen = bottle.request.query.fen.replace("_","/")
     beli = bottle.request.get_cookie("beli", secret=SKRIVNOST)
     crni = bottle.request.get_cookie("crni", secret=SKRIVNOST)
+    if uporabnisko_ime == beli:
+        nasprotnik = crni
+    else:
+        nasprotnik = beli
     if "1-0" in igra:
         rezultat_igre = "W"
         lokalni_rezultat = "Zmaga" if uporabnisko_ime == beli else "Poraz"
+        lokalni_rezultat_nasprotnik = "Zmaga" if uporabnisko_ime == crni else "Poraz"
     if "0-1" in igra:
         rezultat_igre = "B"
         lokalni_rezultat = "Zmaga" if uporabnisko_ime == crni else "Poraz"
+        lokalni_rezultat_nasprotnik = "Zmaga" if uporabnisko_ime == beli else "Poraz"
     if "1/2-1/2" in igra:
         rezultat_igre = "D"
         lokalni_rezultat = "Remi"
+        lokalni_rezultat_nasprotnik = "Remi"
     list_ki_mu_hocemo_dodati_igro = vse_skupaj.v_slovar()["uporabniki"]
     nov_list = []
     for account in list_ki_mu_hocemo_dodati_igro:
         if account["uporabnisko_ime"] == uporabnisko_ime:
             account["igre"] = account["igre"] + [{"id":len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
             #[(uporabnisko_ime, igra, str(datetime.today()))]
+        if account["uporabnisko_ime"] == nasprotnik:
+            account["igre"] = account["igre"] + [{"id":len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat_nasprotnik, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
         nov_list.append(account)
     model.VseSkupaj.v_datoteko({"uporabniki":nov_list}, STANJE)
     vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
@@ -97,8 +106,8 @@ def prijava_post():
     if uporabnisko_ime in ["Stanley", "Stockfish"]:
                 # to moramo preveriti, saj bi sicer imeli probleme z branjem iger
                 return bottle.template("registracija.tpl", napaka="To ime je rezervirano za računalnike!")
-    
-    # tukaj preveri ASCII
+    if not uporabnisko_ime.isascii():
+        return bottle.template("registracija.tpl", napaka="Ime uporabnika mora biti ASCII sprejemljivo!")
     
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
     if uporabnik:
@@ -121,6 +130,12 @@ def igra_proti_cloveku_get():
 def igraj_proti_racunalniku_post():
     beli = bottle.request.forms.getunicode("beli")
     crni = bottle.request.forms.getunicode("crni")
+    if not beli.isascii() or not crni.isascii():
+        return bottle.template("igraj.tpl", vrsta_igre="clovek",
+                           nasprotnik= None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!")
+    if beli == "" or crni == "":
+        return bottle.template("igraj.tpl", vrsta_igre="clovek",
+                           nasprotnik= None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ime!")
     if beli == crni:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
                            nasprotnik= None, beli=beli, crni=crni, napaka="Imeni igralcev morata biti različni!")
