@@ -66,7 +66,7 @@ const ctx_skupno = document.getElementById('myChat_skupno').getContext('2d');
 const myChart_skupno = new Chart(ctx_skupno, {
     type: 'doughnut',
     data: {
-        labels: ['Zmaga', 'Poraz', 'Remi'],
+        labels: ['Zmaga {{'{:.1%}'.format(zmage / (zmage + porazi + remiji))}}', 'Poraz {{'{:.1%}'.format(porazi / (zmage + porazi + remiji))}}', 'Remi {{'{:.1%}'.format(remiji / (zmage + porazi + remiji))}}'],
         datasets: [{
             label: '# of Votes',
             data: [parseInt('{{zmage}}'), parseInt('{{porazi}}'), parseInt('{{remiji}}')],
@@ -89,7 +89,7 @@ const myChart_skupno = new Chart(ctx_skupno, {
         plugins: {
             title: {
                 display: true,
-                text: 'Rezultati iger skupno'
+                text: 'Rezultati iger skupno ({{zmage + porazi + remiji}})'
             }
         }
     }
@@ -99,7 +99,7 @@ const ctx_beli = document.getElementById('myChart_beli').getContext('2d');
 const myChart_beli = new Chart(ctx_beli, {
     type: 'doughnut',
     data: {
-        labels: ['Zmaga beli', 'Poraz beli', 'Remi beli'],
+        labels: ['Zmaga beli {{'{:.1%}'.format(zmage_beli / (zmage_beli + porazi_beli + remiji_beli))}}', 'Poraz beli {{'{:.1%}'.format(porazi_beli / (zmage_beli + porazi_beli + remiji_beli))}}', 'Remi beli {{'{:.1%}'.format(remiji_beli / (zmage_beli + porazi_beli + remiji_beli))}}'],
         datasets: [{
             label: '# of Votes',
             data: [parseInt('{{zmage_beli}}'), parseInt('{{porazi_beli}}'), parseInt('{{remiji_beli}}')],
@@ -122,7 +122,7 @@ const myChart_beli = new Chart(ctx_beli, {
         plugins: {
             title: {
                 display: true,
-                text: 'Rezultati iger beli'
+                text: 'Rezultati iger beli ({{zmage_beli + porazi_beli + remiji_beli}})'
             }
         }
     }
@@ -134,7 +134,7 @@ const ctx_crni = document.getElementById('myChart_crni').getContext('2d');
 const myChart_crni = new Chart(ctx_crni, {
     type: 'doughnut',
     data: {
-        labels: ['Zmaga črni', 'Poraz črni', 'Remi črni'],
+        labels: ['Zmaga črni {{'{:.1%}'.format(zmage_crni / (zmage_crni + porazi_crni + remiji_crni))}}', 'Poraz črni {{'{:.1%}'.format(porazi_crni / (zmage_crni + porazi_crni + remiji_crni))}}', 'Remi črni {{'{:.1%}'.format(remiji_crni / (zmage_crni + porazi_crni + remiji_crni))}}'],
         datasets: [{
             label: '# of Votes',
             data: [parseInt('{{zmage_crni}}'), parseInt('{{porazi_crni}}'), parseInt('{{remiji_crni}}')],
@@ -157,7 +157,7 @@ const myChart_crni = new Chart(ctx_crni, {
         plugins: {
             title: {
                 display: true,
-                text: 'Rezultati iger črni'
+                text: 'Rezultati iger črni ({{zmage_crni + porazi_crni + remiji_crni}})'
             }
         }
     }

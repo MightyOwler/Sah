@@ -23,10 +23,8 @@ def arhiv_get():
 def arhiv_get():
     return bottle.template("arhiv.tpl")
 
-# tukaj moramo urediti dinamičen naslov
 @bottle.get("/arhiv/<id:path>")
 def server_static(id):
-    # pot = "/arhiv/igra/"
     return bottle.template("arhiv_igra.tpl", id=id[:-1])
 
 @bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
@@ -34,8 +32,6 @@ def server_static(barva):
   pot = '/igraj_proti_racunalniku/'
   bottle.response.set_cookie("barva", barva[:-1], path=pot, secret=SKRIVNOST)
   bottle.redirect("/igraj_proti_racunalniku/stanley/")
-
-###  TUKAJ MORAŠ NAREDITI SPREMEMBE GLEDE SHRANJEVANJA IGER (TUDI DRUGEMU UPORABNIKU)
 
 @bottle.route("/shrani_igro/")
 def shrani_igro():
@@ -108,7 +104,10 @@ def prijava_post():
                 return bottle.template("registracija.tpl", napaka="To ime je rezervirano za računalnike!")
     if not uporabnisko_ime.isascii():
         return bottle.template("registracija.tpl", napaka="Ime uporabnika mora biti ASCII sprejemljivo!")
-    
+    if len(uporabnisko_ime) > 20:
+        return bottle.template("registracija.tpl", napaka="Ime uporabnika sme vsebovati največ 20 znakov!")
+    if len(uporabnisko_ime) == 0:
+        return bottle.template("registracija.tpl", napaka="Ime uporabnika ne sme biti prazno!")
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
     if uporabnik:
         return bottle.template("registracija.tpl", napaka="Uporabnik že obstaja!")
