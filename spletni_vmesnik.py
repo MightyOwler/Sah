@@ -30,8 +30,16 @@ def server_static(id):
 @bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
 def server_static(barva):
   pot = '/igraj_proti_racunalniku/'
-  bottle.response.set_cookie("barva", barva[:-1], path=pot, secret=SKRIVNOST)
+  bottle.response.set_cookie("barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
   bottle.redirect("/igraj_proti_racunalniku/stanley/")
+  
+@bottle.post('/igraj_proti_racunalniku/stockfish/<barva:path>')
+def server_static(barva):
+  pot = '/igraj_proti_racunalniku/'
+  bottle.response.set_cookie("barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
+  bottle.response.set_cookie("stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)
+  bottle.redirect("/igraj_proti_racunalniku/stanley/?stockfish=True")
+
 
 @bottle.route("/shrani_igro/")
 def shrani_igro():
@@ -114,8 +122,6 @@ def prijava_post():
     else:
         slovar_z_novim_uporabnikom = dict()
         slovar_z_novim_uporabnikom["uporabniki"] = vse_skupaj.v_slovar()["uporabniki"] + [{'uporabnisko_ime': uporabnisko_ime, 'zasifrirano_geslo': geslo_v_cistopisu, 'igre':[]}]
-        # na tem mestu sem spremenil metodo v_datoteko iz model.py 
-        # (json.dump(self.v_slovar()) --> json.dump(self))
         model.VseSkupaj.v_datoteko(slovar_z_novim_uporabnikom, STANJE)
         vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
         bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)

@@ -3,6 +3,7 @@
 %SKRIVNOST = "blablabla"
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
+<title>Izberi barvo proti Stanleyu</title>
 <div class="columns is-mobile is-centered" style="margin:10px;">
   <h1 class="title is-1" style="margin:10px;">Izberi barvo</h1>
 </div>
@@ -55,9 +56,15 @@
 <div class="columns is-mobile is-centered">
   <chess-board style="width: 600px" position="start" draggable-pieces=""></chess-board>
 </div>
-<div class="columns is-mobile is-centered"><label class="title is-2" style="margin:10px;">Igra:</label></div> 
+%if bottle.request.query.stockfish:
+  <div class="columns is-mobile is-centered">
+    <div class="subtitle is-4" style="margin:10px;">Stockfish je trenutno na dopustu, saj spremlja šahovsko olimpijado v Indiji. Zato te je izzval Stanley!</div>
+  </div>
+%end
+<div class="columns is-mobile is-centered"><label class="title is-2" style="margin:10px;">Igra:</label>
+</div> 
 <div class="columns is-mobile is-centered">
-  <div id="pgn" class="subtitle is-4" style="margin:10px;"></div>
+<div id="pgn" class="subtitle is-4" style="margin:10px;"></div>
 </div>
 <div class="columns is-mobile is-centered">
         <button id="undo" class="button is-link is-medium" style="margin:10px;">Popravi potezo</button>
