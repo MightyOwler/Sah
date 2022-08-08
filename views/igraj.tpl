@@ -52,11 +52,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
-<script type="module" src="../static/sah_samo_z_legalnimi_potezami – kopija.js"></script>
-<script type="module" src="../static/sah_proti_igralcu.js"></script>
+<script type="module" src="../static/sah_samo_z_legalnimi_potezami2.js"></script>
 </head>
 <body>
-<div class="columns is-mobile is-centered">
+<div class="columns is-mobile is-centered"> 
     <h1 class="subtitle is-1" style="margin:10px;"><strong>{{beli}}</strong> vs. <strong>{{crni}}</strong></h1>
 </div>
 <div class="columns is-mobile is-centered">

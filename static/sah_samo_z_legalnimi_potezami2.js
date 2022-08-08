@@ -12,6 +12,7 @@ const game = new Chess();
 // const fenElement = document.querySelector('#fen');
 const pgnElement = document.querySelector('#pgn');
 var celotna_igra = [];
+
 board.addEventListener('drag-start', (e) => {
   const {source, piece, position, orientation} = e.detail;
 
@@ -54,6 +55,7 @@ board.addEventListener('snap-end', (e) => {
 });
 
 function updateStatus () {
+  
   celotna_igra.push(game.fen());
 
   let status = '';
@@ -95,6 +97,23 @@ function updateStatus () {
   // alert(game.pgn());
   // v game.pgn() se skiriva cela igra, ko je mat bi lahko program sporočil
 }
+
+function popravi_pozezo(){
+  if (celotna_igra.length > 1){
+  game.undo();
+  celotna_igra.pop();
+  board.setPosition(celotna_igra[celotna_igra.length -1]);
+  pgnElement.innerHTML = game.pgn();
+  }
+}
+
+document.querySelector('#flipOrientationBtn').addEventListener('click', () => {
+  board.flip();
+});
+
+document.querySelector('#undo').addEventListener('click', () => {
+  popravi_pozezo();
+});
 
 updateStatus();
             // End Example JS
