@@ -70,7 +70,9 @@
 </div>
 <div class="columns is-mobile is-centered">
     <button id="flipOrientationBtn" class="button is-link is-medium" style="margin:10px;">Obrni šahovnico</button>
+        <button id="undo" class="button is-link is-medium" style="margin:10px;">Popravi potezo</button>
 </div>
+
         </body>
 %end
 %else:
