@@ -107,12 +107,12 @@ function popravi_pozezo(){
   }
 }
 
-document.querySelector('#flipOrientationBtn').addEventListener('click', () => {
-  board.flip();
-});
-
 document.querySelector('#undo').addEventListener('click', () => {
   popravi_pozezo();
+});
+
+document.querySelector('#flipOrientationBtn').addEventListener('click', () => {
+  board.flip();
 });
 
 updateStatus();

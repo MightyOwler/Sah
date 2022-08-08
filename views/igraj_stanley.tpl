@@ -39,7 +39,7 @@
 <div class="columns is-mobile is-centered">
   <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stanley</strong></h1>
 </div>
-<script type="module" src="../../static/sah_proti_stanley_beli.js"></script>
+<script type="module" src="../../static/sah_proti_stanley_beli – kopija.js"></script>
 %else:
 %bottle.response.set_cookie("beli", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
@@ -58,6 +58,9 @@
 <div class="columns is-mobile is-centered"><label class="title is-2" style="margin:10px;">Igra:</label></div> 
 <div class="columns is-mobile is-centered">
   <div id="pgn" class="subtitle is-4" style="margin:10px;"></div>
+</div>
+<div class="columns is-mobile is-centered">
+        <button id="undo" class="button is-link is-medium" style="margin:10px;">Popravi potezo</button>
 </div>
 </body>
 </html>

@@ -88,4 +88,19 @@ pgnElement.innerHTML = game.pgn();
 
 }
 
+function popravi_pozezo(){
+  if (celotna_igra.length > 2){
+  game.undo();
+  game.undo();
+  celotna_igra.pop();
+  celotna_igra.pop();
+  board.setPosition(celotna_igra[celotna_igra.length -1]);
+  pgnElement.innerHTML = game.pgn();
+  }
+}
+
+document.querySelector('#undo').addEventListener('click', () => {
+  popravi_pozezo();
+});
+
 updateStatus(); 
