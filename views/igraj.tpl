@@ -52,7 +52,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
-<script type="module" src="../static/sah_samo_z_legalnimi_potezami2.js"></script>
+<script type="module" src="../static/sah_samo_z_legalnimi_potezami.js"></script>
 </head>
 <body>
 <div class="columns is-mobile is-centered"> 
@@ -136,7 +136,7 @@ img {
                 
             <div class = "column" style="display: flex; justify-content:left; width: 250px";">
                 <div class="block" style="display: flex; justify-content:left; margin:0px 50px;">
-                    <h1 style="width: 250px;"><em><strong>Stockfish</strong> je trenutno eden izmed najboljših šahovskih programov. (trenutno na dopustu!)</em> <br><br> Slog: <em>brutalen</em> <br><br>Rating: 3390</h1>
+                    <h1 style="width: 250px;"><em><strong>Stockfish</strong> uživa neizmerno slavo kot eden izmed najboljših šahovskih programov. (trenutno na dopustu!)</em> <br><br> Slog: <em>brutalen</em> <br><br>Rating: 3390</h1>
 
                 </div>
             </div>

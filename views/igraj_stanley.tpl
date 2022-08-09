@@ -40,7 +40,7 @@
 <div class="columns is-mobile is-centered">
   <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stanley</strong></h1>
 </div>
-<script type="module" src="../../static/sah_proti_stanley_beli – kopija.js"></script>
+<script type="module" src="../../static/sah_proti_stanley_beli.js"></script>
 %else:
 %bottle.response.set_cookie("beli", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
