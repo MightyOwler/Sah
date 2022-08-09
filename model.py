@@ -13,7 +13,6 @@ class Uporabnik:
     zasifrirano_geslo: str
     igre: list
     
-    # karkoli naj bi bila ta metoda...
     @staticmethod
     def zasifriraj_geslo(geslo_v_cistopisu):
         return "XXX" + geslo_v_cistopisu[::-1] + "XXX"
@@ -56,11 +55,7 @@ class VseSkupaj:
     def poisci_uporabnika(self, uporabnisko_ime, geslo_v_cistopisu=None, igre=None):
         for uporabnik in self.uporabniki:
             if uporabnik.uporabnisko_ime == uporabnisko_ime:
-                #if geslo_v_cistopisu is None or uporabnik.ima_geslo(geslo_v_cistopisu):
                 return uporabnik
-        
-        ## return ...
-        # tukaj bo v resnici bilo treba nekaj narediti
     
     def v_slovar(self):
         return {

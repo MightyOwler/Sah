@@ -2,7 +2,7 @@
     "uporabniki": [
         {
             "uporabnisko_ime": "jasa",
-            "zasifrirano_geslo": "geslo",
+            "zasifrirano_geslo": "XXXolsegXXX",
             "igre": [
                 {
                     "id": 1,
@@ -368,7 +368,7 @@
         },
         {
             "uporabnisko_ime": "matej",
-            "zasifrirano_geslo": "geslo",
+            "zasifrirano_geslo": "XXXolsegXXX",
             "igre": [
                 {
                     "id": 1,
@@ -434,17 +434,17 @@
         },
         {
             "uporabnisko_ime": "sabina",
-            "zasifrirano_geslo": "zelena",
+            "zasifrirano_geslo": "XXXanelezXXX",
             "igre": []
         },
         {
             "uporabnisko_ime": "aljaz",
-            "zasifrirano_geslo": "aljaz",
+            "zasifrirano_geslo": "XXXzajlaXXX",
             "igre": []
         },
         {
             "uporabnisko_ime": "ziva",
-            "zasifrirano_geslo": "kapibara",
+            "zasifrirano_geslo": "XXXarabipakXXX",
             "igre": [
                 {
                     "id": 1,
@@ -477,6 +477,11 @@
                     "datum": "2022-08-08 21:52:58.816330"
                 }
             ]
+        },
+        {
+            "uporabnisko_ime": "jodlar",
+            "zasifrirano_geslo": "XXXolsegXXX",
+            "igre": []
         }
     ]
 }

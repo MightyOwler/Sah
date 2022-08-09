@@ -44,7 +44,6 @@ def server_static(barva):
 @bottle.route("/shrani_igro/")
 def shrani_igro():
     global vse_skupaj
-    # spremeniti smo morali url, da se podatki niso izgubili
     uporabnisko_ime = bottle.request.get_cookie("uporabnisko_ime", secret=SKRIVNOST)
     igra = bottle.request.query.igra.replace("_","#")
     celoten_fen = bottle.request.query.fen.replace("_","/")
@@ -90,7 +89,7 @@ def prijava_post():
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu, [])
     if uporabnik:
-        if uporabnik.zasifrirano_geslo == geslo_v_cistopisu:
+        if uporabnik.zasifrirano_geslo == model.Uporabnik.zasifriraj_geslo(geslo_v_cistopisu):
             bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
             bottle.redirect("/")
         else:
@@ -117,11 +116,12 @@ def prijava_post():
     if len(uporabnisko_ime) == 0:
         return bottle.template("registracija.tpl", napaka="Ime uporabnika ne sme biti prazno!")
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu)
-    if uporabnik:
+    if uporabnik:   
         return bottle.template("registracija.tpl", napaka="Uporabnik že obstaja!")
     else:
         slovar_z_novim_uporabnikom = dict()
-        slovar_z_novim_uporabnikom["uporabniki"] = vse_skupaj.v_slovar()["uporabniki"] + [{'uporabnisko_ime': uporabnisko_ime, 'zasifrirano_geslo': geslo_v_cistopisu, 'igre':[]}]
+        nov_uporabnik = {'uporabnisko_ime': uporabnisko_ime, 'zasifrirano_geslo': model.Uporabnik.zasifriraj_geslo(geslo_v_cistopisu), 'igre':[]}
+        slovar_z_novim_uporabnikom["uporabniki"] = vse_skupaj.v_slovar()["uporabniki"] + [nov_uporabnik]
         model.VseSkupaj.v_datoteko(slovar_z_novim_uporabnikom, STANJE)
         vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
         bottle.response.set_cookie("uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)

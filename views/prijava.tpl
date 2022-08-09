@@ -5,7 +5,6 @@
     <div class="section">
         <form method="POST">
             <div class="field">
-            
                 <div class="columns is-mobile is-centered"><label class="title is-4" style="margin:20px;">Uporabniško ime:</label></div>
                 <div class="columns is-mobile is-centered">
                     <p class="control has-icons-left" style="margin:10px;">
@@ -15,7 +14,6 @@
                         </span>
                     </p>
                 </div>
-    
             </div>
             <div class="field">
                 <div class="columns is-mobile is-centered"><label class="title is-4" style="margin:20px;">Geslo:</label></div>
@@ -37,7 +35,7 @@
     </div>
 </div>
  % if napaka:
-                <div class="columns is-mobile is-centered">
-                    <p class="title help is-3 is-danger">{{ napaka }}!</p>
-                </div>
-                % end
+    <div class="columns is-mobile is-centered">
+        <p class="title help is-3 is-danger">{{ napaka }}!</p>
+    </div>
+% end

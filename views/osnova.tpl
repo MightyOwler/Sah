@@ -10,6 +10,7 @@
   <div class="buttons is-mobile is-centered">
                 %import bottle
                 %SKRIVNOST = "blablabla"
+
                 %if bottle.request.get_cookie('uporabnisko_ime'):
                 <form method="POST" action="/odjava/">
                   <button class="button is-primary is-large">
@@ -36,7 +37,7 @@
                     Statistika
                   </button>
                 </form>
-                
+
                 % else:
                       <a class="button is-primary is-large" href="/registracija/">
                         <strong>Registriraj se</strong>
@@ -44,18 +45,18 @@
                       <a class="button is-light is-large" href="/prijava/">
                         Prijavi se
                       </a>
-                  % end
-                </div>
+                % end
+  </div>
 </div>
 %if bottle.request.get_cookie('uporabnisko_ime'):
 <div class="columns is-mobile is-centered" style="margin:10px;">
-                <h1 class="subtitle is-4 is-spaced">Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
-                </div>
+  <h1 class="subtitle is-4 is-spaced">Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
+</div>
 
 %else:
 <div class="columns is-mobile is-centered" style="margin:10px;">
-                <h1 class="subtitle is-4 is-spaced">Prijavi se. Če še nimaš svojega računa, ga ustvari z registracijo.</h1>
-                </div>
+  <h1 class="subtitle is-4 is-spaced">Prijavi se. Če še nimaš svojega računa, ga ustvari z registracijo.</h1>
+</div>
 %end
 </body>
 

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
 <div class="box">
     <div class="section">
         <form method="POST">
@@ -35,7 +36,7 @@
     </div>
 </div>
 % if napaka:
-            <div class="columns is-mobile is-centered">
-                <p class="title help is-3 is-danger">{{ napaka }}!</p>
-            </div>
-            % end
+    <div class="columns is-mobile is-centered">
+        <p class="title help is-3 is-danger">{{ napaka }}!</p>
+    </div>
+% end
