@@ -77,21 +77,55 @@
 %else:
 <title>Šah proti računalniku</title>
 <body>
+<style>
+
+img {
+    width:200%;
+    height:200%;
+
+}
+
+
+</style>
 <div class="box">
-    <div class="buttons is-mobile is-centered">
-        <form method="GET" action="/igraj_proti_racunalniku/stanley/">
+    <div class="columns is-mobile is-centered" style="margin:10px;">
+        <div class = "column">
+            <div class="buttons is-mobile is-centered">
+                <div>
+                    <form method="GET" action="/igraj_proti_racunalniku/stanley/">
                         <button class="button is-primary is-large">
-                          Igraj proti Stanleyu
+                            Igraj proti Stanleyu
                         </button>
-                      </form>
-                      <form method="GET" action="/igraj_proti_racunalniku/stockfish/">
+                    </form>
+                </div>
+                <div>
+                    <form method="GET" action="/igraj_proti_racunalniku/stockfish/">
                         <button class="button is-primary is-large">
-                          Igraj proti Stockfishu
+                            Igraj proti Stockfishu
                         </button>
-                      </form>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+<div class="columns" is-mobile is-centered>
+            <div class = "column" style="display: flex; justify-content:right;"> 
+                <figure class="image is-128x128" style="width:30%; height:30%;">
+                    <img class="is-rounded" src="../static/stanley-icon.png" >
+                </figure>
+            </div>
+    
+    
+            <div class = "column" style="display: flex; justify-content:left;">
+                <figure class="image is-128x128" style="width:30%; height:30%;">
+                    <img class="is-rounded" src="../static/stockfish-icon2.png">
+                </figure>
+            </div>
+    
+</div>
+   
 </body>
 %end
 </html>
