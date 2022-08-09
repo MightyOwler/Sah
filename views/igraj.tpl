@@ -111,14 +111,14 @@ img {
 
 <div class="columns" is-mobile is-centered>
             <div class = "column" style="display: flex; justify-content:right;"> 
-                <figure class="image is-128x128" style="width:30%; height:30%; margin:0px 50px;">
+                <figure class="image is-128x128" style="width:30%; height:30%; margin:0px 40px;">
                     <img class="is-rounded" src="../static/stanley-icon.png" >
                 </figure>
             </div>
     
     
             <div class = "column" style="display: flex; justify-content:left;">
-                <figure class="image is-128x128" style="width:29%; height:29%; margin:0px 50px;">
+                <figure class="image is-128x128" style="width:32%; height:32%; margin:0px 30px;">
                     <img class="is-rounded" src="../static/stockfish-icon.png">
                 </figure>
             </div>
