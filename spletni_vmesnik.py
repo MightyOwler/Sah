@@ -5,6 +5,12 @@ from datetime import datetime
 SKRIVNOST = "blablabla" #to je kasneje treba dati v neko datoteko
 STANJE = "stanje.json"
 vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
+def stanje_trenutnega_uporabnika():
+    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime')
+    if uporabnisko_ime is None:
+        bottle.redirect('/')
+            
+
 @bottle.get('/')
 def index():
     bottle.response.delete_cookie("barva", path = "/igraj_proti_racunalniku/", secret=SKRIVNOST)
@@ -17,32 +23,38 @@ def server_static(ime_dat):
 
 @bottle.get("/statistika/")
 def arhiv_get():
+    stanje_trenutnega_uporabnika()
     return bottle.template("statistika.tpl")
 
 @bottle.get("/arhiv/")
 def arhiv_get():
+    stanje_trenutnega_uporabnika()
     return bottle.template("arhiv.tpl")
 
 @bottle.get("/arhiv/<id:path>")
 def server_static(id):
+    stanje_trenutnega_uporabnika()
     return bottle.template("arhiv_igra.tpl", id=id[:-1])
 
 @bottle.post('/igraj_proti_racunalniku/stanley/<barva:path>')
 def server_static(barva):
-  pot = '/igraj_proti_racunalniku/'
-  bottle.response.set_cookie("barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
-  bottle.redirect("/igraj_proti_racunalniku/stanley/")
+    stanje_trenutnega_uporabnika()
+    pot = '/igraj_proti_racunalniku/'
+    bottle.response.set_cookie("barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
+    bottle.redirect("/igraj_proti_racunalniku/stanley/")
   
 @bottle.post('/igraj_proti_racunalniku/stockfish/<barva:path>')
 def server_static(barva):
-  pot = '/igraj_proti_racunalniku/'
-  bottle.response.set_cookie("barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
-  bottle.response.set_cookie("stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)
-  bottle.redirect("/igraj_proti_racunalniku/stanley/?stockfish=True")
+    stanje_trenutnega_uporabnika()
+    pot = '/igraj_proti_racunalniku/'
+    bottle.response.set_cookie("barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
+    bottle.response.set_cookie("stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)
+    bottle.redirect("/igraj_proti_racunalniku/stanley/?stockfish=True")
 
 
 @bottle.route("/shrani_igro/")
 def shrani_igro():
+    stanje_trenutnega_uporabnika()
     global vse_skupaj
     uporabnisko_ime = bottle.request.get_cookie("uporabnisko_ime", secret=SKRIVNOST)
     igra = bottle.request.query.igra.replace("_","#")
@@ -129,10 +141,12 @@ def prijava_post():
          
 @bottle.get("/igraj_proti_cloveku/")
 def igra_proti_cloveku_get():
+    stanje_trenutnega_uporabnika()
     return bottle.template("igraj.tpl", vrsta_igre="clovek", nasprotnik = None, napaka = None)
 
 @bottle.post("/igraj_proti_cloveku/")
 def igraj_proti_racunalniku_post():
+    stanje_trenutnega_uporabnika()
     beli = bottle.request.forms.getunicode("beli")
     crni = bottle.request.forms.getunicode("crni")
     if not beli.isascii() or not crni.isascii():
@@ -152,19 +166,18 @@ def igraj_proti_racunalniku_post():
 
 @bottle.get("/igraj_proti_racunalniku/")
 def igraj_proti_racunalniku_get():
+    stanje_trenutnega_uporabnika()
     return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
 
 @bottle.get("/igraj_proti_racunalniku/stanley/")
 def igraj_proti_racunalniku__stanley_get():
+    stanje_trenutnega_uporabnika()
     return bottle.template("igraj_stanley.tpl")
 
 @bottle.get("/igraj_proti_racunalniku/stockfish/")
 def igraj_proti_racunalniku__stockfish_get():
+    stanje_trenutnega_uporabnika()
     return bottle.template("igraj_stockfish.tpl")
-
-    # treba je še naštimati ustrezno barvo figur
-    
-
 
 
 # tole pobriše piškotek uporabnisko_ime

@@ -17,11 +17,11 @@ class Uporabnik:
     def zasifriraj_geslo(geslo_v_cistopisu):
         return "XXX" + geslo_v_cistopisu[::-1] + "XXX"
 
-    def ima_geslo(self, geslo_v_cistopisu):
-        return self.zasifriraj_geslo(geslo_v_cistopisu) == self.zasifrirano_geslo
+    # def ima_geslo(self, geslo_v_cistopisu):
+    #     return self.zasifriraj_geslo(geslo_v_cistopisu) == self.zasifrirano_geslo
     
-    def nastavi_novo_geslo(self, geslo_v_cistopisu):
-        self.zasifrirano_geslo = self.zasifriraj_geslo(geslo_v_cistopisu)
+    # def nastavi_novo_geslo(self, geslo_v_cistopisu):
+    #     self.zasifrirano_geslo = self.zasifriraj_geslo(geslo_v_cistopisu)
 
     def v_slovar(self):
         return {
@@ -38,14 +38,14 @@ class Uporabnik:
             igre=slovar["igre"]
         )
 
-    def preveri_uporabnika(self, uporabnisko_ime, geslo):
-        if self.poisci_uporabnika(uporabnisko_ime) == None:
-            return False
-        else:
-            if self.zasifrirano_geslo == geslo:
-                return True
-            else:
-                return False
+    # def preveri_uporabnika(self, uporabnisko_ime, geslo):
+    #     if self.poisci_uporabnika(uporabnisko_ime) == None:
+    #         return False
+    #     else:
+    #         if self.zasifrirano_geslo == geslo:
+    #             return True
+    #         else:
+    #             return False
 
 @dataclass
 class VseSkupaj:
@@ -76,6 +76,8 @@ class VseSkupaj:
     def iz_datoteke(cls, ime_datoteke):
         with open(ime_datoteke, encoding="utf-8") as f:
             return cls.iz_slovarja(json.load(f))
+        
+
     
         
     # malo sumljivo je, ker sploh nikjer nisem zašifriral gesla
