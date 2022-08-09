@@ -52,22 +52,6 @@
                 <h1 class="subtitle is-4 is-spaced">Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
                 </div>
 
-<div class="level">
-    
-            <div class = "level-item"> 
-                <figure class="image is-128x128">
-                    <img src="../static/stanley-icon.png">
-                </figure>
-            </div>
-    
-    
-            <div class = "level-item">
-                <figure class="image is-128x128">
-                    <img src="../static/stockfish-icon2.png">
-                </figure>
-            </div>
-    
-</div>
 %else:
 <div class="columns is-mobile is-centered" style="margin:10px;">
                 <h1 class="subtitle is-4 is-spaced">Prijavi se. Če še nimaš svojega računa, ga ustvari z registracijo.</h1>

@@ -93,14 +93,14 @@ img {
             <div class="buttons is-mobile is-centered">
                 <div>
                     <form method="GET" action="/igraj_proti_racunalniku/stanley/">
-                        <button class="button is-primary is-large">
+                        <button class="button is-primary is-large" style="margin:10px 50px;">
                             Igraj proti Stanleyu
                         </button>
                     </form>
                 </div>
                 <div>
                     <form method="GET" action="/igraj_proti_racunalniku/stockfish/">
-                        <button class="button is-primary is-large">
+                        <button class="button is-primary is-large" style="margin:10px 50px;">
                             Igraj proti Stockfishu
                         </button>
                     </form>
@@ -108,23 +108,44 @@ img {
             </div>
         </div>
     </div>
-</div>
 
 <div class="columns" is-mobile is-centered>
             <div class = "column" style="display: flex; justify-content:right;"> 
-                <figure class="image is-128x128" style="width:30%; height:30%;">
+                <figure class="image is-128x128" style="width:30%; height:30%; margin:0px 50px;">
                     <img class="is-rounded" src="../static/stanley-icon.png" >
                 </figure>
             </div>
     
     
             <div class = "column" style="display: flex; justify-content:left;">
-                <figure class="image is-128x128" style="width:30%; height:30%;">
-                    <img class="is-rounded" src="../static/stockfish-icon2.png">
+                <figure class="image is-128x128" style="width:29%; height:29%; margin:0px 50px;">
+                    <img class="is-rounded" src="../static/stockfish-icon.png">
                 </figure>
             </div>
     
 </div>
+
+<div class="columns" is-mobile is-centered>
+            <div class = "column" > 
+                <div class="block" style="display: flex; justify-content:right; margin:0px 50px;">
+                    <h1 style="width: 250px;"><em><strong>Stanley</strong> sicer zna premikati figure, ampak ne igra prav dobro. Kljub temu ga ne podcenjuj!</em> <br><br> Slog: <em>naključen</em> <br><br>Rating: 1</h1>
+                    
+                </div>
+            </div>
+    
+                
+            <div class = "column" style="display: flex; justify-content:left; width: 250px";">
+                <div class="block" style="display: flex; justify-content:left; margin:0px 50px;">
+                    <h1 style="width: 250px;"><em><strong>Stockfish</strong> je trenutno eden izmed najboljših šahovskih programov. (trenutno na dopustu!)</em> <br><br> Slog: <em>brutalen</em> <br><br>Rating: 3390</h1>
+
+                </div>
+            </div>
+    
+</div>
+
+</div>
+
+
    
 </body>
 %end
