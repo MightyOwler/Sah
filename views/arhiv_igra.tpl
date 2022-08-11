@@ -23,7 +23,7 @@
 
 
 <head>
-<title>Analiza igre {{[beli]}} vs. {{[crni]}}</title>
+<title>Analiza igre: {{beli}} vs. {{crni}}</title>
 <link rel="icon" href="/static/chess_icon.ico">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>

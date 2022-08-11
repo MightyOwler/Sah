@@ -2,6 +2,7 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <link rel="icon" href="/static/chess_icon.ico">
 
+<title>Prijava</title>
 <div class="box">
     <div class="section">
         <form method="POST">

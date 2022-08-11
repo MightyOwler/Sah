@@ -7,6 +7,7 @@
 %SKRIVNOST = "blablabla"
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %if nasprotnik == None:
+<title>Kdo igra proti komu?</title>
 <div class="box">
     <div class="section">
         <div class="columns is-mobile is-centered" style="margin:10px;">
@@ -49,7 +50,7 @@
 %else:
 
 <head>
-<title>Šah proti lokalnemu nasprotniku</title>
+<title>Šah proti lokalnemu nasprotniku: {{beli}} vs. {{crni}}</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>

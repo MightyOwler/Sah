@@ -36,7 +36,7 @@
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) == "beli":
 %    bottle.response.set_cookie("beli", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
 %    bottle.response.set_cookie("crni", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
-<title>{{uporabnisko_ime}} vs. Stanleyu</title>
+<title>Šah proti računalniku: {{uporabnisko_ime}} vs. Stanleyu</title>
 <div class="columns is-mobile is-centered">
   <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stanley</strong></h1>
 </div>
@@ -45,7 +45,7 @@
 %else:
 %bottle.response.set_cookie("beli", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
-<title>Stanley vs. {{uporabnisko_ime}}</title>
+<title>Šah proti računalniku: Stanley vs. {{uporabnisko_ime}}</title>
 <div class="columns is-mobile is-centered">
   <h1 class="subtitle is-1" style="margin:10px;"><strong>Stanley</strong> vs. <strong>{{uporabnisko_ime}}</strong></h1>
 </div>
