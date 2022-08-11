@@ -6,7 +6,7 @@
 
 Čeprav so pravila šaha izredno preprosta, se v njem skirva izredna globina, ki privlači stotine miljonov igralcev po vsem svetu.
 
-![slika šaha](https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg)
+![slika šaha](https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg?w=2000)
 
 **Opomba:** Zgornja slika je sicer zelo lepa, bi pa moralo biti polje a1 črne barve.
 
