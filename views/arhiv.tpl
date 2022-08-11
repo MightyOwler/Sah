@@ -4,12 +4,12 @@
 %import model
 %SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 %STANJE = "stanje.json"
-%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
+%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
 %vse_uporabnikove_igre = uporabnik.igre
 <head>
-<title>Arhiv uporabnika {{uporabnisko_ime}}</title>
+<title>Arhiv iger uporabnika {{uporabnisko_ime}}</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 </head>
 <style>

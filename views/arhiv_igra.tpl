@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 %import bottle
 %import model
 %SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 %STANJE = "stanje.json"
-
-%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
+%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
 %vse_uporabnikove_igre = uporabnik.igre
 %for posamezna_igra in vse_uporabnikove_igre:

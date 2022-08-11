@@ -4,6 +4,8 @@
 <title>Igranje šaha</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
 </head>
 <body>
 <div class="box">
@@ -59,6 +61,14 @@
   <h1 class="subtitle is-4 is-spaced">Prijavi se. Če še nimaš svojega računa, ga ustvari z registracijo.</h1>
 </div>
 %end
+<a class="navbar-item" style="position: fixed; bottom: 10px;"
+          href="https://github.com/MightyOwler/Sah">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+          <span>GitHub, Jaša Knap 2022</span>
+        </a>
 </body>
+
 
 </html>
