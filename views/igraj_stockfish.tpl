@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 %import bottle
-%SKRIVNOST = "blablabla"
+%import model
+%SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
 <title>Izberi barvo proti "Stockfishu"</title>

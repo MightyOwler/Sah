@@ -1,9 +1,9 @@
 %import bottle
 %import model
-%SKRIVNOST = "blablabla"
+%SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 %STANJE = "stanje.json"
-%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
+%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
 %vse_uporabnikove_igre = uporabnik.igre
 %zmage, porazi, remiji = 0,0,0
@@ -106,7 +106,7 @@ const ctx_beli = document.getElementById('myChart_beli').getContext('2d');
 const myChart_beli = new Chart(ctx_beli, {
     type: 'doughnut',
     data: {
-        labels: ['Zmaga beli: {{pridobi_podatek_o_odstotkih(zmage_beli, zmage_beli, porazi_beli, remiji_beli)}}', 'Poraz beli {{pridobi_podatek_o_odstotkih(porazi_beli, zmage_beli, porazi_beli, remiji_beli)}}', 'Remi beli {{pridobi_podatek_o_odstotkih(remiji_beli, zmage_beli, porazi_beli, remiji_beli)}}'],
+        labels: ['Zmaga beli: {{pridobi_podatek_o_odstotkih(zmage_beli, zmage_beli, porazi_beli, remiji_beli)}}', 'Poraz beli: {{pridobi_podatek_o_odstotkih(porazi_beli, zmage_beli, porazi_beli, remiji_beli)}}', 'Remi beli: {{pridobi_podatek_o_odstotkih(remiji_beli, zmage_beli, porazi_beli, remiji_beli)}}'],
         datasets: [{
             label: '# of Votes',
             data: [parseInt('{{zmage_beli}}'), parseInt('{{porazi_beli}}'), parseInt('{{remiji_beli}}')],
@@ -146,13 +146,11 @@ const myChart_crni = new Chart(ctx_crni, {
             label: '# of Votes',
             data: [parseInt('{{zmage_crni}}'), parseInt('{{porazi_crni}}'), parseInt('{{remiji_crni}}')],
             backgroundColor: [
-                
                 'rgba(60, 179, 113, 0.2)',
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(90, 90, 90, 0.2)'
             ],
             borderColor: [
-                
                 'rgba(60, 179, 113, 1)',
                 'rgba(255, 99, 132, 1)',
                 'rgba(90, 90, 90, 1)'

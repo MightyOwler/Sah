@@ -9,7 +9,8 @@
 <div class="box">
   <div class="buttons is-mobile is-centered">
                 %import bottle
-                %SKRIVNOST = "blablabla"
+                %import model
+                %SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 
                 %if bottle.request.get_cookie('uporabnisko_ime'):
                 <form method="POST" action="/odjava/">

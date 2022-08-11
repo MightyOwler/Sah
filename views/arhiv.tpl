@@ -2,7 +2,7 @@
 <html>
 %import bottle
 %import model
-%SKRIVNOST = "blablabla"
+%SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 %STANJE = "stanje.json"
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)

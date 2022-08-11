@@ -1,5 +1,3 @@
-/* import from 'chessboard-element';
-import from 'chess.js' */
 import {objToFen} from "https://unpkg.com/chessboard-element?module";  //tole ne dela tako kot bi moralo
 
             // Begin Example JS
@@ -71,7 +69,7 @@ function updateStatus () {
     //document.cookie = "igra=".concat(String(game.pgn()).concat(";path=/;max-age=60;Secure;"))
     var rezulat_na_koncu_pgn
     if (moveColor == "Black") {alert("Beli je zmagal!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 1-0"}
-    else {alert("Beli je zmagal!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 0-1"}
+    else {alert("Črni je zmagal!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 0-1"}
     
     location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
   } else if (game.in_draw()) {

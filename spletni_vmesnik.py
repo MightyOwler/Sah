@@ -2,9 +2,12 @@ import bottle
 import model
 from datetime import datetime
 
-SKRIVNOST = "blablabla" #to je kasneje treba dati v neko datoteko
+SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 STANJE = "stanje.json"
 vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
+
+
+# V primeru, da uporabnik izbirše piškotek, ga to preusmeri začetno stran
 def stanje_trenutnega_uporabnika():
     uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime')
     if uporabnisko_ime is None:
@@ -65,28 +68,29 @@ def shrani_igro():
         nasprotnik = crni
     else:
         nasprotnik = beli
+    
+    # Tole je sicer nekoliko dolgo, vendar berljivo
     if "1-0" in igra:
         rezultat_igre = "W"
         lokalni_rezultat = "Zmaga" if uporabnisko_ime == beli else "Poraz"
         lokalni_rezultat_nasprotnik = "Zmaga" if uporabnisko_ime == crni else "Poraz"
-    if "0-1" in igra:
+    elif "0-1" in igra:
         rezultat_igre = "B"
         lokalni_rezultat = "Zmaga" if uporabnisko_ime == crni else "Poraz"
         lokalni_rezultat_nasprotnik = "Zmaga" if uporabnisko_ime == beli else "Poraz"
-    if "1/2-1/2" in igra:
+    else:
         rezultat_igre = "D"
         lokalni_rezultat = "Remi"
         lokalni_rezultat_nasprotnik = "Remi"
-    list_ki_mu_hocemo_dodati_igro = vse_skupaj.v_slovar()["uporabniki"]
-    nov_list = []
-    for account in list_ki_mu_hocemo_dodati_igro:
+    seznam_ki_mu_hocemo_dodati_igro = vse_skupaj.v_slovar()["uporabniki"]
+    nov_seznam = []
+    for account in seznam_ki_mu_hocemo_dodati_igro:
         if account["uporabnisko_ime"] == uporabnisko_ime:
             account["igre"] = account["igre"] + [{"id":len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
-            #[(uporabnisko_ime, igra, str(datetime.today()))]
         if account["uporabnisko_ime"] == nasprotnik:
             account["igre"] = account["igre"] + [{"id":len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre, "lokalni_rezultat": lokalni_rezultat_nasprotnik, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
-        nov_list.append(account)
-    model.VseSkupaj.v_datoteko({"uporabniki":nov_list}, STANJE)
+        nov_seznam.append(account)
+    model.VseSkupaj.v_datoteko({"uporabniki":nov_seznam}, STANJE)
     vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
     bottle.redirect("/")
 
@@ -97,7 +101,6 @@ def prijava_get():
 @bottle.post("/prijava/")
 def prijava_post():
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
-    # tole bom moral spremeniti nazaj, ker zdaj je malo smešno (v resnici je to, kar sem imenoval zasifrirano geslo v json datoteki cistopis) (spodnja vrstica)
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
     uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime, geslo_v_cistopisu, [])
     if uporabnik:
@@ -117,9 +120,9 @@ def registracija_get():
 def prijava_post():
     global vse_skupaj
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
-    geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo") 
+    geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
+    # Pred registracijo preprečimo nekaj problematičnih primerov
     if uporabnisko_ime in ["Stanley", "Stockfish"]:
-                # to moramo preveriti, saj bi sicer imeli probleme z branjem iger
                 return bottle.template("registracija.tpl", napaka="To ime je rezervirano za računalnike!")
     if not uporabnisko_ime.isascii():
         return bottle.template("registracija.tpl", napaka="Ime uporabnika mora biti ASCII sprejemljivo!")
@@ -180,13 +183,12 @@ def igraj_proti_racunalniku__stockfish_get():
     return bottle.template("igraj_stockfish.tpl")
 
 
-# tole pobriše piškotek uporabnisko_ime
+# Tole pobriše piškotek uporabnisko_ime ob odjavi
 @bottle.post("/odjava/")
 def odjava_post():
     bottle.response.delete_cookie("uporabnisko_ime", path = "/", secret=SKRIVNOST)
     bottle.redirect("/")
 
-# to mora biti čisto na dnu
 if __name__ == '__main__':
     bottle.run(debug=True, host="localhost", reloader=True)
 

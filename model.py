@@ -76,8 +76,10 @@ class VseSkupaj:
     def iz_datoteke(cls, ime_datoteke):
         with open(ime_datoteke, encoding="utf-8") as f:
             return cls.iz_slovarja(json.load(f))
-        
-
     
+    @staticmethod
+    def preberi_skrivnost_iz_datoteke():
+        with open("skrivnost.txt") as datoteka_s_skrivnostjo:
+            return(datoteka_s_skrivnostjo.read())    
         
     # malo sumljivo je, ker sploh nikjer nisem zašifriral gesla
