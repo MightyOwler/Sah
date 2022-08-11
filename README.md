@@ -6,7 +6,7 @@
 
 Čeprav so pravila šaha izredno preprosta, se v njem skirva izredna globina, ki privlači stotine miljonov igralcev po vsem svetu.
 
-![slika šaha](https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg?w=2000)
+![slika šaha](https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg)
 
 **Opomba:** Zgornja slika je sicer zelo lepa, bi pa moralo biti polje a1 črne barve.
 
@@ -30,7 +30,7 @@ Pri izdelavi spletne storitve sem si sposodil nasledje slike:
 1. Opica Stanley (https://www.chess.com/member/stanley1)
 2. Stockfish (https://stockfishchess.org/)
 3. Ikona šahovnice (https://freeicons.io/common-styles-icons-3/chess-icon-10622)
-4. Slika šaha na README (https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg?w=2000)
+4. Slika šaha na README (https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg)
 
-Pogram za pravilno delovanje knjižnice [chess.js](https://github.com/jhlywa/chess.js/blob/master/README.md), [chessboard-element.js](https://justinfagnani.github.io/chessboard-element/) in [chart.js](https://www.chartjs.org/). Za lep izled pa sta bili uporabljena [Bulma](https://bulma.io/) in [Font Awesome](https://fontawesome.com/icons).
+Pogram za pravilno delovanje uporablja JavaScript knjižnice [chess.js](https://github.com/jhlywa/chess.js/blob/master/README.md), [chessboard-element.js](https://justinfagnani.github.io/chessboard-element/) in [chart.js](https://www.chartjs.org/). Za lep izled pa sta bila uporabljena [Bulma](https://bulma.io/) in [Font Awesome](https://fontawesome.com/icons).
 
