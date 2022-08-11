@@ -10,11 +10,11 @@
 %zmage_beli, porazi_beli, remiji_beli = 0,0,0
 %zmage_crni, porazi_crni, remiji_crni = 0,0,0
 %def pridobi_podatek_o_odstotkih(n1, n2, n3, n4):
-%if n2 + n3 + n4 != 0:
-%return '{:.1%}'.format(n1/(n2 + n3 + n4))
-%else:
-%return "ni podatka"
-%end
+%    if n2 + n3 + n4 != 0:
+%        return '{:.1%}'.format(n1/(n2 + n3 + n4))
+%    else:
+%       return "ni podatka"
+%    end
 %end
 %for posamezna_igra in vse_uporabnikove_igre:
 %   uporabnik_je_bel = posamezna_igra["beli"] == uporabnisko_ime
@@ -25,32 +25,31 @@
 %       else:
 %           zmage_crni += 1
 %       end
-%       end
+%   end
 %   if posamezna_igra["lokalni_rezultat"] == "Poraz":
 %       porazi += 1
-%   if uporabnik_je_bel:
+%       if uporabnik_je_bel:
 %           porazi_beli += 1
 %       else:
 %           porazi_crni += 1
 %       end
-%       end
+%   end
 %   if posamezna_igra["lokalni_rezultat"] == "Remi":
 %       remiji += 1
-%   if uporabnik_je_bel:
+%       if uporabnik_je_bel:
 %           remiji_beli += 1
 %       else:
 %           remiji_crni += 1
 %       end
-%       end
-
+%   end
 %end
-<!DOCTYPE html>
-<html>
-<head>
+
+
 <title>Statistika uporabnika {{uporabnisko_ime}}</title>
+<link rel="icon" href="/static/chess_icon.ico">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+
 <div class="columns is-mobile is-centered">
 <h1 class="subtitle is-1 " style="margin:10px;">Statistika uporabnika <strong>{{uporabnisko_ime}}</strong></h1>
 </div>
