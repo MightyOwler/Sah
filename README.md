@@ -8,6 +8,8 @@
 
 ![slika šaha](https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg?w=2000)
 
+**Opomba:** Zgornja slika je sicer zelo lepa, bi pa moralo biti polje a1 črne barve.
+
 Ker šah igram že dolgo časa, sem se odločil, da za projektno nalogo pri predmetu uvod v programiranje napišem spletno storitev, s pomočjo katere lahko uporabnik igra šah.
 
 ## Opis programa
