@@ -14,9 +14,9 @@ Ker šah igram že dolgo časa, sem se odločil, da za projektno nalogo pri pred
 
 ## Opis programa
 Program nam omogoča igranje šaha s spletnim vmesnikom. Najprej se moramo registrirati, nato pa še prijaviti. Tedaj lakho:
-- Igramo proti lokalnemu nasprotniku
-- Igramo proti računalniku (trenutno je na voljo zgolj računalnik, ki naključno vleče poteze)
-- Odpremo arhiv iger, kjer lahko prevrtimo odigrane igre od začetka do konca
+- Igramo šah proti lokalnemu nasprotniku (*če za nasprotnika izberemo ime kakšnega uporabnika, se bo igra shranila tudi na njegovem računu!*)
+- Igramo šah proti računalniku (*trenutno je na voljo zgolj računalnik, ki naključno vleče poteze*)
+- Odpremo arhiv iger, kjer lahko prevrtimo odigrane igre od začetka do konca (*pozicijo lahko spreminjamo s puščicami ali tipkami WASD*)
 - Pregledamo statistiko svojih odigranih iger
 
 ## Kako zagnati program?
@@ -30,7 +30,7 @@ Pri izdelavi spletne storitve sem si izposodil naslednje slike:
 1. Opica Stanley (https://www.chess.com/member/stanley1)
 2. Stockfish (https://stockfishchess.org/)
 3. Ikona šahovnice (https://freeicons.io/common-styles-icons-3/chess-icon-10622)
-4. Slika šaha na README (https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg)
+4. Slika šaha na datoteki README (https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg)
 
 Pogram za pravilno delovanje uporablja JavaScript knjižnice [chess.js](https://github.com/jhlywa/chess.js/blob/master/README.md), [chessboard-element.js](https://justinfagnani.github.io/chessboard-element/) in [chart.js](https://www.chartjs.org/). Za lep izled pa sta bila uporabljena [Bulma](https://bulma.io/) in [Font Awesome](https://fontawesome.com/icons).
 
