@@ -41,6 +41,9 @@
         </form>
     </div>
 </div>
+<div class="columns is-mobile is-centered" style="margin:10px;">
+    <h1 class="subtitle is-4 "><strong>Opomba:</strong> če za nasprotnika izbereš ime kakega uporabnika, se bo igra shranila tudi na njegovem računu!</h1>
+</div>
 </div>
 % if napaka:
         <div class="columns is-mobile is-centered">

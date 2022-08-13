@@ -21,8 +21,8 @@ def index():
 
 @bottle.route('/static/<ime_dat:path>')
 def server_static(ime_dat):
-  pot = 'static'
-  return bottle.static_file(ime_dat, root=pot)
+    pot = 'static'
+    return bottle.static_file(ime_dat, root=pot)
 
 
 @bottle.get("/prijava/")
@@ -164,13 +164,11 @@ def shrani_igro():
     nov_seznam = []
     for account in seznam_ki_mu_hocemo_dodati_igro:
         if account["uporabnisko_ime"] == uporabnisko_ime:
-            account["igre"] = account["igre"]
-            + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
-                "lokalni_rezultat": lokalni_rezultat, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
+            account["igre"] = account["igre"] + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
+                                                  "lokalni_rezultat": lokalni_rezultat, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
         if account["uporabnisko_ime"] == nasprotnik:
-            account["igre"] = account["igre"]
-            + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
-                "lokalni_rezultat": lokalni_rezultat_nasprotnik, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
+            account["igre"] = account["igre"] + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
+                                                  "lokalni_rezultat": lokalni_rezultat_nasprotnik, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
         nov_seznam.append(account)
     model.VseSkupaj.v_datoteko({"uporabniki": nov_seznam}, STANJE)
     vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)

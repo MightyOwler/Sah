@@ -55,9 +55,24 @@
   </div>
 </div>
 %if bottle.request.get_cookie('uporabnisko_ime'):
-<div class="columns is-mobile is-centered" style="margin:10px;">
+  %if bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST) == "jasa":
+  <div class="columns is-mobile is-centered" style="margin:10px;">
+    <h1 class="subtitle is-4 is-spaced">👑 Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>! 👑</h1>
+  </div>
+  %elif bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST) == "ziva":
+  <div class="columns is-mobile is-centered" style="margin:10px;">
+  <h1 class="subtitle is-4 is-spaced">❤️ Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>! ❤️</h1>
+</div>
+ %elif bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST) == "matej":
+  <div class="columns is-mobile is-centered" style="margin:10px;">
+  <h1 class="subtitle is-4 is-spaced">🐒 Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>! 🐒</h1>
+</div>
+  
+  %else:
+  <div class="columns is-mobile is-centered" style="margin:10px;">
   <h1 class="subtitle is-4 is-spaced">Živijo <strong>{{bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)}}</strong>!</h1>
 </div>
+  %end
 
 %else:
 <div class="columns is-mobile is-centered" style="margin:10px;">
