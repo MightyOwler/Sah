@@ -14,15 +14,15 @@
   <div class="section">
     <div class="buttons is-mobile is-centered">
       <form method="POST" action="/igraj_proti_racunalniku/stockfish/beli/">
-                      <button class="button is-primary is-medium" style="margin:10px;">
-                        Beli
-                      </button>
-                    </form>
+        <button class="button is-primary is-medium" style="margin:10px;">
+          Beli
+        </button>
+      </form>
       <form method="POST" action="/igraj_proti_racunalniku/stockfish/crni/">
-                      <button class="button is-primary is-medium" style="margin:10px;">
-                        Črni
-                      </button>
-                    </form>
+        <button class="button is-primary is-medium" style="margin:10px;">
+          Črni
+        </button>
+      </form>
     </div>
   </div>
 </div>

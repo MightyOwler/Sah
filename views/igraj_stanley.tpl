@@ -4,6 +4,7 @@
 %import model
 %SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
 <title>Izberi barvo proti Stanleyu</title>
 <div class="columns is-mobile is-centered" style="margin:10px;">
@@ -58,7 +59,9 @@
 
 %if bottle.request.query.stockfish:
   <div class="columns is-mobile is-centered">
-    <div class="subtitle is-4" style="margin:10px;">Stockfish je trenutno na dopustu, saj spremlja šahovsko olimpijado v Indiji. Zato te je izzval Stanley!</div>
+    <div class="subtitle is-4" style="margin:10px;">
+      Stockfish je trenutno na dopustu, saj spremlja šahovsko olimpijado v Indiji. Zato te je izzval Stanley!
+    </div>
   </div>
 %end
 

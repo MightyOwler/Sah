@@ -11,7 +11,7 @@ window.setTimeout(makeRandomMove, 250);
 
 
 board.addEventListener('drag-start', (e) => {
-  const {source, piece, position, orientation} = e.detail;
+  const { source, piece, position, orientation } = e.detail;
 
   // do not pick up pieces if the game is over
   if (game.game_over()) {
@@ -26,7 +26,7 @@ board.addEventListener('drag-start', (e) => {
   }
 });
 
-function makeRandomMove () {
+function makeRandomMove() {
   let possibleMoves = game.moves();
 
   // game over
@@ -41,7 +41,7 @@ function makeRandomMove () {
 }
 
 board.addEventListener('drop', (e) => {
-  const {source, target, setAction} = e.detail;
+  const { source, target, setAction } = e.detail;
 
   // see if the move is legal
   const move = game.move({
@@ -54,7 +54,7 @@ board.addEventListener('drop', (e) => {
   if (move === null) {
     setAction('snapback');
     return;
-  }else {updateStatus();}
+  } else { updateStatus(); }
   // make random legal move for black
   window.setTimeout(makeRandomMove, 250);
 });
@@ -65,37 +65,37 @@ board.addEventListener('snap-end', (e) => {
   board.setPosition(game.fen());
 });
 
-function updateStatus () {
+function updateStatus() {
   celotna_igra.push(game.fen());
   let moveColor = 'White';
   if (game.turn() === 'b') {
     moveColor = 'Black';
   }
-  
+
   if (game.in_checkmate()) {
-  // checkmate?
-  var rezulat_na_koncu_pgn
-  if (moveColor == "Black") {alert("Več sreče prihodnjič! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 1-0"}
-  else {alert("Zmaga!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 0-1"}
-  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
-} else if (game.in_draw()) {
-  // draw?
-  var rezulat_na_koncu_pgn = " 1/2-1/2"
-  alert("Remi! Igra se bo shranila!")
-  location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#","_").concat("&fen=").concat(String(celotna_igra).replace("/","_")));
-}
-pgnElement.innerHTML = game.pgn();
-
-}
-
-function popravi_pozezo(){
-  if (celotna_igra.length > 2){
-  game.undo();
-  game.undo();
-  celotna_igra.pop();
-  celotna_igra.pop();
-  board.setPosition(celotna_igra[celotna_igra.length -1]);
+    // checkmate?
+    var rezulat_na_koncu_pgn
+    if (moveColor == "Black") { alert("Več sreče prihodnjič! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 1-0" }
+    else { alert("Zmaga!!! Igra se bo shranila!"); var rezulat_na_koncu_pgn = " 0-1" }
+    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#", "_").concat("&fen=").concat(String(celotna_igra).replace("/", "_")));
+  } else if (game.in_draw()) {
+    // draw?
+    var rezulat_na_koncu_pgn = " 1/2-1/2"
+    alert("Remi! Igra se bo shranila!")
+    location.replace('/shrani_igro/?igra='.concat(String(game.pgn())).concat(rezulat_na_koncu_pgn).replace("#", "_").concat("&fen=").concat(String(celotna_igra).replace("/", "_")));
+  }
   pgnElement.innerHTML = game.pgn();
+
+}
+
+function popravi_pozezo() {
+  if (celotna_igra.length > 2) {
+    game.undo();
+    game.undo();
+    celotna_igra.pop();
+    celotna_igra.pop();
+    board.setPosition(celotna_igra[celotna_igra.length - 1]);
+    pgnElement.innerHTML = game.pgn();
   }
 }
 

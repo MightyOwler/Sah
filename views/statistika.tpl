@@ -67,7 +67,13 @@
     </div>
 </div>
 
+
+<!-- To spodaj v scriptu bi bilo morda elegantno dati v statično 
+.js datoteko, ampak bi bilo nekoliko zoprno prenesti podatke, poleg
+tega pa dejansko ni tako problematično, tudi če pustimo -->
+
 <script>
+
 const ctx_skupno = document.getElementById('myChat_skupno').getContext('2d');
 const myChart_skupno = new Chart(ctx_skupno, {
     type: 'doughnut',
