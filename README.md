@@ -24,7 +24,7 @@ Program nam omogoča igranje šaha prek spletnega vmesnika. Najprej se moramo re
 2. V mapi, kjer se nahaja datoteka `spletni_vmesnik.py`, ustvarite novo datoteko z imenom `skrivnost.txt` in vanjo vpišite poljubno kratko besedilo.
 3. Iz terminala poženite ukaz `python spletni_vmesnik.py` in odprite [lokalni strežnik](http://localhost:8080/).
 
-**Opozorilo:** Nekateri antivirusni programi lahko povzročajo težave pri uporabi programa. Odpravite jih lahko tako, da jih začasno izklopite v nastavitvah brskalnika.
+**Opozorilo:** Nekateri antivirusni programi lahko povzročajo težave pri uporabi programa. Odpravite jih lahko tako, da antivirusne programe začasno izklopite v nastavitvah brskalnika.
 
 ## Viri in ostale povezave
 Pri izdelavi spletne storitve sem si izposodil naslednje slike:
