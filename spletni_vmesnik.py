@@ -109,12 +109,18 @@ def igraj_proti_racunalniku_post():
     stanje_trenutnega_uporabnika()
     beli = bottle.request.forms.getunicode("beli")
     crni = bottle.request.forms.getunicode("crni")
-    if not beli.isascii() or not crni.isascii():
+    if beli in ["Stanley", "Stockfish"] or crni in ["Stanley", "Stockfish"]:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!")
+                               nasprotnik=None, beli=beli, crni=crni, napaka="To ime je rezervirano za računalnike!")
+    if len(beli) > 20 or len(crni) > 20:
+        return bottle.template("igraj.tpl", vrsta_igre="clovek",
+                               nasprotnik=None, beli=beli, crni=crni, napaka="Ime nasprotnika sme vsebovati največ 20 znakov!")
     if beli == "" or crni == "":
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
                                nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ime!")
+    if not beli.isascii() or not crni.isascii():
+        return bottle.template("igraj.tpl", vrsta_igre="clovek",
+                               nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!")
     if beli == crni:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
                                nasprotnik=None, beli=beli, crni=crni, napaka="Imeni igralcev morata biti različni!")
