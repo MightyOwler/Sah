@@ -8,7 +8,6 @@
 %STANJE = "stanje.json"
 %vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 %SKRIVNOST = "blablabla"
-%print()
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 %if nasprotnik == None:
 <title>Kdo igra proti komu?</title>
@@ -80,10 +79,9 @@
 </div>
 <div class="columns is-mobile is-centered">
     <button id="flipOrientationBtn" class="button is-link is-medium" style="margin:10px;">Obrni šahovnico</button>
-        <button id="undo" class="button is-link is-medium" style="margin:10px;">Popravi potezo</button>
+    <button id="undo" class="button is-link is-medium" style="margin:10px;">Popravi potezo</button>
 </div>
-
-        </body>
+</body>
 %end
 %else:
 <title>Šah proti računalniku</title>
@@ -147,8 +145,7 @@ img {
                 
             <div class = "column" style="display: flex; justify-content:left; width: 250px";">
                 <div class="block" style="display: flex; justify-content:left; margin:0px 50px;">
-                    <h1 style="width: 250px;"><em><strong>Stockfish</strong> uživa neizmerno slavo kot eden izmed najboljših šahovskih programov. (trenutno na dopustu!)</em> <br><br> Slog: <em>brutalen</em> <br><br>Rating: 3390</h1>
-
+                    <h1 style="width: 250px;"><em><strong>Stockfish</strong> uživa neizmerno slavo kot eden izmed najboljših šahovskih programov. (trenutno na dopustu!)</em> <br><br> Slog: <em>brutalen</em> <br><br>Rating: 3390</h1
                 </div>
             </div>
     
