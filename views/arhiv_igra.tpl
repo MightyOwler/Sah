@@ -50,7 +50,9 @@
 const searchRegExp = /&#039/g; 
 const replaceWith = '';
 var celotna_igra = '{{str(popravljen_celoten_fen)}}'.replace(searchRegExp, replaceWith).replace(/;/g, replaceWith);
+var uporabnisko_ime = '{{uporabnisko_ime}}';
+var crni = '{{crni}}';
 </script>
-<script src="/../static/arhiv_iger.js"></script>   
+<script type = "module" src="/../static/arhiv_iger.js"></script>   
 </html>
 

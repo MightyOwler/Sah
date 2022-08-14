@@ -2,9 +2,9 @@ celotna_igra = celotna_igra.slice(1,-1).split(", ");
 const dolzina_igre = celotna_igra.length;
 var polpoteza = 0;
 
-// if ('{{str(uporabnisko_ime)}}' === '{{str(crni)}}'){
-//     board.flip();
-//  }
+if (uporabnisko_ime === crni){
+    board.flip();
+ }
 
 document.querySelector('#naprej').addEventListener('click', () => {
     if (polpoteza < dolzina_igre - 1){
