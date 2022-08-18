@@ -94,8 +94,8 @@ def server_static(racunalniski_nasprotnik, barva):
         bottle.redirect("/igraj_proti_racunalniku/stanley/")
     else:
         bottle.response.set_cookie(
-            "stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)
-        bottle.redirect("/igraj_proti_racunalniku/stanley/?stockfish=True")
+            "stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)   
+        bottle.redirect("/igraj_proti_racunalniku/stockfish/")
 
 
 @bottle.get("/igraj_proti_cloveku/")

@@ -4,9 +4,9 @@
 %import model
 %SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-%if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
 
-<title>Izberi barvo proti "Stockfishu"</title>
+%if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
+<title>Izberi barvo proti Stockfishu</title>
 <div class="columns is-mobile is-centered" style="margin:10px;">
   <h1 class="title is-1" style="margin:10px;">Izberi barvo</h1>
 </div>
@@ -28,37 +28,40 @@
 </div>
               
 %else:
+
+
+
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
 
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) == "beli":
-%bottle.response.set_cookie("beli", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
-%bottle.response.set_cookie("crni", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
-
-<title>{{uporabnisko_ime}} vs. Stanleyu</title>
+%    bottle.response.set_cookie("beli", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
+%    bottle.response.set_cookie("crni", "Stockfish", path="/shrani_igro/", secret=SKRIVNOST)
+<title>Šah proti računalniku: {{uporabnisko_ime}} vs. Stockfish</title>
 <div class="columns is-mobile is-centered">
-  <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stanley</strong></h1>
+  <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stockfish</strong></h1>
 </div>
-<script type="module" src="../../static/sah_proti_stanley_beli – kopija.js"></script>
+<script type="module" src="../../static/sah_proti_racunalniku_beli.js"></script>
 
 %else:
-%bottle.response.set_cookie("beli", "Stanley", path="/shrani_igro/", secret=SKRIVNOST)
+%bottle.response.set_cookie("beli", "Stockfish", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
-
-<title>Stanley vs. {{uporabnisko_ime}}</title>
+<title>Šah proti računalniku: Stockfish vs. {{uporabnisko_ime}}</title>
 <div class="columns is-mobile is-centered">
-  <h1 class="subtitle is-1" style="margin:10px;"><strong>Stanley</strong> vs. <strong>{{uporabnisko_ime}}</strong></h1>
+  <h1 class="subtitle is-1" style="margin:10px;"><strong>Stockfish</strong> vs. <strong>{{uporabnisko_ime}}</strong></h1>
 </div>
-<script type="module" src="../../static/sah_proti_stanley_crni.js"></script>
+<script type="module" src="../../static/sah_proti_racunalniku_crni.js"></script>
 %end
-
 
 <div class="columns is-mobile is-centered">
   <chess-board style="width: 600px" position="start" draggable-pieces=""></chess-board>
 </div>
-<div class="columns is-mobile is-centered"><label class="title is-2" style="margin:10px;">Igra:</label></div> 
+
+
+<div class="columns is-mobile is-centered"><label class="title is-2" style="margin:10px;">Igra:</label>
+</div> 
 <div class="columns is-mobile is-centered">
-  <div id="pgn" class="subtitle is-4" style="margin:10px;"></div>
+<div id="pgn" class="subtitle is-4" style="margin:10px;"></div>
 </div>
 <div class="columns is-mobile is-centered">
   <button id="undo" class="button is-link is-medium" style="margin:10px;">Popravi potezo</button>

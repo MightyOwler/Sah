@@ -57,13 +57,6 @@
   <chess-board style="width: 600px" position="start" draggable-pieces=""></chess-board>
 </div>
 
-%if bottle.request.query.stockfish:
-  <div class="columns is-mobile is-centered">
-    <div class="subtitle is-4" style="margin:10px;">
-      Stockfish je trenutno na dopustu, saj spremlja šahovsko olimpijado v Indiji. Zato te je izzval Stanley!
-    </div>
-  </div>
-%end
 
 <div class="columns is-mobile is-centered"><label class="title is-2" style="margin:10px;">Igra:</label>
 </div> 
