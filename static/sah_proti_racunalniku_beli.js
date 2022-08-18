@@ -122,6 +122,7 @@ function AIPoteza(){
     let possibleMoves = game.moves();
     var maxScore = turnMultiplier * CHECKMATE;
     var bestMove = [];
+    var scores = [];
     possibleMoves.forEach((poteza) => {
         game.move(poteza);
         if (game.in_checkmate()) {
@@ -131,33 +132,75 @@ function AIPoteza(){
             var score = STALEMATE;
         }
         else {
+            
             var score = turnMultiplier * ovrednotiPozicijo();
         }
     if (score > maxScore){
         maxScore = score;
         bestMove = [poteza];
-    }
-    else if (score == maxScore) {
+        scores.push(score);
+    } 
+    else if (score === maxScore) {
         bestMove.push(poteza);
     }
     game.undo();
     })
-    const randomIdx = Math.floor(Math.random() * bestMove.length);
+    var randomIdx = Math.floor(Math.random() * bestMove.length);
     game.move(bestMove[randomIdx]);
 }
+
+// function AIPoteza2(){
+//     if (game.turn() === 'w') {
+//         var turnMultiplier = 1;
+//       }
+//     else{
+//         var turnMultiplier = -1;
+//     }
+    
+    
+//     var possibleMoves1 = game.moves();
+//     var maxScore = turnMultiplier * CHECKMATE;
+//     var bestMoves = [];
+//     possibleMoves1.forEach((poteza1) => {
+//         game.move(poteza1);
+//         var possibleMoves2 = game.moves();
+//         possibleMoves2.forEach((poteza2) => {
+//             game.move(poteza2);
+//             if (game.in_checkmate()) {
+//                 var score = - turnMultiplier * CHECKMATE;
+//             }
+//             else if (game.in_draw()) {
+//                 var score = STALEMATE;
+//             }
+//             else {
+//                 var score = turnMultiplier * ovrednotiPozicijo();
+//             }
+//             if (score > maxScore){
+//                 maxScore = score;
+//                 bestMoves = [[poteza1, poteza2]];
+//             }
+//             else if (score == maxScore) {
+//                 bestMoves.push([poteza1, poteza2]);
+//             }
+//             game.undo();
+//         })
+//     game.undo();
+//     })
+//     const randomIdx = Math.floor(Math.random() * bestMoves.length);
+//     game.move(bestMoves[randomIdx][0]);
+// }
+
 
 
 // prešteje vrednost figur na šahovnici, glede na standardno točkovanje
 function ovrednotiPozicijo(){
-    let fen = game.fen();
+    let fen = game.fen().slice(0, game.fen().indexOf(" "));
     var vrednost = 0;
     for (let i = 0; i < fen.length; i++) {
         if (fen[i] in pieceScore){
             vrednost += pieceScore[fen[i]];
         }  
       }
-    
-
     return vrednost;
 
 }
