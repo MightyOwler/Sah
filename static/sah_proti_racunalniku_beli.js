@@ -160,17 +160,26 @@ function AIPotezaNegaMax(){
         var beliNaPotezi = -1;
     }
     NajdiNegaMax(GLOBINA, beliNaPotezi);
-    var randomIdx = Math.floor(Math.random() * nextMove.length);
-    game.move(nextMove[randomIdx]);
+    if (nextMove === null){
+        var randomIdx = Math.floor(Math.random() * game.moves().length);
+        game.move(game.moves()[randomIdx]);
+    }
+    else{
+        alert("Najdena prava poteza!");
+        alert(nextMove);
+        var randomIdx = Math.floor(Math.random() * nextMove.length);
+        game.move(nextMove[randomIdx]);
     //return nextMove;
+    }
+    
 }
 
-
+// tukaj bo potrebno dosti bolje shranjevati legitimne poteze 
+// (program noče vleči, ker se shranjujejo kar neke naključne poteze)
 
 function NajdiNegaMax(globina, turnMultiplier){
     //alert(turnMultiplier * ovrednotiPozicijo());
     if (globina === 0){
-        
         return turnMultiplier * ovrednotiPozicijo();
     }
 
@@ -188,61 +197,20 @@ function NajdiNegaMax(globina, turnMultiplier){
                     nextMove = [poteza];
                     //alert(nextMove);
                 }
-                else if (score === maxScore) {
-                    if (!(nextMove.includes(poteza))){
-                        nextMove.push(poteza);
-                        alert(nextMove);
-                    }
+                // else if (score === maxScore) {
+                //     if (!(nextMove.includes(poteza))){
+                //         nextMove.push(poteza);
+                //         //alert(nextMove);
+                //     }
                     
-                }
+                // }
             }
             game.undo();
         })
+    
+    return maxScore;
 
 }
-
-
-// function AIPoteza2(){
-//     if (game.turn() === 'w') {
-//         var turnMultiplier = 1;
-//       }
-//     else{
-//         var turnMultiplier = -1;
-//     }
-    
-    
-//     var possibleMoves1 = game.moves();
-//     var maxScore = turnMultiplier * CHECKMATE;
-//     var bestMoves = [];
-//     possibleMoves1.forEach((poteza1) => {
-//         game.move(poteza1);
-//         var possibleMoves2 = game.moves();
-//         possibleMoves2.forEach((poteza2) => {
-//             game.move(poteza2);
-//             if (game.in_checkmate()) {
-//                 var score = - turnMultiplier * CHECKMATE;
-//             }
-//             else if (game.in_draw()) {
-//                 var score = STALEMATE;
-//             }
-//             else {
-//                 var score = turnMultiplier * ovrednotiPozicijo();
-//             }
-//             if (score > maxScore){
-//                 maxScore = score;
-//                 bestMoves = [[poteza1, poteza2]];
-//             }
-//             else if (score == maxScore) {
-//                 bestMoves.push([poteza1, poteza2]);
-//             }
-//             game.undo();
-//         })
-//     game.undo();
-//     })
-//     const randomIdx = Math.floor(Math.random() * bestMoves.length);
-//     game.move(bestMoves[randomIdx][0]);
-// }
-
 
 
 // prešteje vrednost figur na šahovnici, glede na standardno točkovanje
