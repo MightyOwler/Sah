@@ -111,20 +111,26 @@ document.querySelector('#undo').addEventListener('click', () => {
 });
 
 function AIPoteza(){
-    var turnMultiplier = -1;
+    if (game.turn() === 'w') {
+        var turnMultiplier = 1;
+      }
+    else{
+        var turnMultiplier = -1;
+    }
+    
     
     let possibleMoves = game.moves();
     var maxScore = turnMultiplier * CHECKMATE;
     var bestMove = [];
     possibleMoves.forEach((poteza) => {
+        game.move(poteza);
         if (game.in_checkmate()) {
-            var score = turnMultiplier * CHECKMATE;
+            var score = - turnMultiplier * CHECKMATE;
         }
         else if (game.in_draw()) {
             var score = STALEMATE;
         }
         else {
-            game.move(poteza);
             var score = turnMultiplier * ovrednotiPozicijo();
         }
     if (score > maxScore){
