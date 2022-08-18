@@ -10,6 +10,7 @@ var celotna_igra = [];
 const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
 const CHECKMATE = 1000;
 const STALEMATE = 0;
+const GLOBINA = 2;
 
 board.addEventListener('drag-start', (e) => {
   const { source, piece, position, orientation } = e.detail;
@@ -38,7 +39,8 @@ function makeRandomMove() {
   //const randomIdx = Math.floor(Math.random() * possibleMoves.length);
   //game.move(possibleMoves[randomIdx]);
 
-  AIPoteza();
+  AIPotezaMinMax();
+  //NajdiAIPotezaMinMax(GLOBINA, possibleMoves, game.turn() === 'w');
   board.setPosition(game.fen());
   updateStatus();
 }
@@ -136,9 +138,8 @@ function AIPoteza(){
             var score = turnMultiplier * ovrednotiPozicijo();
         }
     if (score > maxScore){
-        maxScore = score;
-        bestMove = [poteza];
-        scores.push(score);
+        var maxScore = score;
+        var bestMove = [poteza];
     } 
     else if (score === maxScore) {
         bestMove.push(poteza);
@@ -147,6 +148,61 @@ function AIPoteza(){
     })
     var randomIdx = Math.floor(Math.random() * bestMove.length);
     game.move(bestMove[randomIdx]);
+}
+
+function AIPotezaMinMax(globina, veljavnePoteze, beliNaPotezi){
+    // Naslednja vrstica verjento ne bo potrebna
+    window.nextMove = null;
+    if (game.turn() === 'w') {
+        var beliNaPotezi = true;
+      }
+    else{
+        var beliNaPotezi = false;
+    }
+    NajdiAIPotezaMinMax(GLOBINA, game.moves(), beliNaPotezi);
+    return window.nextMove;
+}
+
+function NajdiAIPotezaMinMax(globina, veljavnePoteze, beliNaPotezi){
+    window.nextMove = null;
+    if (globina === 0){
+        return ovrednotiPozicijo();
+    }
+    if (beliNaPotezi === true){
+        var maxScore = -CHECKMATE;
+        let possibleMoves = game.moves();
+        possibleMoves.forEach((poteza) => {
+            game.move(poteza);
+            let naslednjePoteze = game.moves();
+            var score = NajdiAIPotezaMinMax(globina - 1, naslednjePoteze, false);
+            if (score > maxScore){
+                maxScore = score;
+                if (globina == GLOBINA){
+                    nextMove = poteza;
+                }
+            }
+            game.undo();
+        })
+        return maxScore;
+    }
+    else{
+        var minScore = CHECKMATE;
+        let possibleMoves = game.moves();
+        possibleMoves.forEach((poteza) => {
+            game.move(poteza);
+            let naslednjePoteze = game.moves();
+            var score = NajdiAIPotezaMinMax(globina - 1, naslednjePoteze, true);
+            if (score < minScore){
+                var minScore = score;
+                if (globina == GLOBINA){
+                    nextMove = poteza;
+                }
+            }
+            game.undo();
+        })
+        return minScore;
+    }
+
 }
 
 // function AIPoteza2(){
@@ -193,14 +249,28 @@ function AIPoteza(){
 
 
 // prešteje vrednost figur na šahovnici, glede na standardno točkovanje
+// To je seveda naivna metoda, da se jo izboljšati
 function ovrednotiPozicijo(){
+    if (game.in_checkmate()) {
+        if (game.turn() === 'w') {
+            return CHECKMATE;
+          }
+        else{
+            return -CHECKMATE;
+        }
+    }
+    else if (game.in_draw()) {
+        return STALEMATE;
+    }
+    else{
     let fen = game.fen().slice(0, game.fen().indexOf(" "));
     var vrednost = 0;
     for (let i = 0; i < fen.length; i++) {
         if (fen[i] in pieceScore){
             vrednost += pieceScore[fen[i]];
-        }  
-      }
+        }
+    }  
+    }
     return vrednost;
 
 }
