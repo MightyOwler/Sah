@@ -172,9 +172,4 @@ const myChart_crni = new Chart(ctx_crni, {
         }
     }
 });
-
-const config = {
-  type: 'doughnut',
-  data: data,
-};
 </script>

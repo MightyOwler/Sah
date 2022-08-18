@@ -11,7 +11,7 @@ var nextMove = null; // zato, ker je težko delati z globalnimi spremenljivkami
 const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
 const CHECKMATE = 1000;
 const STALEMATE = 0;
-const GLOBINA = 2;
+const GLOBINA = 2; // to dela v teoriji, v praksi pa za vse večje od 2 dela zelo počasi
 
 board.addEventListener('drag-start', (e) => {
   const { source, piece, position, orientation } = e.detail;
@@ -182,8 +182,9 @@ function NajdiNegaMax(globina, turnMultiplier){
     if (globina === 0){
         return turnMultiplier * ovrednotiPozicijo();
     }
-
-    var maxScore = -CHECKMATE;
+    
+    // - 1 zato, da če je mat neizbežen, vseeno potegne
+    var maxScore = -CHECKMATE - 1;
     
         let possibleMoves = shuffle(game.moves());
         possibleMoves.forEach((poteza) => {
@@ -217,10 +218,10 @@ function NajdiNegaMax(globina, turnMultiplier){
 function ovrednotiPozicijo(){
     if (game.in_checkmate()) {
         if (game.turn() === 'w') {
-            return CHECKMATE;
+            return -CHECKMATE;
           }
         else{
-            return -CHECKMATE;
+            return CHECKMATE;
         }
     }
     else if (game.in_draw()) {
