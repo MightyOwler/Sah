@@ -7,7 +7,7 @@ const pgnElement = document.querySelector('#pgn');
 var celotna_igra = [];
 
 // da bomo uvedli engine
-const pieceScore = {"K": 0, "Q": 9, "R": 5, "B": 3, "N": 3, "p": 1};
+const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
 const CHECKMATE = 1000;
 const STALEMATE = 0;
 
@@ -35,10 +35,10 @@ function makeRandomMove() {
     return;
   }
 
-  const randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  //const randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  //game.move(possibleMoves[randomIdx]);
 
-  //AIPoteza();
-  game.move(possibleMoves[randomIdx]);
+  AIPoteza();
   board.setPosition(game.fen());
   updateStatus();
 }
@@ -111,6 +111,48 @@ document.querySelector('#undo').addEventListener('click', () => {
 });
 
 function AIPoteza(){
+    var turnMultiplier = -1;
+    
+    let possibleMoves = game.moves();
+    var maxScore = turnMultiplier * CHECKMATE;
+    var bestMove = [];
+    possibleMoves.forEach((poteza) => {
+        if (game.in_checkmate()) {
+            var score = turnMultiplier * CHECKMATE;
+        }
+        else if (game.in_draw()) {
+            var score = STALEMATE;
+        }
+        else {
+            game.move(poteza);
+            var score = turnMultiplier * ovrednotiPozicijo();
+        }
+    if (score > maxScore){
+        maxScore = score;
+        bestMove = [poteza];
+    }
+    else if (score == maxScore) {
+        bestMove.push(poteza);
+    }
+    game.undo();
+    })
+    const randomIdx = Math.floor(Math.random() * bestMove.length);
+    game.move(bestMove[randomIdx]);
+}
+
+
+// prešteje vrednost figur na šahovnici, glede na standardno točkovanje
+function ovrednotiPozicijo(){
+    let fen = game.fen();
+    var vrednost = 0;
+    for (let i = 0; i < fen.length; i++) {
+        if (fen[i] in pieceScore){
+            vrednost += pieceScore[fen[i]];
+        }  
+      }
+    
+
+    return vrednost;
 
 }
 
