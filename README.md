@@ -4,7 +4,7 @@
 
 Šah je ena izmed najstarejših in najbolj priljubljenih iger na svetu. Igrata jo dva igralca, ki izmenično premikata vsak svoje figure s ciljem matirati nasprotnikovega kralja.
 
-Čeprav so pravila šaha izredno preprosta, se v njem skriva izredna globina, ki privlači stotine milijonov igralcev po vsem svetu.
+Čeprav so pravila šaha preprosta, se v njem skriva izredna globina, ki privlači stotine milijonov igralcev po vsem svetu.
 
 ![slika šaha](https://img.freepik.com/premium-vector/realistic-chess-pieces-chessboard-set_208581-1470.jpg?w=2000)
 
