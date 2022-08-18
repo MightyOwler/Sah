@@ -5,6 +5,7 @@ const board = document.querySelector('chess-board');
 const game = new Chess();
 const pgnElement = document.querySelector('#pgn');
 var celotna_igra = [];
+var nextMove = null; // zato, ker je težko delati z globalnimi spremenljivkami
 
 // da bomo uvedli engine
 const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
@@ -39,8 +40,8 @@ function makeRandomMove() {
   //const randomIdx = Math.floor(Math.random() * possibleMoves.length);
   //game.move(possibleMoves[randomIdx]);
 
-  AIPotezaMinMax();
-  //NajdiAIPotezaMinMax(GLOBINA, possibleMoves, game.turn() === 'w');
+  AIPotezaNegaMax();
+  //NajdiAIPotezaNegaMax(GLOBINA, possibleMoves, game.turn() === 'w');
   board.setPosition(game.fen());
   updateStatus();
 }
@@ -124,7 +125,6 @@ function AIPoteza(){
     let possibleMoves = game.moves();
     var maxScore = turnMultiplier * CHECKMATE;
     var bestMove = [];
-    var scores = [];
     possibleMoves.forEach((poteza) => {
         game.move(poteza);
         if (game.in_checkmate()) {
@@ -150,60 +150,57 @@ function AIPoteza(){
     game.move(bestMove[randomIdx]);
 }
 
-function AIPotezaMinMax(globina, veljavnePoteze, beliNaPotezi){
+function AIPotezaNegaMax(){
     // Naslednja vrstica verjento ne bo potrebna
-    window.nextMove = null;
+    nextMove = [];
     if (game.turn() === 'w') {
-        var beliNaPotezi = true;
+        var beliNaPotezi = 1;
       }
     else{
-        var beliNaPotezi = false;
+        var beliNaPotezi = -1;
     }
-    NajdiAIPotezaMinMax(GLOBINA, game.moves(), beliNaPotezi);
-    return window.nextMove;
+    NajdiNegaMax(GLOBINA, beliNaPotezi);
+    var randomIdx = Math.floor(Math.random() * nextMove.length);
+    game.move(nextMove[randomIdx]);
+    //return nextMove;
 }
 
-function NajdiAIPotezaMinMax(globina, veljavnePoteze, beliNaPotezi){
-    window.nextMove = null;
+
+
+function NajdiNegaMax(globina, turnMultiplier){
+    //alert(turnMultiplier * ovrednotiPozicijo());
     if (globina === 0){
-        return ovrednotiPozicijo();
+        
+        return turnMultiplier * ovrednotiPozicijo();
     }
-    if (beliNaPotezi === true){
-        var maxScore = -CHECKMATE;
+
+    var maxScore = -CHECKMATE;
+    
         let possibleMoves = game.moves();
         possibleMoves.forEach((poteza) => {
             game.move(poteza);
-            let naslednjePoteze = game.moves();
-            var score = NajdiAIPotezaMinMax(globina - 1, naslednjePoteze, false);
+            //var nextMoves = game.moves();
+            var score = - NajdiNegaMax(globina - 1, -turnMultiplier)
+            
             if (score > maxScore){
                 maxScore = score;
-                if (globina == GLOBINA){
-                    nextMove = poteza;
+                if (globina === GLOBINA){
+                    nextMove = [poteza];
+                    //alert(nextMove);
+                }
+                else if (score === maxScore) {
+                    if (!(nextMove.includes(poteza))){
+                        nextMove.push(poteza);
+                        alert(nextMove);
+                    }
+                    
                 }
             }
             game.undo();
         })
-        return maxScore;
-    }
-    else{
-        var minScore = CHECKMATE;
-        let possibleMoves = game.moves();
-        possibleMoves.forEach((poteza) => {
-            game.move(poteza);
-            let naslednjePoteze = game.moves();
-            var score = NajdiAIPotezaMinMax(globina - 1, naslednjePoteze, true);
-            if (score < minScore){
-                var minScore = score;
-                if (globina == GLOBINA){
-                    nextMove = poteza;
-                }
-            }
-            game.undo();
-        })
-        return minScore;
-    }
 
 }
+
 
 // function AIPoteza2(){
 //     if (game.turn() === 'w') {
