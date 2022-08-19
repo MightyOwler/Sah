@@ -11,7 +11,7 @@ var nextMove = null; // zato, ker je težko delati z globalnimi spremenljivkami
 const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
 const CHECKMATE = 1000;
 const STALEMATE = 0;
-const GLOBINA = 2; // to dela v teoriji, v praksi pa za vse večje od 2 dela zelo počasi
+const GLOBINA = 3; // to dela v teoriji, v praksi pa za vse večje od 2 dela zelo počasi
 
 board.addEventListener('drag-start', (e) => {
   const { source, piece, position, orientation } = e.detail;
@@ -159,7 +159,7 @@ function AIPotezaNegaMax(){
     else{
         var beliNaPotezi = -1;
     }
-    NajdiNegaMax(GLOBINA, beliNaPotezi);
+    NajdiNegaMax(GLOBINA, beliNaPotezi, -CHECKMATE - 1, CHECKMATE + 1);
     if (nextMove === null){
         var randomIdx = Math.floor(Math.random() * game.moves().length);
         game.move(game.moves()[randomIdx]);
@@ -172,7 +172,7 @@ function AIPotezaNegaMax(){
 }
 
 
-function NajdiNegaMax(globina, turnMultiplier){
+function NajdiNegaMax(globina, turnMultiplier, alpha, beta){
     if (globina === 0){
         return turnMultiplier * ovrednotiPozicijo();
     }
@@ -181,9 +181,10 @@ function NajdiNegaMax(globina, turnMultiplier){
     var maxScore = -CHECKMATE - 1;
         // Zmešati je treba zato, da računalnik igra raznoliko
         let possibleMoves = shuffle(game.moves());
+        try{
         possibleMoves.forEach((poteza) => {
             game.move(poteza);
-            var score = - NajdiNegaMax(globina - 1, -turnMultiplier)
+            var score = - NajdiNegaMax(globina - 1, -turnMultiplier, -beta, -alpha)
             
             if (score > maxScore){
                 maxScore = score;
@@ -192,11 +193,21 @@ function NajdiNegaMax(globina, turnMultiplier){
                 }
             }
             game.undo();
+            if (maxScore > alpha){
+                alpha = maxScore;
+            }
+            if (alpha >= beta){
+                throw "break";
+            }
         })
     
     return maxScore;
-
+        }
+        catch (e) {
+            if (e !== "break") throw e
+          }
 }
+
 
 
 // Prešteje vrednost figur na šahovnici, glede na standardno točkovanje
