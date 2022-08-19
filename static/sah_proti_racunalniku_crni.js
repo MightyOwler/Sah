@@ -4,10 +4,16 @@
 const board = document.querySelector('chess-board');
 const game = new Chess();
 var celotna_igra = [];
+var nextMove = null;
 board.flip();
 const pgnElement = document.querySelector('#pgn');
 window.setTimeout(makeRandomMove, 250);
 
+// da bomo uvedli engine
+const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
+const CHECKMATE = 1000;
+const STALEMATE = 0;
+const GLOBINA = 3; // to dela v teoriji, v praksi pa za vse večje od 2 dela zelo počasi
 
 
 board.addEventListener('drag-start', (e) => {
@@ -34,10 +40,7 @@ function makeRandomMove() {
     return;
   }
 
-  const randomIdx = Math.floor(Math.random() * possibleMoves.length);
-
-  // AIPoteza();
-  game.move(possibleMoves[randomIdx]);
+  AIPotezaNegaMax();
   board.setPosition(game.fen());
   updateStatus();
 }
@@ -104,5 +107,113 @@ function popravi_pozezo() {
 document.querySelector('#undo').addEventListener('click', () => {
   popravi_pozezo();
 });
+
+
+function AIPotezaNegaMax(){
+    nextMove = [];
+    if (game.turn() === 'w') {
+        var beliNaPotezi = 1;
+      }
+    else{
+        var beliNaPotezi = -1;
+    }
+    NajdiNegaMax(GLOBINA, beliNaPotezi, -CHECKMATE, CHECKMATE);
+    // v primeru da ne najde ustrezne poteze, zgolj naključno premakne (prepreči bugge)
+    // z length je treba narediti zato, ker nextMove ni string (ampak objekt)
+    if (nextMove.length === 0){
+        var randomIdx = Math.floor(Math.random() * game.moves().length);
+        game.move(game.moves()[randomIdx]);
+    }
+    else{
+        var randomIdx = Math.floor(Math.random() * nextMove.length);
+        game.move(nextMove[randomIdx]);
+    }
+    
+}
+
+
+function NajdiNegaMax(globina, turnMultiplier, alpha, beta){
+    if (globina === 0){
+        return turnMultiplier * ovrednotiPozicijo();
+    }
+    
+    // - 1 zato, da če je mat neizbežen, vseeno potegne (prepreči bug)
+    var maxScore = -CHECKMATE - 1;
+        // Zmešati je treba zato, da računalnik igra raznoliko
+        let possibleMoves = shuffle(game.moves());
+        try{
+        possibleMoves.forEach((poteza) => {
+            game.move(poteza);
+            var score = - NajdiNegaMax(globina - 1, -turnMultiplier, -beta, -alpha)
+            
+            if (score > maxScore){
+                maxScore = score;
+                if (globina === GLOBINA){
+                    nextMove = [poteza];
+                }
+            }
+            game.undo();
+            if (maxScore > alpha){
+                alpha = maxScore;
+            }
+            if (alpha >= beta){
+                throw "break";
+            }
+        })
+    
+    return maxScore;
+        }
+        catch (e) {
+            if (e !== "break") throw e
+          }
+}
+
+
+
+// Prešteje vrednost figur na šahovnici, glede na standardno točkovanje
+// To je seveda naivna metoda, da se jo izboljšati
+function ovrednotiPozicijo(){
+    if (game.in_checkmate()) {
+        if (game.turn() === 'w') {
+            return -CHECKMATE;
+          }
+        else{
+            return CHECKMATE;
+        }
+    }
+    else if (game.in_draw()) {
+        return STALEMATE;
+    }
+    else{
+    let fen = game.fen().slice(0, game.fen().indexOf(" "));
+    var vrednost = 0;
+    for (let i = 0; i < fen.length; i++) {
+        if (fen[i] in pieceScore){
+            vrednost += pieceScore[fen[i]];
+        }
+    }  
+    }
+    return vrednost;
+
+}
+
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
+
 
 updateStatus(); 

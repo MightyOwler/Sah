@@ -37,11 +37,7 @@ function makeRandomMove() {
     return;
   }
 
-  //const randomIdx = Math.floor(Math.random() * possibleMoves.length);
-  //game.move(possibleMoves[randomIdx]);
-
   AIPotezaNegaMax();
-
   board.setPosition(game.fen());
   updateStatus();
 }
