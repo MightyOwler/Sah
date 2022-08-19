@@ -11,7 +11,7 @@ var nextMove = null; // zato, ker je težko delati z globalnimi spremenljivkami
 const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
 const CHECKMATE = 1000;
 const STALEMATE = 0;
-const GLOBINA = 3; // to dela v teoriji, v praksi pa za vse večje od 2 dela zelo počasi
+const GLOBINA = 2; // to dela v teoriji, v praksi pa za vse večje od 2 dela zelo počasi
 
 board.addEventListener('drag-start', (e) => {
   const { source, piece, position, orientation } = e.detail;
@@ -159,8 +159,9 @@ function AIPotezaNegaMax(){
     else{
         var beliNaPotezi = -1;
     }
-    NajdiNegaMax(GLOBINA, beliNaPotezi, -CHECKMATE - 1, CHECKMATE + 1);
-    if (nextMove === null){
+    NajdiNegaMax(GLOBINA, beliNaPotezi, -CHECKMATE, CHECKMATE);
+    // v primeru da ne najde ustrezne poteze, zgolj naključno premakne (prepreči bugge)
+    if (nextMove === []){
         var randomIdx = Math.floor(Math.random() * game.moves().length);
         game.move(game.moves()[randomIdx]);
     }
@@ -177,8 +178,7 @@ function NajdiNegaMax(globina, turnMultiplier, alpha, beta){
         return turnMultiplier * ovrednotiPozicijo();
     }
     
-    // - 1 zato, da če je mat neizbežen, vseeno potegne (prepreči bug)
-    var maxScore = -CHECKMATE - 1;
+    var maxScore = -CHECKMATE;
         // Zmešati je treba zato, da računalnik igra raznoliko
         let possibleMoves = shuffle(game.moves());
         try{
