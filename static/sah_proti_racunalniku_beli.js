@@ -113,42 +113,6 @@ document.querySelector('#undo').addEventListener('click', () => {
   popravi_pozezo();
 });
 
-function AIPoteza(){
-    if (game.turn() === 'w') {
-        var turnMultiplier = 1;
-      }
-    else{
-        var turnMultiplier = -1;
-    }
-    
-    
-    let possibleMoves = game.moves();
-    var maxScore = turnMultiplier * CHECKMATE;
-    var bestMove = [];
-    possibleMoves.forEach((poteza) => {
-        game.move(poteza);
-        if (game.in_checkmate()) {
-            var score = - turnMultiplier * CHECKMATE;
-        }
-        else if (game.in_draw()) {
-            var score = STALEMATE;
-        }
-        else {
-            
-            var score = turnMultiplier * ovrednotiPozicijo();
-        }
-    if (score > maxScore){
-        var maxScore = score;
-        var bestMove = [poteza];
-    } 
-    else if (score === maxScore) {
-        bestMove.push(poteza);
-    }
-    game.undo();
-    })
-    var randomIdx = Math.floor(Math.random() * bestMove.length);
-    game.move(bestMove[randomIdx]);
-}
 
 // Pomožna funkcija, ki pokliče rekurzivno funckijo NajdiNegaMax()
 function AIPotezaNegaMax(){
@@ -161,7 +125,8 @@ function AIPotezaNegaMax(){
     }
     NajdiNegaMax(GLOBINA, beliNaPotezi, -CHECKMATE, CHECKMATE);
     // v primeru da ne najde ustrezne poteze, zgolj naključno premakne (prepreči bugge)
-    if (nextMove === []){
+    // z length je treba narediti zato, ker nextMove ni string (ampak objekt)
+    if (nextMove.length === 0){
         var randomIdx = Math.floor(Math.random() * game.moves().length);
         game.move(game.moves()[randomIdx]);
     }
@@ -178,7 +143,8 @@ function NajdiNegaMax(globina, turnMultiplier, alpha, beta){
         return turnMultiplier * ovrednotiPozicijo();
     }
     
-    var maxScore = -CHECKMATE;
+    // - 1 zato, da če je mat neizbežen, vseeno potegne (prepreči bug)
+    var maxScore = -CHECKMATE - 1;
         // Zmešati je treba zato, da računalnik igra raznoliko
         let possibleMoves = shuffle(game.moves());
         try{
