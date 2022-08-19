@@ -15,7 +15,7 @@ Ker šah igram že dolgo časa, sem se odločil, da za projektno nalogo pri pred
 ## Opis programa
 Program nam omogoča igranje šaha prek spletnega vmesnika. Najprej se moramo registrirati, nato pa še prijaviti. Tedaj lahko:
 - Igramo šah proti lokalnemu nasprotniku (*če za nasprotnika izberemo ime kakšnega uporabnika, se bo igra shranila tudi na njegovem računu!*)
-- Igramo šah proti računalniku (*trenutno je na voljo zgolj računalnik, ki naključno vleče poteze*)
+- Igramo šah proti računalniku (*trenutno sta na voljo računalnik, ki vleče naključno, in računalnik z globino 3*)
 - Odpremo arhiv iger, kjer lahko prevrtimo odigrane igre od začetka do konca (*pozicijo lahko spreminjamo s puščicami ali tipkami WASD*)
 - Pregledamo statistiko svojih odigranih iger
 
