@@ -41,7 +41,7 @@ function makeRandomMove() {
   //game.move(possibleMoves[randomIdx]);
 
   AIPotezaNegaMax();
-  //NajdiAIPotezaNegaMax(GLOBINA, possibleMoves, game.turn() === 'w');
+
   board.setPosition(game.fen());
   updateStatus();
 }
@@ -150,8 +150,8 @@ function AIPoteza(){
     game.move(bestMove[randomIdx]);
 }
 
+// Pomožna funkcija, ki pokliče rekurzivno funckijo NajdiNegaMax()
 function AIPotezaNegaMax(){
-    // Naslednja vrstica verjento ne bo potrebna
     nextMove = [];
     if (game.turn() === 'w') {
         var beliNaPotezi = 1;
@@ -165,46 +165,32 @@ function AIPotezaNegaMax(){
         game.move(game.moves()[randomIdx]);
     }
     else{
-        // alert("Najdena prava poteza!");
-        // alert(nextMove);
         var randomIdx = Math.floor(Math.random() * nextMove.length);
         game.move(nextMove[randomIdx]);
-    //return nextMove;
     }
     
 }
 
-// tukaj bo potrebno dosti bolje shranjevati legitimne poteze 
-// (program noče vleči, ker se shranjujejo kar neke naključne poteze)
 
 function NajdiNegaMax(globina, turnMultiplier){
-    //alert(turnMultiplier * ovrednotiPozicijo());
     if (globina === 0){
         return turnMultiplier * ovrednotiPozicijo();
     }
     
-    // - 1 zato, da če je mat neizbežen, vseeno potegne
+    // - 1 zato, da če je mat neizbežen, vseeno potegne (prepreči bug)
     var maxScore = -CHECKMATE - 1;
-    
+        // Zmešati je treba zato, da računalnik igra raznoliko
         let possibleMoves = shuffle(game.moves());
         possibleMoves.forEach((poteza) => {
             game.move(poteza);
-            //var nextMoves = game.moves();
             var score = - NajdiNegaMax(globina - 1, -turnMultiplier)
             
             if (score > maxScore){
                 maxScore = score;
                 if (globina === GLOBINA){
                     nextMove = [poteza];
-                    //alert(nextMove);
                 }
             }
-            // else if (score === maxScore) {
-            //     //if (!(nextMove.includes(poteza))){
-            //         nextMove.push(poteza);
-            //         //alert(nextMove);
-            //     //}
-            // }
             game.undo();
         })
     
@@ -213,7 +199,7 @@ function NajdiNegaMax(globina, turnMultiplier){
 }
 
 
-// prešteje vrednost figur na šahovnici, glede na standardno točkovanje
+// Prešteje vrednost figur na šahovnici, glede na standardno točkovanje
 // To je seveda naivna metoda, da se jo izboljšati
 function ovrednotiPozicijo(){
     if (game.in_checkmate()) {
