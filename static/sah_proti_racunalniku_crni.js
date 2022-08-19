@@ -13,7 +13,7 @@ window.setTimeout(makeRandomMove, 250);
 const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
 const CHECKMATE = 1000;
 const STALEMATE = 0;
-const GLOBINA = 3; // to dela v teoriji, v praksi pa za vse večje od 2 dela zelo počasi
+const GLOBINA = 3; // to dela v teoriji, v praksi pa za vse večje od 3 dela zelo počasi
 
 
 board.addEventListener('drag-start', (e) => {
