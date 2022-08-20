@@ -36,7 +36,7 @@
 
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) == "beli":
 %    bottle.response.set_cookie("beli", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
-%    bottle.response.set_cookie("crni", "Stockfish", path="/shrani_igro/", secret=SKRIVNOST)
+%    bottle.response.set_cookie("crni", "Stocknoob", path="/shrani_igro/", secret=SKRIVNOST)
 <title>Šah proti računalniku: {{uporabnisko_ime}} vs. Stocknoob</title>
 <div class="columns is-mobile is-centered">
   <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stocknoob</strong></h1>
@@ -44,7 +44,7 @@
 <script type="module" src="../../static/sah_proti_racunalniku_beli.js"></script>
 
 %else:
-%bottle.response.set_cookie("beli", "Stockfish", path="/shrani_igro/", secret=SKRIVNOST)
+%bottle.response.set_cookie("beli", "Stocknoob", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
 <title>Šah proti računalniku: Stocknoob vs. {{uporabnisko_ime}}</title>
 <div class="columns is-mobile is-centered">
