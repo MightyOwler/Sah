@@ -58,7 +58,7 @@ def prijava_post():
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
     # Pred registracijo preprečimo nekaj problematičnih primerov
-    if uporabnisko_ime in ["Stanley", "Stockfish"]:
+    if uporabnisko_ime in ["Stanley", "Stockfish", "Stokfiš"]:
         return bottle.template("registracija.tpl", napaka="To ime je rezervirano za računalnike!")
     if not uporabnisko_ime.isascii():
         return bottle.template("registracija.tpl", napaka="Ime uporabnika mora biti ASCII sprejemljivo!")
@@ -109,7 +109,7 @@ def igraj_proti_racunalniku_post():
     stanje_trenutnega_uporabnika()
     beli = bottle.request.forms.getunicode("beli")
     crni = bottle.request.forms.getunicode("crni")
-    if beli in ["Stanley", "Stockfish"] or crni in ["Stanley", "Stockfish"]:
+    if beli in ["Stanley", "Stockfish", "Stokfiš"] or crni in ["Stanley", "Stockfish", "Stokfiš"]:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
                                nasprotnik=None, beli=beli, crni=crni, napaka="To ime je rezervirano za računalnike!")
     if len(beli) > 20 or len(crni) > 20:
@@ -138,7 +138,7 @@ def igraj_proti_racunalniku_get():
     stanje_trenutnega_uporabnika()
     return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
 
-# Tole preveri oba primera: Stanley in Stockfish
+# Tole preveri oba primera: Stanley in Stockfish (po novem tudi Stokfiš)
 
 
 @bottle.get("/igraj_proti_racunalniku/<racunalniski_nasprotnik:path>/")

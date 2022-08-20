@@ -110,7 +110,7 @@ img {
                 <div>
                     <form method="GET" action="/igraj_proti_racunalniku/stockfish/">
                         <button class="button is-primary is-large" style="margin:10px 50px;">
-                            Igraj proti Stockfishu
+                            Igraj proti Stokfišu
                         </button>
                     </form>
                 </div>
@@ -145,7 +145,7 @@ img {
                 
             <div class = "column" style="display: flex; justify-content:left; width: 250px";">
                 <div class="block" style="display: flex; justify-content:left; margin:0px 50px;">
-                    <h1 style="width: 250px;"><em><strong>Stockfish</strong> uživa neizmerno slavo kot eden izmed najboljših šahovskih programov. (trenutno na dopustu!)</em> <br><br> Slog: <em>brutalen</em> <br><br>Rating: 3390</h1
+                    <h1 style="width: 250px;"><em><strong>Stokfiš</strong> je daljni sorodnik slavnega Stockfisha. Pogled mu sega 3 poteze vnaprej. Ali ga uspeš premagati?</em> <br><br> Slog: <em>pohlepen</em> <br><br>Rating: ~1200</h1
                 </div>
             </div>
     
