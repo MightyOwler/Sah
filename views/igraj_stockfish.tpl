@@ -6,7 +6,7 @@
 %uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
 
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) is None:
-<title>Izberi barvo proti Stokfišu</title>
+<title>Izberi barvo proti Stocknoobu</title>
 <div class="columns is-mobile is-centered" style="margin:10px;">
   <h1 class="title is-1" style="margin:10px;">Izberi barvo</h1>
 </div>
@@ -37,18 +37,18 @@
 %if bottle.request.get_cookie('barva', secret=SKRIVNOST) == "beli":
 %    bottle.response.set_cookie("beli", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
 %    bottle.response.set_cookie("crni", "Stockfish", path="/shrani_igro/", secret=SKRIVNOST)
-<title>Šah proti računalniku: {{uporabnisko_ime}} vs. Stokfiš</title>
+<title>Šah proti računalniku: {{uporabnisko_ime}} vs. Stocknoob</title>
 <div class="columns is-mobile is-centered">
-  <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stokfiš</strong></h1>
+  <h1 class="subtitle is-1" style="margin:10px;"><strong>{{uporabnisko_ime}}</strong> vs. <strong>Stocknoob</strong></h1>
 </div>
 <script type="module" src="../../static/sah_proti_racunalniku_beli.js"></script>
 
 %else:
 %bottle.response.set_cookie("beli", "Stockfish", path="/shrani_igro/", secret=SKRIVNOST)
 %bottle.response.set_cookie("crni", uporabnisko_ime, path="/shrani_igro/", secret=SKRIVNOST)
-<title>Šah proti računalniku: Stokfiš vs. {{uporabnisko_ime}}</title>
+<title>Šah proti računalniku: Stocknoob vs. {{uporabnisko_ime}}</title>
 <div class="columns is-mobile is-centered">
-  <h1 class="subtitle is-1" style="margin:10px;"><strong>Stokfiš</strong> vs. <strong>{{uporabnisko_ime}}</strong></h1>
+  <h1 class="subtitle is-1" style="margin:10px;"><strong>Stocknoob</strong> vs. <strong>{{uporabnisko_ime}}</strong></h1>
 </div>
 <script type="module" src="../../static/sah_proti_racunalniku_crni.js"></script>
 %end
