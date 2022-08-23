@@ -29,7 +29,7 @@ board.addEventListener('drag-start', (e) => {
   }
 });
 
-function makeRandomMove() {
+function makeNegamaxMove() {
   let possibleMoves = game.moves();
 
   // game over
@@ -58,7 +58,7 @@ board.addEventListener('drop', (e) => {
     return;
   } else { updateStatus(); }
   // make random legal move for black
-  window.setTimeout(makeRandomMove, 250);
+  window.setTimeout(makeNegamaxMove, 250);
   //updateStatus();
 
 });

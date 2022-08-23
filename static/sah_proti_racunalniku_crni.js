@@ -7,7 +7,7 @@ var celotna_igra = [];
 var nextMove = null;
 board.flip();
 const pgnElement = document.querySelector('#pgn');
-window.setTimeout(makeRandomMove, 250);
+window.setTimeout(makeNegamaxMove, 250);
 
 // da bomo uvedli engine
 const pieceScore = {"Q": 9, "R": 5, "B": 3, "N": 3, "P": 1, "q": -9, "r": -5, "b": -3, "n": -3, "p": -1};
@@ -32,7 +32,7 @@ board.addEventListener('drag-start', (e) => {
   }
 });
 
-function makeRandomMove() {
+function makeNegamaxMove() {
   let possibleMoves = game.moves();
 
   // game over
@@ -61,7 +61,7 @@ board.addEventListener('drop', (e) => {
     return;
   } else { updateStatus(); }
   // make random legal move for black
-  window.setTimeout(makeRandomMove, 250);
+  window.setTimeout(makeNegamaxMove, 250);
 });
 
 // update the board position after the piece snap
