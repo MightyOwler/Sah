@@ -33,7 +33,7 @@ class Uporabnik:
 class VseSkupaj:
     uporabniki: List[Uporabnik]
 
-    def poisci_uporabnika(self, uporabnisko_ime, geslo_v_cistopisu=None, igre=None):
+    def poisci_uporabnika(self, uporabnisko_ime):
         for uporabnik in self.uporabniki:
             if uporabnik.uporabnisko_ime == uporabnisko_ime:
                 return uporabnik

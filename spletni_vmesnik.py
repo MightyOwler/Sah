@@ -35,7 +35,7 @@ def prijava_post():
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
     uporabnik = vse_skupaj.poisci_uporabnika(
-        uporabnisko_ime, geslo_v_cistopisu, [])
+        uporabnisko_ime)
     if uporabnik:
         if uporabnik.zasifrirano_geslo == model.Uporabnik.zasifriraj_geslo(geslo_v_cistopisu):
             bottle.response.set_cookie(
@@ -58,6 +58,7 @@ def prijava_post():
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
     # Pred registracijo preprečimo nekaj problematičnih primerov
+    # To bi se dalo dati v pomožno funkcijo
     if uporabnisko_ime in ["Stanley", "Stockfish", "Stocknoob"]:
         return bottle.template("registracija.tpl", napaka="To ime je rezervirano za računalnike!")
     if not uporabnisko_ime.isascii():
@@ -67,7 +68,7 @@ def prijava_post():
     if len(uporabnisko_ime) == 0:
         return bottle.template("registracija.tpl", napaka="Ime uporabnika ne sme biti prazno!")
     uporabnik = vse_skupaj.poisci_uporabnika(
-        uporabnisko_ime, geslo_v_cistopisu)
+        uporabnisko_ime)
     if uporabnik:
         return bottle.template("registracija.tpl", napaka="Uporabnik že obstaja!")
     else:
