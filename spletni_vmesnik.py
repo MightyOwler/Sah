@@ -8,6 +8,7 @@ vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 
 
 # V primeru, da uporabnik izbirše piškotek, ga to preusmeri začetno stran
+# v poisci_uporabnika
 def stanje_trenutnega_uporabnika():
     uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime')
     if uporabnisko_ime is None:
@@ -95,7 +96,7 @@ def server_static(racunalniski_nasprotnik, barva):
         bottle.redirect("/igraj_proti_racunalniku/stanley/")
     else:
         bottle.response.set_cookie(
-            "stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)   
+            "stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)
         bottle.redirect("/igraj_proti_racunalniku/stockfish/")
 
 
@@ -163,7 +164,7 @@ def shrani_igro():
         nasprotnik = crni
     else:
         nasprotnik = beli
-    
+
     rezultat_igre, lokalni_rezultat, lokalni_rezultat_nasprotnik = model.VseSkupaj.doloci_lastnosti_odigrane_igre(
         igra, uporabnisko_ime, beli, crni)
 
@@ -197,7 +198,8 @@ def arhiv_get():
 @bottle.get("/arhiv/<id:path>")
 def server_static(id):
     stanje_trenutnega_uporabnika()
-    return bottle.template("arhiv_igra.tpl", id=id[:-1])
+    uporabnisko_ime, igra, beli, crni, popravljen_celoten_fen = model.PrikazovanjeStrani.arhiv_igra(id)
+    return bottle.template("arhiv_igra.tpl", SKRIVNOST=SKRIVNOST, STANJE=STANJE, vse_skupaj=vse_skupaj, uporabnisko_ime = uporabnisko_ime, igra = igra, beli = beli, crni = crni, popravljen_celoten_fen = popravljen_celoten_fen, id=id[:-1])
 
 
 # Tole pobriše piškotek uporabnisko_ime ob odjavi
