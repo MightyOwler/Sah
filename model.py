@@ -113,3 +113,12 @@ class PrikazovanjeStrani:
         uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
         vse_uporabnikove_igre = uporabnik.igre
         return uporabnisko_ime, vse_uporabnikove_igre
+    
+    @staticmethod
+    def igraj_proti_racunalniku():
+        import bottle
+        import model
+        SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
+        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+        cookie_obstaja = bottle.request.get_cookie('barva', secret=SKRIVNOST) == None
+        return uporabnisko_ime, cookie_obstaja

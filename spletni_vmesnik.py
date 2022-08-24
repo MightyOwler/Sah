@@ -146,8 +146,8 @@ def igraj_proti_racunalniku_get():
 @bottle.get("/igraj_proti_racunalniku/<racunalniski_nasprotnik:path>/")
 def server_static(racunalniski_nasprotnik):
     stanje_trenutnega_uporabnika()
-    print(f"igraj_{racunalniski_nasprotnik}.tpl")
-    return bottle.template(f"igraj_{racunalniski_nasprotnik}.tpl")
+    uporabnisko_ime, cookie_obstaja = model.PrikazovanjeStrani.igraj_proti_racunalniku()
+    return bottle.template(f"igraj_{racunalniski_nasprotnik}.tpl", SKRIVNOST = SKRIVNOST, uporabnisko_ime = uporabnisko_ime, cookie_obstaja = cookie_obstaja)
 
 
 @bottle.route("/shrani_igro/")
