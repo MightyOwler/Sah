@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html>
-%import bottle
-%import model
-%SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
-%STANJE = "stanje.json"
-%vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
-%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-%uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
-%vse_uporabnikove_igre = uporabnik.igre
 <head>
 <title>Arhiv iger uporabnika {{uporabnisko_ime}}</title>
 <link rel="icon" href="/static/chess_icon.ico">

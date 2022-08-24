@@ -192,7 +192,8 @@ def arhiv_get():
 @bottle.get("/arhiv/")
 def arhiv_get():
     stanje_trenutnega_uporabnika()
-    return bottle.template("arhiv.tpl")
+    uporabnisko_ime, vse_uporabnikove_igre = model.PrikazovanjeStrani.arhiv()
+    return bottle.template("arhiv.tpl", uporabnisko_ime = uporabnisko_ime, vse_uporabnikove_igre = vse_uporabnikove_igre)
 
 
 @bottle.get("/arhiv/<id:path>")
