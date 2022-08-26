@@ -24,9 +24,6 @@
 </div>
               
 %else:
-
-
-
 <script type="module" src="https://unpkg.com/chessboard-element?module"></script>
 <script src="https://justinfagnani.github.io/chessboard-element/js/chess-0.10.2.min.js"></script>
 

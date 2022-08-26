@@ -3,6 +3,8 @@ import json
 from typing import List
 
 
+
+
 @dataclass
 class Uporabnik:
     uporabnisko_ime: str
@@ -29,11 +31,21 @@ class Uporabnik:
         )
 
 
+# def stanje_trenutnega_uporabnika():
+#     uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime')
+#     if uporabnisko_ime is None:
+#         bottle.redirect('/')
+
 @dataclass
 class VseSkupaj:
     uporabniki: List[Uporabnik]
 
-    def poisci_uporabnika(self, uporabnisko_ime):
+    def poisci_uporabnika(self, uporabnisko_ime = None, prijavljanje = False):
+        import bottle
+        if prijavljanje == False:
+            uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+        if uporabnisko_ime is None and not prijavljanje:
+            bottle.redirect('/')
         for uporabnik in self.uporabniki:
             if uporabnik.uporabnisko_ime == uporabnisko_ime:
                 return uporabnik
@@ -85,7 +97,7 @@ class VseSkupaj:
 class PrikazovanjeStrani:
     @staticmethod
     def arhiv_igra(id):
-        import bottle        
+        import bottle
         SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
         STANJE = "stanje.json"
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
@@ -105,10 +117,9 @@ class PrikazovanjeStrani:
     @staticmethod
     def arhiv():
         import bottle
-        import model
-        SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
+        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
         STANJE = "stanje.json"
-        vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
+        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
         uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
         vse_uporabnikove_igre = uporabnik.igre
@@ -117,8 +128,9 @@ class PrikazovanjeStrani:
     @staticmethod
     def igraj_proti_racunalniku():
         import bottle
-        import model
-        SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
+        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-        cookie_obstaja = bottle.request.get_cookie('barva', secret=SKRIVNOST) == None
-        return uporabnisko_ime, cookie_obstaja
+        #cookie_obstaja = bottle.request.get_cookie('barva', secret=SKRIVNOST)
+        return uporabnisko_ime
+    
+SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()

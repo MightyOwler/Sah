@@ -9,10 +9,7 @@ vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 
 # V primeru, da uporabnik izbirše piškotek, ga to preusmeri začetno stran
 # v poisci_uporabnika
-def stanje_trenutnega_uporabnika():
-    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime')
-    if uporabnisko_ime is None:
-        bottle.redirect('/')
+
 
 
 @bottle.get('/')
@@ -36,7 +33,8 @@ def prijava_post():
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
     uporabnik = vse_skupaj.poisci_uporabnika(
-        uporabnisko_ime)
+        uporabnisko_ime, prijavljanje= True)
+    print(geslo_v_cistopisu, uporabnisko_ime)
     if uporabnik:
         if uporabnik.zasifrirano_geslo == model.Uporabnik.zasifriraj_geslo(geslo_v_cistopisu):
             bottle.response.set_cookie(
@@ -85,30 +83,48 @@ def prijava_post():
         bottle.redirect("/")
 
 
+@bottle.get("/igraj_proti_racunalniku/")
+def igraj_proti_racunalniku_get():
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
+    return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
+
+# Tole preveri oba primera: Stanley in Stockfish (po novem tudi Stocknoob)
+
+
+@bottle.get("/igraj_proti_racunalniku/<racunalniski_nasprotnik:path>/")
+def server_static(racunalniski_nasprotnik):
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
+    uporabnisko_ime = model.PrikazovanjeStrani.igraj_proti_racunalniku()
+    return bottle.template(f"igraj_{racunalniski_nasprotnik}.tpl", SKRIVNOST = SKRIVNOST, uporabnisko_ime = uporabnisko_ime)
+
+
+
 # To preveri oba primera: Stanley in Stockfish
 @bottle.post('/igraj_proti_racunalniku/<racunalniski_nasprotnik:path>/<barva:path>')
 def server_static(racunalniski_nasprotnik, barva):
-    stanje_trenutnega_uporabnika()
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
+    SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
     pot = '/igraj_proti_racunalniku/'
+    
     bottle.response.set_cookie(
         "barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
     if racunalniski_nasprotnik == "stanley":
         bottle.redirect("/igraj_proti_racunalniku/stanley/")
+        #return bottle.template("igraj_stanley.tpl", SKRIVNOST=SKRIVNOST)
     else:
-        bottle.response.set_cookie(
-            "stockfish", True, path=pot, max_age=1, secret=SKRIVNOST)
         bottle.redirect("/igraj_proti_racunalniku/stockfish/")
+        #return bottle.template("igraj_stockfish.tpl", SKRIVNOST=SKRIVNOST)
 
 
 @bottle.get("/igraj_proti_cloveku/")
 def igra_proti_cloveku_get():
-    stanje_trenutnega_uporabnika()
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     return bottle.template("igraj.tpl", vrsta_igre="clovek", nasprotnik=None, napaka=None)
 
 
 @bottle.post("/igraj_proti_cloveku/")
 def igraj_proti_racunalniku_post():
-    stanje_trenutnega_uporabnika()
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     beli = bottle.request.forms.getunicode("beli")
     crni = bottle.request.forms.getunicode("crni")
     if beli in ["Stanley", "Stockfish", "Stocknoob"] or crni in ["Stanley", "Stockfish", "Stocknoob"]:
@@ -135,25 +151,11 @@ def igraj_proti_racunalniku_post():
                                nasprotnik="izbran", beli=beli, crni=crni, napaka=None)
 
 
-@bottle.get("/igraj_proti_racunalniku/")
-def igraj_proti_racunalniku_get():
-    stanje_trenutnega_uporabnika()
-    return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
-
-# Tole preveri oba primera: Stanley in Stockfish (po novem tudi Stocknoob)
-
-
-@bottle.get("/igraj_proti_racunalniku/<racunalniski_nasprotnik:path>/")
-def server_static(racunalniski_nasprotnik):
-    stanje_trenutnega_uporabnika()
-    uporabnisko_ime, cookie_obstaja = model.PrikazovanjeStrani.igraj_proti_racunalniku()
-    return bottle.template(f"igraj_{racunalniski_nasprotnik}.tpl", SKRIVNOST = SKRIVNOST, uporabnisko_ime = uporabnisko_ime, cookie_obstaja = cookie_obstaja)
-
 
 @bottle.route("/shrani_igro/")
 def shrani_igro():
-    stanje_trenutnega_uporabnika()
     global vse_skupaj
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     uporabnisko_ime = bottle.request.get_cookie(
         "uporabnisko_ime", secret=SKRIVNOST)
     igra = bottle.request.query.igra.replace("_", "#")
@@ -185,20 +187,20 @@ def shrani_igro():
 
 @bottle.get("/statistika/")
 def arhiv_get():
-    stanje_trenutnega_uporabnika()
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     return bottle.template("statistika.tpl")
 
 
 @bottle.get("/arhiv/")
 def arhiv_get():
-    stanje_trenutnega_uporabnika()
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     uporabnisko_ime, vse_uporabnikove_igre = model.PrikazovanjeStrani.arhiv()
     return bottle.template("arhiv.tpl", uporabnisko_ime = uporabnisko_ime, vse_uporabnikove_igre = vse_uporabnikove_igre)
 
 
 @bottle.get("/arhiv/<id:path>")
 def server_static(id):
-    stanje_trenutnega_uporabnika()
+    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     uporabnisko_ime, igra, beli, crni, popravljen_celoten_fen = model.PrikazovanjeStrani.arhiv_igra(id)
     return bottle.template("arhiv_igra.tpl", SKRIVNOST=SKRIVNOST, STANJE=STANJE, vse_skupaj=vse_skupaj, uporabnisko_ime = uporabnisko_ime, igra = igra, beli = beli, crni = crni, popravljen_celoten_fen = popravljen_celoten_fen, id=id[:-1])
 
