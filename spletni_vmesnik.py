@@ -117,7 +117,8 @@ def server_static(racunalniski_nasprotnik, barva):
 @bottle.get("/igraj_proti_cloveku/")
 def igra_proti_cloveku_get():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    return bottle.template("igraj.tpl", vrsta_igre="clovek", nasprotnik=None, napaka=None)
+    uporabnisko_ime, uporabniki = model.PrikazovanjeStrani.igraj()
+    return bottle.template("igraj.tpl", vrsta_igre="clovek", uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, napaka=None)
 
 
 @bottle.post("/igraj_proti_cloveku/")
@@ -125,28 +126,29 @@ def igraj_proti_racunalniku_post():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     beli = bottle.request.forms.getunicode("beli")
     crni = bottle.request.forms.getunicode("crni")
+    uporabnisko_ime, uporabniki = model.PrikazovanjeStrani.igraj()
     if beli in ["Stanley", "Stockfish", "Stocknoob"] or crni in ["Stanley", "Stockfish", "Stocknoob"]:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               nasprotnik=None, beli=beli, crni=crni, napaka="To ime je rezervirano za računalnike!")
+                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="To ime je rezervirano za računalnike!")
     if len(beli) > 20 or len(crni) > 20:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               nasprotnik=None, beli=beli, crni=crni, napaka="Ime nasprotnika sme vsebovati največ 20 znakov!")
+                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Ime nasprotnika sme vsebovati največ 20 znakov!")
     if beli == "" or crni == "":
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ime!")
+                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ime!")
     if not beli.isascii() or not crni.isascii():
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!")
+                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!")
     if beli == crni:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               nasprotnik=None, beli=beli, crni=crni, napaka="Imeni igralcev morata biti različni!")
+                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Imeni igralcev morata biti različni!")
     else:
         bottle.response.set_cookie(
             "beli", beli, path="/shrani_igro/", secret=SKRIVNOST)
         bottle.response.set_cookie(
             "crni", crni, path="/shrani_igro/", secret=SKRIVNOST)
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               nasprotnik="izbran", beli=beli, crni=crni, napaka=None)
+                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik="izbran", beli=beli, crni=crni, napaka=None)
 
 
 

@@ -3,12 +3,8 @@
 <link rel="icon" href="/static/chess_icon.ico">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 %if vrsta_igre == "clovek":
-%import model
 %import bottle
-%STANJE = "stanje.json"
-%vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
-%SKRIVNOST = "blablabla"
-%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+
 %if nasprotnik == None:
 <title>Kdo igra proti komu?</title>
 <div class="box">
@@ -47,7 +43,7 @@
     <h1 class="subtitle is-4"><strong>Opomba:</strong> če za nasprotnika izbereš ime kakega uporabnika, se bo igra shranila tudi na njegovem računu!</h1>
 </div>
 <div class="columns is-mobile is-centered" style="margin:10px;">
-    <h1 class="subtitle is-6">(Trenutno so prijavljeni uporabniki: {{", ".join([uporabnik.uporabnisko_ime for uporabnik in vse_skupaj.uporabniki])}})</h1>
+    <h1 class="subtitle is-6">(Trenutno so prijavljeni uporabniki: {{", ".join([uporabnik.uporabnisko_ime for uporabnik in uporabniki])}})</h1>
 </div>
 </div>
 % if napaka:

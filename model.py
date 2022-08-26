@@ -186,4 +186,14 @@ class PrikazovanjeStrani:
         
         return uporabnisko_ime, slovar_rezultatov, slovar_rezultatov_s_podatki
         
+    @staticmethod
+    def igraj():
+        import bottle
+        STANJE = "stanje.json"
+        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
+        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
+        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+        
+        return uporabnisko_ime, vse_skupaj.uporabniki
+        
 SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
