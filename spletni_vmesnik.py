@@ -1,15 +1,10 @@
 import bottle
 import model
-from datetime import datetime
+
 
 SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
 STANJE = "stanje.json"
 vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
-
-
-# V primeru, da uporabnik izbirše piškotek, ga to preusmeri začetno stran
-# v poisci_uporabnika
-
 
 
 @bottle.get('/')
@@ -34,7 +29,6 @@ def prijava_post():
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
     uporabnik = vse_skupaj.poisci_uporabnika(
         uporabnisko_ime, prijavljanje= True)
-    print(geslo_v_cistopisu, uporabnisko_ime)
     if uporabnik:
         if uporabnik.zasifrirano_geslo == model.Uporabnik.zasifriraj_geslo(geslo_v_cistopisu):
             bottle.response.set_cookie(
@@ -155,34 +149,7 @@ def igraj_proti_racunalniku_post():
 @bottle.route("/shrani_igro/")
 def shrani_igro():
     global vse_skupaj
-    model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    uporabnisko_ime = bottle.request.get_cookie(
-        "uporabnisko_ime", secret=SKRIVNOST)
-    igra = bottle.request.query.igra.replace("_", "#")
-    celoten_fen = bottle.request.query.fen.replace("_", "/")
-    beli = bottle.request.get_cookie("beli", secret=SKRIVNOST)
-    crni = bottle.request.get_cookie("crni", secret=SKRIVNOST)
-    if uporabnisko_ime == beli:
-        nasprotnik = crni
-    else:
-        nasprotnik = beli
-
-    rezultat_igre, lokalni_rezultat, lokalni_rezultat_nasprotnik = model.VseSkupaj.doloci_lastnosti_odigrane_igre(
-        igra, uporabnisko_ime, beli, crni)
-
-    seznam_ki_mu_hocemo_dodati_igro = vse_skupaj.v_slovar()["uporabniki"]
-    nov_seznam = []
-    for account in seznam_ki_mu_hocemo_dodati_igro:
-        if account["uporabnisko_ime"] == uporabnisko_ime:
-            account["igre"] = account["igre"] + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
-                                                  "lokalni_rezultat": lokalni_rezultat, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
-        if account["uporabnisko_ime"] == nasprotnik:
-            account["igre"] = account["igre"] + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
-                                                  "lokalni_rezultat": lokalni_rezultat_nasprotnik, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
-        nov_seznam.append(account)
-    model.VseSkupaj.v_datoteko({"uporabniki": nov_seznam}, STANJE)
-    vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
-    bottle.redirect("/")
+    model.PrikazovanjeStrani.shrani_igro(vse_skupaj)
 
 
 @bottle.get("/statistika/")

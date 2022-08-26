@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 import json
 from typing import List
-
-
+from datetime import datetime
 
 
 @dataclass
@@ -195,5 +194,37 @@ class PrikazovanjeStrani:
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
         
         return uporabnisko_ime, vse_skupaj.uporabniki
+    
+    @staticmethod
+    def shrani_igro(vse_skupaj):
+        import bottle
+        STANJE = "stanje.json"
+        VseSkupaj.poisci_uporabnika(vse_skupaj)
+        uporabnisko_ime = bottle.request.get_cookie(
+        "uporabnisko_ime", secret=SKRIVNOST)
+        igra = bottle.request.query.igra.replace("_", "#")
+        celoten_fen = bottle.request.query.fen.replace("_", "/")
+        beli = bottle.request.get_cookie("beli", secret=SKRIVNOST)
+        crni = bottle.request.get_cookie("crni", secret=SKRIVNOST)
+        if uporabnisko_ime == beli:
+            nasprotnik = crni
+        else:
+            nasprotnik = beli
+
+        rezultat_igre, lokalni_rezultat, lokalni_rezultat_nasprotnik = VseSkupaj.doloci_lastnosti_odigrane_igre(
+            igra, uporabnisko_ime, beli, crni)
         
+        seznam_ki_mu_hocemo_dodati_igro = vse_skupaj.v_slovar()["uporabniki"]
+        nov_seznam = []
+        for account in seznam_ki_mu_hocemo_dodati_igro:
+            if account["uporabnisko_ime"] == uporabnisko_ime:
+                account["igre"] = account["igre"] + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
+                                                    "lokalni_rezultat": lokalni_rezultat, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
+            if account["uporabnisko_ime"] == nasprotnik:
+                account["igre"] = account["igre"] + [{"id": len(account["igre"]) + 1, "beli":beli, "crni":crni, "rezultat": rezultat_igre,
+                                                    "lokalni_rezultat": lokalni_rezultat_nasprotnik, "igra":igra, "celoten_fen": celoten_fen, "datum":str(datetime.today())}]
+            nov_seznam.append(account)
+        VseSkupaj.v_datoteko({"uporabniki": nov_seznam}, STANJE)
+        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
+        bottle.redirect("/")
 SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
