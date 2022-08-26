@@ -87,9 +87,28 @@ class VseSkupaj:
             lokalni_rezultat_nasprotnik = "Remi"
 
         return rezultat_igre, lokalni_rezultat, lokalni_rezultat_nasprotnik
+    
+    @staticmethod
+    def vnesi_novega_uporabnika(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj):
+        import bottle
+        STANJE = "stanje.json"
+        slovar_z_novim_uporabnikom = dict()
+        nov_uporabnik = {'uporabnisko_ime': uporabnisko_ime,
+                         'zasifrirano_geslo': Uporabnik.zasifriraj_geslo(geslo_v_cistopisu), 'igre': []}
+        slovar_z_novim_uporabnikom["uporabniki"] = vse_skupaj.v_slovar()[
+            "uporabniki"] + [nov_uporabnik]
+        VseSkupaj.v_datoteko(slovar_z_novim_uporabnikom, STANJE)
+        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
+        bottle.response.set_cookie(
+            "uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
 
 @dataclass
 class PrikazovanjeStrani:
+    """Razred, ki poskrbi, da je v spletnm vmesniku malo kode
+
+    Returns:
+        Funkcije vrnejo potrebne spemenljivke ustreznih tipov
+    """
     @staticmethod
     def arhiv_igra(id):
         import bottle
@@ -226,5 +245,50 @@ class PrikazovanjeStrani:
             nov_seznam.append(account)
         VseSkupaj.v_datoteko({"uporabniki": nov_seznam}, STANJE)
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
-        bottle.redirect("/")
+        
+        
+    @staticmethod
+    def igraj_proti_cloveku_doloci_napako():
+        import bottle
+        napaka = ""
+        beli = bottle.request.forms.getunicode("beli")
+        crni = bottle.request.forms.getunicode("crni")
+        if beli in ["Stanley", "Stockfish", "Stocknoob"] or crni in ["Stanley", "Stockfish", "Stocknoob"]:
+            napaka="To ime je rezervirano za računalnike!"
+        if len(beli) > 20 or len(crni) > 20:
+            napaka="Ime nasprotnika sme vsebovati največ 20 znakov!"
+        if beli == "" or crni == "":
+            napaka = "Nasprotnik mora imeti ime!"
+        if not beli.isascii() or not crni.isascii():
+            napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!"
+        if beli == crni:
+            napaka="Imeni igralcev morata biti različni!"
+        return beli, crni, napaka
+    
+    @staticmethod
+    def registracija_doloci_napako(vse_skupaj):
+        import bottle
+        napaka = ""
+        uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
+        geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
+        # Pred registracijo preprečimo nekaj problematičnih primerov
+        # To bi se dalo dati v pomožno funkcijo
+        
+        if uporabnisko_ime in ["Stanley", "Stockfish", "Stocknoob"]:
+            napaka="To ime je rezervirano za računalnike!"
+        if not uporabnisko_ime.isascii():
+            napaka="Ime uporabnika mora biti ASCII sprejemljivo!"
+        if len(uporabnisko_ime) > 20:
+            napaka="Ime uporabnika sme vsebovati največ 20 znakov!"
+        if len(uporabnisko_ime) == 0:
+            napaka="Ime uporabnika ne sme biti prazno!"
+        uporabnik = vse_skupaj.poisci_uporabnika(
+            uporabnisko_ime, prijavljanje= True)
+        if uporabnik:
+            napaka = "Uporabnik že obstaja!"
+        
+        return uporabnisko_ime, geslo_v_cistopisu, napaka
+    
+    
+        
 SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()

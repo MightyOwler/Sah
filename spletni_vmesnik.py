@@ -48,32 +48,11 @@ def registracija_get():
 @bottle.post("/registracija/")
 def prijava_post():
     global vse_skupaj
-    uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
-    geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
-    # Pred registracijo preprečimo nekaj problematičnih primerov
-    # To bi se dalo dati v pomožno funkcijo
-    if uporabnisko_ime in ["Stanley", "Stockfish", "Stocknoob"]:
-        return bottle.template("registracija.tpl", napaka="To ime je rezervirano za računalnike!")
-    if not uporabnisko_ime.isascii():
-        return bottle.template("registracija.tpl", napaka="Ime uporabnika mora biti ASCII sprejemljivo!")
-    if len(uporabnisko_ime) > 20:
-        return bottle.template("registracija.tpl", napaka="Ime uporabnika sme vsebovati največ 20 znakov!")
-    if len(uporabnisko_ime) == 0:
-        return bottle.template("registracija.tpl", napaka="Ime uporabnika ne sme biti prazno!")
-    uporabnik = vse_skupaj.poisci_uporabnika(
-        uporabnisko_ime, prijavljanje= True)
-    if uporabnik:
-        return bottle.template("registracija.tpl", napaka="Uporabnik že obstaja!")
+    uporabnisko_ime, geslo_v_cistopisu, napaka = model.PrikazovanjeStrani.registracija_doloci_napako(vse_skupaj)
+    if napaka:
+        return bottle.template("registracija.tpl", napaka=napaka)
     else:
-        slovar_z_novim_uporabnikom = dict()
-        nov_uporabnik = {'uporabnisko_ime': uporabnisko_ime,
-                         'zasifrirano_geslo': model.Uporabnik.zasifriraj_geslo(geslo_v_cistopisu), 'igre': []}
-        slovar_z_novim_uporabnikom["uporabniki"] = vse_skupaj.v_slovar()[
-            "uporabniki"] + [nov_uporabnik]
-        model.VseSkupaj.v_datoteko(slovar_z_novim_uporabnikom, STANJE)
-        vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
-        bottle.response.set_cookie(
-            "uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
+        model.VseSkupaj.vnesi_novega_uporabnika(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj)
         bottle.redirect("/")
 
 
@@ -118,24 +97,11 @@ def igra_proti_cloveku_get():
 @bottle.post("/igraj_proti_cloveku/")
 def igraj_proti_racunalniku_post():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    beli = bottle.request.forms.getunicode("beli")
-    crni = bottle.request.forms.getunicode("crni")
     uporabnisko_ime, uporabniki = model.PrikazovanjeStrani.igraj()
-    if beli in ["Stanley", "Stockfish", "Stocknoob"] or crni in ["Stanley", "Stockfish", "Stocknoob"]:
+    beli, crni, napaka = model.PrikazovanjeStrani.igraj_proti_cloveku_doloci_napako()
+    if napaka:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="To ime je rezervirano za računalnike!")
-    if len(beli) > 20 or len(crni) > 20:
-        return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Ime nasprotnika sme vsebovati največ 20 znakov!")
-    if beli == "" or crni == "":
-        return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ime!")
-    if not beli.isascii() or not crni.isascii():
-        return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!")
-    if beli == crni:
-        return bottle.template("igraj.tpl", vrsta_igre="clovek",
-                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka="Imeni igralcev morata biti različni!")
+                               uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka=napaka)
     else:
         bottle.response.set_cookie(
             "beli", beli, path="/shrani_igro/", secret=SKRIVNOST)
@@ -150,6 +116,7 @@ def igraj_proti_racunalniku_post():
 def shrani_igro():
     global vse_skupaj
     model.PrikazovanjeStrani.shrani_igro(vse_skupaj)
+    bottle.redirect("/")
 
 
 @bottle.get("/statistika/")

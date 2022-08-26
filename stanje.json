@@ -1404,6 +1404,16 @@
                     "datum": "2022-08-26 22:22:27.160931"
                 }
             ]
+        },
+        {
+            "uporabnisko_ime": "jasa3",
+            "zasifrirano_geslo": "XXXolsegXXX",
+            "igre": []
+        },
+        {
+            "uporabnisko_ime": "jasa6",
+            "zasifrirano_geslo": "XXXolsegXXX",
+            "igre": []
         }
     ]
 }
