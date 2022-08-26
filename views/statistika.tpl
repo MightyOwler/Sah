@@ -1,48 +1,5 @@
 %import bottle
-%import model
-%SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
-%STANJE = "stanje.json"
-%vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
-%uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-%uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
-%vse_uporabnikove_igre = uporabnik.igre
-%zmage, porazi, remiji = 0,0,0
-%zmage_beli, porazi_beli, remiji_beli = 0,0,0
-%zmage_crni, porazi_crni, remiji_crni = 0,0,0
-%def pridobi_podatek_o_odstotkih(n1, n2, n3, n4):
-%    if n2 + n3 + n4 != 0:
-%        return '{:.1%}'.format(n1/(n2 + n3 + n4))
-%    else:
-%       return "ni podatka"
-%    end
-%end
-%for posamezna_igra in vse_uporabnikove_igre:
-%   uporabnik_je_bel = posamezna_igra["beli"] == uporabnisko_ime
-%   if posamezna_igra["lokalni_rezultat"] == "Zmaga":
-%       zmage += 1
-%       if uporabnik_je_bel:
-%           zmage_beli += 1
-%       else:
-%           zmage_crni += 1
-%       end
-%   end
-%   if posamezna_igra["lokalni_rezultat"] == "Poraz":
-%       porazi += 1
-%       if uporabnik_je_bel:
-%           porazi_beli += 1
-%       else:
-%           porazi_crni += 1
-%       end
-%   end
-%   if posamezna_igra["lokalni_rezultat"] == "Remi":
-%       remiji += 1
-%       if uporabnik_je_bel:
-%           remiji_beli += 1
-%       else:
-%           remiji_crni += 1
-%       end
-%   end
-%end
+
 
 
 <title>Statistika uporabnika {{uporabnisko_ime}}</title>
@@ -78,10 +35,10 @@ const ctx_skupno = document.getElementById('myChat_skupno').getContext('2d');
 const myChart_skupno = new Chart(ctx_skupno, {
     type: 'doughnut',
     data: {
-        labels: ['Zmaga: {{pridobi_podatek_o_odstotkih(zmage, zmage, porazi, remiji)}}', 'Poraz: {{pridobi_podatek_o_odstotkih(porazi, zmage, porazi, remiji)}}', 'Remi: {{pridobi_podatek_o_odstotkih(remiji, zmage, porazi, remiji)}}'],
+        labels: ['Zmaga: {{slovar_rezultatov_s_podatki["zmage"]}}', 'Poraz: {{slovar_rezultatov_s_podatki["porazi"]}}', 'Remi: {{slovar_rezultatov_s_podatki["remiji"]}}'],
         datasets: [{
             label: '# of Votes',
-            data: [parseInt('{{zmage}}'), parseInt('{{porazi}}'), parseInt('{{remiji}}')],
+            data: [parseInt('{{slovar_rezultatov["zmage"]}}'), parseInt('{{slovar_rezultatov["porazi"]}}'), parseInt('{{slovar_rezultatov["remiji"]}}')],
             backgroundColor: [
                 
                 'rgba(60, 179, 113, 0.2)',
@@ -101,7 +58,7 @@ const myChart_skupno = new Chart(ctx_skupno, {
         plugins: {
             title: {
                 display: true,
-                text: 'Rezultati iger skupno ({{zmage + porazi + remiji}})'
+                text: 'Rezultati iger skupno ({{slovar_rezultatov["zmage"] + slovar_rezultatov["porazi"] + slovar_rezultatov["remiji"]}})'
             }
         }
     }
@@ -111,10 +68,10 @@ const ctx_beli = document.getElementById('myChart_beli').getContext('2d');
 const myChart_beli = new Chart(ctx_beli, {
     type: 'doughnut',
     data: {
-        labels: ['Zmaga beli: {{pridobi_podatek_o_odstotkih(zmage_beli, zmage_beli, porazi_beli, remiji_beli)}}', 'Poraz beli: {{pridobi_podatek_o_odstotkih(porazi_beli, zmage_beli, porazi_beli, remiji_beli)}}', 'Remi beli: {{pridobi_podatek_o_odstotkih(remiji_beli, zmage_beli, porazi_beli, remiji_beli)}}'],
+        labels: ['Zmaga beli: {{slovar_rezultatov_s_podatki["zmage_beli"]}}', 'Poraz beli: {{slovar_rezultatov_s_podatki["porazi_beli"]}}', 'Remi beli: {{slovar_rezultatov_s_podatki["remiji_beli"]}}'],
         datasets: [{
             label: '# of Votes',
-            data: [parseInt('{{zmage_beli}}'), parseInt('{{porazi_beli}}'), parseInt('{{remiji_beli}}')],
+            data: [parseInt('{{slovar_rezultatov["zmage_beli"]}}'), parseInt('{{slovar_rezultatov["porazi_beli"]}}'), parseInt('{{slovar_rezultatov["remiji_beli"]}}')],
             backgroundColor: [
                 
                 'rgba(60, 179, 113, 0.2)',
@@ -134,7 +91,7 @@ const myChart_beli = new Chart(ctx_beli, {
         plugins: {
             title: {
                 display: true,
-                text: 'Rezultati iger beli ({{zmage_beli + porazi_beli + remiji_beli}})'
+                text: 'Rezultati iger beli ({{slovar_rezultatov["zmage_beli"] + slovar_rezultatov["porazi_beli"] + slovar_rezultatov["remiji_beli"]}})'
             }
         }
     }
@@ -146,10 +103,10 @@ const ctx_crni = document.getElementById('myChart_crni').getContext('2d');
 const myChart_crni = new Chart(ctx_crni, {
     type: 'doughnut',
     data: {
-        labels: ['Zmaga črni: {{pridobi_podatek_o_odstotkih(zmage_crni, zmage_crni, porazi_crni, remiji_crni)}}', 'Poraz črni: {{pridobi_podatek_o_odstotkih(porazi_crni, zmage_crni, porazi_crni, remiji_crni)}}', 'Remi črni: {{pridobi_podatek_o_odstotkih(remiji_crni, zmage_crni, porazi_crni, remiji_crni)}}'],
+        labels: ['Zmaga črni: {{slovar_rezultatov_s_podatki["zmage_crni"]}}', 'Poraz črni: {{slovar_rezultatov_s_podatki["porazi_crni"]}}', 'Remi črni: {{slovar_rezultatov_s_podatki["remiji_crni"]}}'],
         datasets: [{
             label: '# of Votes',
-            data: [parseInt('{{zmage_crni}}'), parseInt('{{porazi_crni}}'), parseInt('{{remiji_crni}}')],
+            data: [parseInt('{{slovar_rezultatov["zmage_crni"]}}'), parseInt('{{slovar_rezultatov["porazi_crni"]}}'), parseInt('{{slovar_rezultatov["remiji_crni"]}}')],
             backgroundColor: [
                 'rgba(60, 179, 113, 0.2)',
                 'rgba(255, 99, 132, 0.2)',
@@ -167,7 +124,7 @@ const myChart_crni = new Chart(ctx_crni, {
         plugins: {
             title: {
                 display: true,
-                text: 'Rezultati iger črni ({{zmage_crni + porazi_crni + remiji_crni}})'
+                text: 'Rezultati iger črni ({{slovar_rezultatov["zmage_crni"] + slovar_rezultatov["porazi_crni"] + slovar_rezultatov["remiji_crni"]}})'
             }
         }
     }

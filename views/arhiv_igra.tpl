@@ -24,7 +24,8 @@
     <button id="flipOrientationBtn" class="button is-link is-medium" style="margin:10px;">Obrni šahovnico</button>
 </div>
 </body>
-<script> const board = document.querySelector('chess-board');
+<script> 
+const board = document.querySelector('chess-board');
 const searchRegExp = /&#039/g; 
 const replaceWith = '';
 var celotna_igra = '{{str(popravljen_celoten_fen)}}'.replace(searchRegExp, replaceWith).replace(/;/g, replaceWith);

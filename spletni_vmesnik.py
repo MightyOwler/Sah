@@ -67,7 +67,7 @@ def prijava_post():
     if len(uporabnisko_ime) == 0:
         return bottle.template("registracija.tpl", napaka="Ime uporabnika ne sme biti prazno!")
     uporabnik = vse_skupaj.poisci_uporabnika(
-        uporabnisko_ime)
+        uporabnisko_ime, prijavljanje= True)
     if uporabnik:
         return bottle.template("registracija.tpl", napaka="Uporabnik že obstaja!")
     else:
@@ -89,8 +89,6 @@ def igraj_proti_racunalniku_get():
     return bottle.template("igraj.tpl", vrsta_igre="racunalnik")
 
 # Tole preveri oba primera: Stanley in Stockfish (po novem tudi Stocknoob)
-
-
 @bottle.get("/igraj_proti_racunalniku/<racunalniski_nasprotnik:path>/")
 def server_static(racunalniski_nasprotnik):
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
@@ -188,7 +186,8 @@ def shrani_igro():
 @bottle.get("/statistika/")
 def arhiv_get():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    return bottle.template("statistika.tpl")
+    uporabnisko_ime, slovar_rezultatov, slovar_rezultatov_s_podatki = model.PrikazovanjeStrani.statistika()
+    return bottle.template("statistika.tpl", uporabnisko_ime = uporabnisko_ime, slovar_rezultatov = slovar_rezultatov, slovar_rezultatov_s_podatki = slovar_rezultatov_s_podatki)
 
 
 @bottle.get("/arhiv/")

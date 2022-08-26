@@ -31,10 +31,6 @@ class Uporabnik:
         )
 
 
-# def stanje_trenutnega_uporabnika():
-#     uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime')
-#     if uporabnisko_ime is None:
-#         bottle.redirect('/')
 
 @dataclass
 class VseSkupaj:
@@ -133,4 +129,61 @@ class PrikazovanjeStrani:
         #cookie_obstaja = bottle.request.get_cookie('barva', secret=SKRIVNOST)
         return uporabnisko_ime
     
+    @staticmethod
+    def statistika():
+        import bottle
+        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
+        STANJE = "stanje.json"
+        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
+        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+        uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
+        vse_uporabnikove_igre = uporabnik.igre
+        
+        mozni_razpleti = ["zmage", "porazi", "remiji", "zmage_beli", "porazi_beli", "remiji_beli", "zmage_crni", "porazi_crni", "remiji_crni"]
+        slovar_rezultatov = {razplet:0 for razplet in mozni_razpleti}
+
+        
+        def pridobi_podatek_o_odstotkih(razplet):
+            if "beli" in razplet:
+                if slovar_rezultatov["zmage_beli"] + slovar_rezultatov["porazi_beli"] + slovar_rezultatov["remiji_beli"] != 0:
+                    return '{:.1%}'.format(slovar_rezultatov[razplet]/(slovar_rezultatov["zmage_beli"] + slovar_rezultatov["porazi_beli"] + slovar_rezultatov["remiji_beli"]))
+                else:
+                    return "ni podatka"
+            
+            if "crni" in razplet:
+                if slovar_rezultatov["zmage_crni"] + slovar_rezultatov["porazi_crni"] + slovar_rezultatov["remiji_crni"] != 0:
+                    return '{:.1%}'.format(slovar_rezultatov[razplet]/(slovar_rezultatov["zmage_crni"] + slovar_rezultatov["porazi_crni"] + slovar_rezultatov["remiji_crni"]))
+                else:
+                    return "ni podatka"
+            
+            if slovar_rezultatov["zmage"] + slovar_rezultatov["porazi"] + slovar_rezultatov["remiji"] != 0:
+                    return '{:.1%}'.format(slovar_rezultatov[razplet]/(slovar_rezultatov["zmage"] + slovar_rezultatov["porazi"] + slovar_rezultatov["remiji"]))
+            else:
+                return "ni podatka"
+           
+        for posamezna_igra in vse_uporabnikove_igre:
+            uporabnik_je_bel = posamezna_igra["beli"] == uporabnisko_ime
+            if posamezna_igra["lokalni_rezultat"] == "Zmaga":
+                slovar_rezultatov["zmage"] += 1
+                if uporabnik_je_bel:
+                    slovar_rezultatov["zmage_beli"] += 1
+                else:
+                    slovar_rezultatov["zmage_crni"] += 1
+            if posamezna_igra["lokalni_rezultat"] == "Poraz":
+                slovar_rezultatov["porazi"] += 1
+                if uporabnik_je_bel:
+                    slovar_rezultatov["porazi_beli"] += 1
+                else:
+                    slovar_rezultatov["porazi_crni"] += 1
+            if posamezna_igra["lokalni_rezultat"] == "Remi":
+                slovar_rezultatov["remiji"] += 1
+                if uporabnik_je_bel:
+                    slovar_rezultatov["remiji_beli"] += 1
+                else:
+                    slovar_rezultatov["remiji_crni"] += 1
+                           
+        slovar_rezultatov_s_podatki = {i: pridobi_podatek_o_odstotkih(i) for i in slovar_rezultatov}
+        
+        return uporabnisko_ime, slovar_rezultatov, slovar_rezultatov_s_podatki
+        
 SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
