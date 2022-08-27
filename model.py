@@ -4,6 +4,7 @@ from typing import List
 from datetime import datetime
 
 
+
 @dataclass
 class Uporabnik:
     uporabnisko_ime: str
@@ -91,7 +92,6 @@ class VseSkupaj:
     @staticmethod
     def vnesi_novega_uporabnika(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj):
         import bottle
-        STANJE = "stanje.json"
         slovar_z_novim_uporabnikom = dict()
         nov_uporabnik = {'uporabnisko_ime': uporabnisko_ime,
                          'zasifrirano_geslo': Uporabnik.zasifriraj_geslo(geslo_v_cistopisu), 'igre': []}
@@ -114,8 +114,6 @@ class PrikazovanjeStrani:
     @staticmethod
     def arhiv_igra(id):
         import bottle
-        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
-        STANJE = "stanje.json"
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
         uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
@@ -131,9 +129,7 @@ class PrikazovanjeStrani:
         
     @staticmethod
     def arhiv():
-        import bottle
-        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
-        STANJE = "stanje.json"
+        import bottle       
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
         uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
@@ -143,15 +139,12 @@ class PrikazovanjeStrani:
     @staticmethod
     def igraj_proti_racunalniku():
         import bottle
-        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
         return uporabnisko_ime
     
     @staticmethod
     def statistika():
         import bottle
-        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
-        STANJE = "stanje.json"
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
         uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
@@ -207,7 +200,6 @@ class PrikazovanjeStrani:
     @staticmethod
     def igraj():
         import bottle
-        STANJE = "stanje.json"
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
         SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
@@ -217,7 +209,6 @@ class PrikazovanjeStrani:
     @staticmethod
     def shrani_igro(vse_skupaj):
         import bottle
-        STANJE = "stanje.json"
         VseSkupaj.poisci_uporabnika(vse_skupaj)
         uporabnisko_ime = bottle.request.get_cookie(
         "uporabnisko_ime", secret=SKRIVNOST)
@@ -292,3 +283,4 @@ class PrikazovanjeStrani:
     
         
 SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
+STANJE = "stanje.json"
