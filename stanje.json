@@ -1588,6 +1588,22 @@
                     "datum": "2022-08-27 10:16:04.308316"
                 }
             ]
+        },
+        {
+            "uporabnisko_ime": "jasa12",
+            "zasifrirano_geslo": "XXXolsegXXX",
+            "igre": [
+                {
+                    "id": 1,
+                    "beli": "jasa12",
+                    "crni": "Stanley",
+                    "rezultat": "W",
+                    "lokalni_rezultat": "Zmaga",
+                    "igra": "1. e4 Nh6 2. d3 g6 3. Bxh6 b5 4. Bxf8 h6 5. Bg7 Rf8 6. Qf3 e5 7. Be2 Nc6 8. d4 Bb7 9. Bxb5 a6 10. Bc4 d5 11. Bxf8 Qe7 12. Bxd5 Nb8 13. Bxe7 Kxe7 14. Qxf7  Kd8 15. Be6 Nd7 16. Qxd7# 1-0",
+                    "celoten_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1,rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1,rnbqkb1r/pppppppp/7n/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2,rnbqkb1r/pppppppp/7n/8/4P3/3P4/PPP2PPP/RNBQKBNR b KQkq - 0 2,rnbqkb1r/pppppp1p/6pn/8/4P3/3P4/PPP2PPP/RNBQKBNR w KQkq - 0 3,rnbqkb1r/pppppp1p/6pB/8/4P3/3P4/PPP2PPP/RN1QKBNR b KQkq - 0 3,rnbqkb1r/p1pppp1p/6pB/1p6/4P3/3P4/PPP2PPP/RN1QKBNR w KQkq b6 0 4,rnbqkB1r/p1pppp1p/6p1/1p6/4P3/3P4/PPP2PPP/RN1QKBNR b KQkq - 0 4,rnbqkB1r/p1pppp2/6pp/1p6/4P3/3P4/PPP2PPP/RN1QKBNR w KQkq - 0 5,rnbqk2r/p1ppppB1/6pp/1p6/4P3/3P4/PPP2PPP/RN1QKBNR b KQkq - 1 5,rnbqkr2/p1ppppB1/6pp/1p6/4P3/3P4/PPP2PPP/RN1QKBNR w KQq - 2 6,rnbqkr2/p1ppppB1/6pp/1p6/4P3/3P1Q2/PPP2PPP/RN2KBNR b KQq - 3 6,rnbqkr2/p1pp1pB1/6pp/1p2p3/4P3/3P1Q2/PPP2PPP/RN2KBNR w KQq e6 0 7,rnbqkr2/p1pp1pB1/6pp/1p2p3/4P3/3P1Q2/PPP1BPPP/RN2K1NR b KQq - 1 7,r1bqkr2/p1pp1pB1/2n3pp/1p2p3/4P3/3P1Q2/PPP1BPPP/RN2K1NR w KQq - 2 8,r1bqkr2/p1pp1pB1/2n3pp/1p2p3/3PP3/5Q2/PPP1BPPP/RN2K1NR b KQq - 0 8,r2qkr2/pbpp1pB1/2n3pp/1p2p3/3PP3/5Q2/PPP1BPPP/RN2K1NR w KQq - 1 9,r2qkr2/pbpp1pB1/2n3pp/1B2p3/3PP3/5Q2/PPP2PPP/RN2K1NR b KQq - 0 9,r2qkr2/1bpp1pB1/p1n3pp/1B2p3/3PP3/5Q2/PPP2PPP/RN2K1NR w KQq - 0 10,r2qkr2/1bpp1pB1/p1n3pp/4p3/2BPP3/5Q2/PPP2PPP/RN2K1NR b KQq - 1 10,r2qkr2/1bp2pB1/p1n3pp/3pp3/2BPP3/5Q2/PPP2PPP/RN2K1NR w KQq d6 0 11,r2qkB2/1bp2p2/p1n3pp/3pp3/2BPP3/5Q2/PPP2PPP/RN2K1NR b KQq - 0 11,r3kB2/1bp1qp2/p1n3pp/3pp3/2BPP3/5Q2/PPP2PPP/RN2K1NR w KQq - 1 12,r3kB2/1bp1qp2/p1n3pp/3Bp3/3PP3/5Q2/PPP2PPP/RN2K1NR b KQq - 0 12,rn2kB2/1bp1qp2/p5pp/3Bp3/3PP3/5Q2/PPP2PPP/RN2K1NR w KQq - 1 13,rn2k3/1bp1Bp2/p5pp/3Bp3/3PP3/5Q2/PPP2PPP/RN2K1NR b KQq - 0 13,rn6/1bp1kp2/p5pp/3Bp3/3PP3/5Q2/PPP2PPP/RN2K1NR w KQ - 0 14,rn6/1bp1kQ2/p5pp/3Bp3/3PP3/8/PPP2PPP/RN2K1NR b KQ - 0 14,rn1k4/1bp2Q2/p5pp/3Bp3/3PP3/8/PPP2PPP/RN2K1NR w KQ - 1 15,rn1k4/1bp2Q2/p3B1pp/4p3/3PP3/8/PPP2PPP/RN2K1NR b KQ - 2 15,r2k4/1bpn1Q2/p3B1pp/4p3/3PP3/8/PPP2PPP/RN2K1NR w KQ - 3 16,r2k4/1bpQ4/p3B1pp/4p3/3PP3/8/PPP2PPP/RN2K1NR b KQ - 0 16",
+                    "datum": "2022-08-27 10:59:47.973918"
+                }
+            ]
         }
     ]
 }

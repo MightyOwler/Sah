@@ -64,7 +64,7 @@ def prijava_post():
     if uporabnik:
         napaka = "Uporabnik že obstaja!"
     else:
-        napaka = model.PrikazovanjeStrani.registracija_doloci_napako(vse_skupaj, uporabnisko_ime = uporabnisko_ime, geslo_v_cistopisu = geslo_v_cistopisu)
+        napaka = model.PrikazovanjeStrani.registracija_doloci_napako(uporabnisko_ime)
     
     if napaka:
         return bottle.template("registracija.tpl", napaka=napaka)

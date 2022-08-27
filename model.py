@@ -3,7 +3,7 @@ import json
 from typing import List
 from datetime import datetime
 
-
+STANJE = "stanje.json"
 
 @dataclass
 class Uporabnik:
@@ -219,8 +219,3 @@ class PrikazovanjeStrani:
             napaka="Ime uporabnika ne sme biti prazno!"
         
         return napaka
-    
-    
-        
-SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
-STANJE = "stanje.json"
