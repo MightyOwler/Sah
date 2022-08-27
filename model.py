@@ -91,7 +91,6 @@ class VseSkupaj:
     
     @staticmethod
     def vnesi_novega_uporabnika(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj):
-        import bottle
         slovar_z_novim_uporabnikom = dict()
         nov_uporabnik = {'uporabnisko_ime': uporabnisko_ime,
                          'zasifrirano_geslo': Uporabnik.zasifriraj_geslo(geslo_v_cistopisu), 'igre': []}
@@ -99,8 +98,7 @@ class VseSkupaj:
             "uporabniki"] + [nov_uporabnik]
         VseSkupaj.v_datoteko(slovar_z_novim_uporabnikom, STANJE)
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
-        bottle.response.set_cookie(
-            "uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
+        
 
         return vse_skupaj
     
@@ -112,12 +110,7 @@ class PrikazovanjeStrani:
         Funkcije vrnejo potrebne spemenljivke ustreznih tipov
     """
     @staticmethod
-    def arhiv_igra(id):
-        import bottle
-        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
-        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-        uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
-        vse_uporabnikove_igre = uporabnik.igre
+    def arhiv_igra(id, vse_uporabnikove_igre):        
         for posamezna_igra in vse_uporabnikove_igre:
             if str(posamezna_igra["id"]) == id[:-1]:
                 igra = posamezna_igra["igra"]
@@ -125,28 +118,13 @@ class PrikazovanjeStrani:
                 crni = posamezna_igra["crni"]
                 celoten_fen = posamezna_igra["celoten_fen"].split(",")
                 popravljen_celoten_fen = [i.split(" ")[0] for i in celoten_fen]
-                return uporabnisko_ime, igra, beli, crni, popravljen_celoten_fen
+                return igra, beli, crni, popravljen_celoten_fen
+            
+    
+    @staticmethod
+    def statistika(uporabnisko_ime):
+        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
         
-    @staticmethod
-    def arhiv():
-        import bottle       
-        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
-        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-        uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
-        vse_uporabnikove_igre = uporabnik.igre
-        return uporabnisko_ime, vse_uporabnikove_igre
-    
-    @staticmethod
-    def igraj_proti_racunalniku():
-        import bottle
-        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-        return uporabnisko_ime
-    
-    @staticmethod
-    def statistika():
-        import bottle
-        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
-        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
         uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
         vse_uporabnikove_igre = uporabnik.igre
         
@@ -195,22 +173,13 @@ class PrikazovanjeStrani:
                            
         slovar_rezultatov_s_podatki = {i: pridobi_podatek_o_odstotkih(i) for i in slovar_rezultatov}
         
-        return uporabnisko_ime, slovar_rezultatov, slovar_rezultatov_s_podatki
+        return slovar_rezultatov, slovar_rezultatov_s_podatki
         
-    @staticmethod
-    def igraj():
-        import bottle
-        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
-        SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
-        uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-        
-        return uporabnisko_ime, vse_skupaj.uporabniki
+
     
     @staticmethod
     def shrani_igro(vse_skupaj, igra, uporabnisko_ime, beli, crni, celoten_fen):
-        import bottle
         VseSkupaj.poisci_uporabnika(vse_skupaj)
-        
         if uporabnisko_ime == beli:
             nasprotnik = crni
         else:

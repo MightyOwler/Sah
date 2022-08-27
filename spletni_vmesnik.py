@@ -55,6 +55,8 @@ def prijava_post():
         return bottle.template("registracija.tpl", napaka=napaka)
     else:
         vse_skupaj = model.VseSkupaj.vnesi_novega_uporabnika(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj)
+        bottle.response.set_cookie(
+            "uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
         bottle.redirect("/")
 
 
@@ -67,7 +69,7 @@ def igraj_proti_racunalniku_get():
 @bottle.get("/igraj_proti_racunalniku/<racunalniski_nasprotnik:path>/")
 def server_static(racunalniski_nasprotnik):
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    uporabnisko_ime = model.PrikazovanjeStrani.igraj_proti_racunalniku()
+    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
     return bottle.template(f"igraj_{racunalniski_nasprotnik}.tpl", SKRIVNOST = SKRIVNOST, uporabnisko_ime = uporabnisko_ime)
 
 
@@ -89,14 +91,16 @@ def server_static(racunalniski_nasprotnik, barva):
 @bottle.get("/igraj_proti_cloveku/")
 def igra_proti_cloveku_get():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    uporabnisko_ime, uporabniki = model.PrikazovanjeStrani.igraj()
+    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+    uporabniki = vse_skupaj.uporabniki
     return bottle.template("igraj.tpl", vrsta_igre="clovek", uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, napaka=None)
 
 
 @bottle.post("/igraj_proti_cloveku/")
 def igraj_proti_racunalniku_post():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    uporabnisko_ime, uporabniki = model.PrikazovanjeStrani.igraj()
+    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+    uporabniki = vse_skupaj.uporabniki
     beli = bottle.request.forms.getunicode("beli")
     crni = bottle.request.forms.getunicode("crni")
     napaka = model.PrikazovanjeStrani.igraj_proti_cloveku_doloci_napako(beli = beli, crni = crni)
@@ -129,21 +133,27 @@ def shrani_igro():
 @bottle.get("/statistika/")
 def arhiv_get():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    uporabnisko_ime, slovar_rezultatov, slovar_rezultatov_s_podatki = model.PrikazovanjeStrani.statistika()
+    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+    slovar_rezultatov, slovar_rezultatov_s_podatki = model.PrikazovanjeStrani.statistika(uporabnisko_ime)
     return bottle.template("statistika.tpl", uporabnisko_ime = uporabnisko_ime, slovar_rezultatov = slovar_rezultatov, slovar_rezultatov_s_podatki = slovar_rezultatov_s_podatki)
 
 
 @bottle.get("/arhiv/")
 def arhiv_get():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    uporabnisko_ime, vse_uporabnikove_igre = model.PrikazovanjeStrani.arhiv()
+    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+    uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
+    vse_uporabnikove_igre = uporabnik.igre
     return bottle.template("arhiv.tpl", uporabnisko_ime = uporabnisko_ime, vse_uporabnikove_igre = vse_uporabnikove_igre)
 
 
 @bottle.get("/arhiv/<id:path>")
 def server_static(id):
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
-    uporabnisko_ime, igra, beli, crni, popravljen_celoten_fen = model.PrikazovanjeStrani.arhiv_igra(id)
+    uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
+    uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
+    vse_uporabnikove_igre = uporabnik.igre
+    igra, beli, crni, popravljen_celoten_fen = model.PrikazovanjeStrani.arhiv_igra(id, vse_uporabnikove_igre = vse_uporabnikove_igre)
     return bottle.template("arhiv_igra.tpl", SKRIVNOST=SKRIVNOST, STANJE=STANJE, vse_skupaj=vse_skupaj, uporabnisko_ime = uporabnisko_ime, igra = igra, beli = beli, crni = crni, popravljen_celoten_fen = popravljen_celoten_fen, id=id[:-1])
 
 
