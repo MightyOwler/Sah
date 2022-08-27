@@ -199,6 +199,7 @@ class PrikazovanjeStrani:
             napaka = "Nasprotnik mora imeti ASCII sprejemljivo ime!"
         if beli == crni:
             napaka = "Imeni igralcev morata biti različni!"
+            
         return napaka
 
     @staticmethod
