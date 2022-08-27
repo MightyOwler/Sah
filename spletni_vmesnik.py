@@ -57,7 +57,7 @@ def registracija_get():
 
 
 @bottle.post("/registracija/")
-def prijava_post():
+def registracija_post():
     global vse_skupaj
     uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
     geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
