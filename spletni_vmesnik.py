@@ -3,7 +3,7 @@ import model
 
 
 SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
-STANJE = "stanje.json"
+STANJE = model.STANJE
 vse_skupaj = model.VseSkupaj.iz_datoteke(STANJE)
 
 def poisci_uporabnika(uporabnisko_ime = None, prijavljanje = False):
