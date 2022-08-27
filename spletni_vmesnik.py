@@ -112,7 +112,7 @@ def igraj_proti_racunalniku_post():
 @bottle.route("/shrani_igro/")
 def shrani_igro():
     global vse_skupaj
-    model.PrikazovanjeStrani.shrani_igro(vse_skupaj)
+    vse_skupaj = model.PrikazovanjeStrani.shrani_igro(vse_skupaj)
     bottle.redirect("/")
 
 

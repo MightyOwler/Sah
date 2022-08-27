@@ -245,6 +245,7 @@ class PrikazovanjeStrani:
             nov_seznam.append(account)
         VseSkupaj.v_datoteko({"uporabniki": nov_seznam}, STANJE)
         vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
+        return vse_skupaj
         
         
     @staticmethod
