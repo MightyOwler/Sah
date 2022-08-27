@@ -36,16 +36,6 @@ class Uporabnik:
 class VseSkupaj:
     uporabniki: List[Uporabnik]
 
-    def poisci_uporabnika(self, uporabnisko_ime = None, prijavljanje = False):
-        import bottle
-        if prijavljanje == False:
-            uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-        if uporabnisko_ime is None and not prijavljanje:
-            bottle.redirect('/')
-        for uporabnik in self.uporabniki:
-            if uporabnik.uporabnisko_ime == uporabnisko_ime:
-                return uporabnik
-
     def v_slovar(self):
         return {
             "uporabniki": [uporabnik.v_slovar() for uporabnik in self.uporabniki],
@@ -122,10 +112,7 @@ class PrikazovanjeStrani:
             
     
     @staticmethod
-    def statistika(uporabnisko_ime):
-        vse_skupaj = VseSkupaj.iz_datoteke(STANJE)
-        
-        uporabnik = vse_skupaj.poisci_uporabnika(uporabnisko_ime)
+    def statistika(uporabnisko_ime, uporabnik):        
         vse_uporabnikove_igre = uporabnik.igre
         
         mozni_razpleti = ["zmage", "porazi", "remiji", "zmage_beli", "porazi_beli", "remiji_beli", "zmage_crni", "porazi_crni", "remiji_crni"]
@@ -179,7 +166,6 @@ class PrikazovanjeStrani:
     
     @staticmethod
     def shrani_igro(vse_skupaj, igra, uporabnisko_ime, beli, crni, celoten_fen):
-        VseSkupaj.poisci_uporabnika(vse_skupaj)
         if uporabnisko_ime == beli:
             nasprotnik = crni
         else:
@@ -220,7 +206,7 @@ class PrikazovanjeStrani:
     
             
     @staticmethod
-    def registracija_doloci_napako(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj):
+    def registracija_doloci_napako(uporabnisko_ime):
         # Pred registracijo preprečimo nekaj problematičnih primerov
         napaka = ""
         if uporabnisko_ime in ["Stanley", "Stockfish", "Stocknoob"]:
@@ -231,10 +217,6 @@ class PrikazovanjeStrani:
             napaka="Ime uporabnika sme vsebovati največ 20 znakov!"
         if len(uporabnisko_ime) == 0:
             napaka="Ime uporabnika ne sme biti prazno!"
-        uporabnik = vse_skupaj.poisci_uporabnika(
-            uporabnisko_ime, prijavljanje= True)
-        if uporabnik:
-            napaka = "Uporabnik že obstaja!"
         
         return napaka
     
