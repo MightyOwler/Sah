@@ -207,15 +207,10 @@ class PrikazovanjeStrani:
         return uporabnisko_ime, vse_skupaj.uporabniki
     
     @staticmethod
-    def shrani_igro(vse_skupaj):
+    def shrani_igro(vse_skupaj, igra, uporabnisko_ime, beli, crni, celoten_fen):
         import bottle
         VseSkupaj.poisci_uporabnika(vse_skupaj)
-        uporabnisko_ime = bottle.request.get_cookie(
-        "uporabnisko_ime", secret=SKRIVNOST)
-        igra = bottle.request.query.igra.replace("_", "#")
-        celoten_fen = bottle.request.query.fen.replace("_", "/")
-        beli = bottle.request.get_cookie("beli", secret=SKRIVNOST)
-        crni = bottle.request.get_cookie("crni", secret=SKRIVNOST)
+        
         if uporabnisko_ime == beli:
             nasprotnik = crni
         else:
@@ -240,11 +235,8 @@ class PrikazovanjeStrani:
         
         
     @staticmethod
-    def igraj_proti_cloveku_doloci_napako():
-        import bottle
+    def igraj_proti_cloveku_doloci_napako(beli, crni):
         napaka = ""
-        beli = bottle.request.forms.getunicode("beli")
-        crni = bottle.request.forms.getunicode("crni")
         if beli in ["Stanley", "Stockfish", "Stocknoob"] or crni in ["Stanley", "Stockfish", "Stocknoob"]:
             napaka="To ime je rezervirano za računalnike!"
         if len(beli) > 20 or len(crni) > 20:
@@ -255,16 +247,13 @@ class PrikazovanjeStrani:
             napaka="Nasprotnik mora imeti ASCII sprejemljivo ime!"
         if beli == crni:
             napaka="Imeni igralcev morata biti različni!"
-        return beli, crni, napaka
+        return napaka
     
             
     @staticmethod
-    def registracija_doloci_napako(vse_skupaj):
+    def registracija_doloci_napako(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj):
         # Pred registracijo preprečimo nekaj problematičnih primerov
-        import bottle
         napaka = ""
-        uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
-        geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
         if uporabnisko_ime in ["Stanley", "Stockfish", "Stocknoob"]:
             napaka="To ime je rezervirano za računalnike!"
         if not uporabnisko_ime.isascii():
@@ -278,7 +267,7 @@ class PrikazovanjeStrani:
         if uporabnik:
             napaka = "Uporabnik že obstaja!"
         
-        return uporabnisko_ime, geslo_v_cistopisu, napaka
+        return napaka
     
     
         

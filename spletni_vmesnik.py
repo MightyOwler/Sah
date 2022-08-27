@@ -48,7 +48,9 @@ def registracija_get():
 @bottle.post("/registracija/")
 def prijava_post():
     global vse_skupaj
-    uporabnisko_ime, geslo_v_cistopisu, napaka = model.PrikazovanjeStrani.registracija_doloci_napako(vse_skupaj)
+    uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
+    geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
+    napaka = model.PrikazovanjeStrani.registracija_doloci_napako(vse_skupaj, uporabnisko_ime = uporabnisko_ime, geslo_v_cistopisu = geslo_v_cistopisu)
     if napaka:
         return bottle.template("registracija.tpl", napaka=napaka)
     else:
@@ -95,7 +97,9 @@ def igra_proti_cloveku_get():
 def igraj_proti_racunalniku_post():
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     uporabnisko_ime, uporabniki = model.PrikazovanjeStrani.igraj()
-    beli, crni, napaka = model.PrikazovanjeStrani.igraj_proti_cloveku_doloci_napako()
+    beli = bottle.request.forms.getunicode("beli")
+    crni = bottle.request.forms.getunicode("crni")
+    napaka = model.PrikazovanjeStrani.igraj_proti_cloveku_doloci_napako(beli = beli, crni = crni)
     if napaka:
         return bottle.template("igraj.tpl", vrsta_igre="clovek",
                                uporabnisko_ime = uporabnisko_ime, uporabniki = uporabniki, nasprotnik=None, beli=beli, crni=crni, napaka=napaka)
@@ -112,7 +116,13 @@ def igraj_proti_racunalniku_post():
 @bottle.route("/shrani_igro/")
 def shrani_igro():
     global vse_skupaj
-    vse_skupaj = model.PrikazovanjeStrani.shrani_igro(vse_skupaj)
+    uporabnisko_ime = bottle.request.get_cookie(
+        "uporabnisko_ime", secret=SKRIVNOST)
+    igra = bottle.request.query.igra.replace("_", "#")
+    celoten_fen = bottle.request.query.fen.replace("_", "/")
+    beli = bottle.request.get_cookie("beli", secret=SKRIVNOST)
+    crni = bottle.request.get_cookie("crni", secret=SKRIVNOST)
+    vse_skupaj = model.PrikazovanjeStrani.shrani_igro(vse_skupaj, igra=igra, uporabnisko_ime=uporabnisko_ime, beli=beli, crni=crni, celoten_fen=celoten_fen)
     bottle.redirect("/")
 
 
