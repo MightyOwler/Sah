@@ -102,9 +102,11 @@ class VseSkupaj:
         bottle.response.set_cookie(
             "uporabnisko_ime", uporabnisko_ime, path="/", secret=SKRIVNOST)
 
+        return vse_skupaj
+    
 @dataclass
 class PrikazovanjeStrani:
-    """Razred, ki poskrbi, da je v spletnm vmesniku malo kode
+    """Razred, ki poskrbi, da je v spletnem vmesniku malo kode
 
     Returns:
         Funkcije vrnejo potrebne spemenljivke ustreznih tipov
@@ -123,7 +125,6 @@ class PrikazovanjeStrani:
                 igra = posamezna_igra["igra"]
                 beli = posamezna_igra["beli"]
                 crni = posamezna_igra["crni"]
-                #id_igre = str(posamezna_igra["id"])
                 celoten_fen = posamezna_igra["celoten_fen"].split(",")
                 popravljen_celoten_fen = [i.split(" ")[0] for i in celoten_fen]
                 return uporabnisko_ime, igra, beli, crni, popravljen_celoten_fen
@@ -144,7 +145,6 @@ class PrikazovanjeStrani:
         import bottle
         SKRIVNOST = VseSkupaj.preberi_skrivnost_iz_datoteke()
         uporabnisko_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SKRIVNOST)
-        #cookie_obstaja = bottle.request.get_cookie('barva', secret=SKRIVNOST)
         return uporabnisko_ime
     
     @staticmethod
@@ -265,15 +265,14 @@ class PrikazovanjeStrani:
             napaka="Imeni igralcev morata biti različni!"
         return beli, crni, napaka
     
+            
     @staticmethod
     def registracija_doloci_napako(vse_skupaj):
+        # Pred registracijo preprečimo nekaj problematičnih primerov
         import bottle
         napaka = ""
         uporabnisko_ime = bottle.request.forms.getunicode("uporabnisko_ime")
         geslo_v_cistopisu = bottle.request.forms.getunicode("zasifrirano_geslo")
-        # Pred registracijo preprečimo nekaj problematičnih primerov
-        # To bi se dalo dati v pomožno funkcijo
-        
         if uporabnisko_ime in ["Stanley", "Stockfish", "Stocknoob"]:
             napaka="To ime je rezervirano za računalnike!"
         if not uporabnisko_ime.isascii():

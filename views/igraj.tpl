@@ -3,8 +3,6 @@
 <link rel="icon" href="/static/chess_icon.ico">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 %if vrsta_igre == "clovek":
-%import bottle
-
 %if nasprotnik == None:
 <title>Kdo igra proti komu?</title>
 <div class="box">

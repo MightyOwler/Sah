@@ -52,7 +52,7 @@ def prijava_post():
     if napaka:
         return bottle.template("registracija.tpl", napaka=napaka)
     else:
-        model.VseSkupaj.vnesi_novega_uporabnika(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj)
+        vse_skupaj = model.VseSkupaj.vnesi_novega_uporabnika(uporabnisko_ime, geslo_v_cistopisu, vse_skupaj)
         bottle.redirect("/")
 
 
@@ -76,15 +76,12 @@ def server_static(racunalniski_nasprotnik, barva):
     model.VseSkupaj.poisci_uporabnika(vse_skupaj)
     SKRIVNOST = model.VseSkupaj.preberi_skrivnost_iz_datoteke()
     pot = '/igraj_proti_racunalniku/'
-    
     bottle.response.set_cookie(
         "barva", barva[:-1], path=pot, max_age=1, secret=SKRIVNOST)
     if racunalniski_nasprotnik == "stanley":
         bottle.redirect("/igraj_proti_racunalniku/stanley/")
-        #return bottle.template("igraj_stanley.tpl", SKRIVNOST=SKRIVNOST)
     else:
         bottle.redirect("/igraj_proti_racunalniku/stockfish/")
-        #return bottle.template("igraj_stockfish.tpl", SKRIVNOST=SKRIVNOST)
 
 
 @bottle.get("/igraj_proti_cloveku/")

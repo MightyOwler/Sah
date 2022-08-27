@@ -1,7 +1,3 @@
-%import bottle
-
-
-
 <title>Statistika uporabnika {{uporabnisko_ime}}</title>
 <link rel="icon" href="/static/chess_icon.ico">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
